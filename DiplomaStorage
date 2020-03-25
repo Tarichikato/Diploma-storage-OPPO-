@@ -4,7 +4,7 @@ contract DiplomaStorage {
     uint public  diplomaCount = 0;
     uint public studentCount = 0;
     uint public schoolCount = 0;
-    uint public diplomaCount = 0;
+    uint public degreeCount = 0;
     
     struct Diploma {
         uint diplomaCount;
@@ -69,7 +69,7 @@ contract DiplomaStorage {
         //sinon erreur
     }
     
-    function createStudent(string _firstName, string _lastName, uint[3] _dateOfBirth){
+    function createStudent(string memory _firstName, string memory _lastName, uint[3] memory _dateOfBirth) public{
         //si l'etudiant n'existe pas encore
             studentCount ++;
             students[studentCount] = Student(studentCount,_firstName,_lastName,_dateOfBirth);
@@ -77,11 +77,11 @@ contract DiplomaStorage {
         //sinon erreur
     }
     
-    function createSchool(string _schoolName){
+    function createSchool(string memory _schoolName) public{
         //si l'ecole n'existe pas encore
             schoolCount ++;
             schools[schoolCount] = School(schoolCount,_schoolName);
-            emit SchoolsCreated(schoolCount,_schoolName);
+            emit SchoolCreated(schoolCount,_schoolName);
         //sinon erreur
     }
     
