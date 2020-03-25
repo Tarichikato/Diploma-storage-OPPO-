@@ -32,6 +32,11 @@ contract DiplomaStorage {
         string nameDegree;
     }
     
+    event DegreeCreated(
+        uint idDegree,
+        uint year,
+        string nameDegree);
+    
     struct Student {
         uint idStudent;
         string firstName;
@@ -82,6 +87,14 @@ contract DiplomaStorage {
             schoolCount ++;
             schools[schoolCount] = School(schoolCount,_schoolName);
             emit SchoolCreated(schoolCount,_schoolName);
+        //sinon erreur
+    }
+    
+    function createDegree(uint _year, string memory _nameDegree) public {
+        // si le diplome n'existe pas
+            degreeCount ++;
+            degrees[degreeCount] = Degree(degreeCount, _year,_nameDegree);
+            emit DegreeCreated(degreeCount,_year,_nameDegree);
         //sinon erreur
     }
     
