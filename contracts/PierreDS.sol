@@ -5,7 +5,7 @@ contract DiplomaStorage {
     uint public studentCount = 0;
     uint public schoolCount = 0;
     uint public degreeCount = 0;
-    
+
     struct Diploma {
         uint diplomaCount;
         uint idDegree;
