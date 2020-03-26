@@ -35,14 +35,18 @@ contract DiplomaStorage {
         uint idStudent;
         string firstName;
         string lastName;
-        uint[3] dateOfBirth;
+        uint day;
+        uint month;
+        uint year;
     }
 
     event StudentCreated(
         uint idStudent,
         string firstName,
         string lastName,
-        uint[3] dateOfBirth);
+        uint day,
+        uint month,
+        uint year);
 
 
 
@@ -58,6 +62,7 @@ contract DiplomaStorage {
 
     constructor() public {
         createDiploma(1,1);
+        createStudent("Rudy", "Deflisque", 8, 7, 97);
     }
 
     function createDiploma(uint _idDegree, uint  _idStudent) public {
@@ -68,11 +73,11 @@ contract DiplomaStorage {
         //sinon erreur
     }
 
-    function createStudent(string memory _firstName, string memory _lastName, uint[3] memory _dateOfBirth) public {
-        //si l'etudiant n'existe pas encore
+    function createStudent(string memory _firstName, string memory _lastName, uint _day, uint _month, uint _year) public {
+        //si l'etudiant n'exi ste pas encore
             studentCount ++;
-            students[studentCount] = Student(studentCount,_firstName,_lastName,_dateOfBirth);
-            emit StudentCreated(studentCount,_firstName,_lastName,_dateOfBirth);
+            students[studentCount] = Student(studentCount, _firstName, _lastName, _day, _month, _year);
+            emit StudentCreated(studentCount,_firstName,_lastName, _day, _month, _year);
         //sinon erreur
     }
 
