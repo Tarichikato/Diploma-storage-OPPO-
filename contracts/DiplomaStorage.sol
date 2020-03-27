@@ -1,5 +1,6 @@
 pragma solidity ^0.5.16;
 
+
 contract DiplomaStorage {
     uint public  diplomaCount = 0;
     uint public studentCount = 0;
@@ -73,10 +74,14 @@ contract DiplomaStorage {
         createStudent("Noheila", "Lurot", 16, 8, 1999);
 
         createDegree(2022,"Ingé","TSP");
+        createDegree(2023,"Ingé","Arts et Métiers Lille");
 
         createSchool("TSP");
+        createSchool("Arts et Métiers Lille")
 
-        createDiploma(1,3);
+        createDiploma(2,3);
+        createDiploma(1,1);
+        createDiploma(1,2);
 
 
 
@@ -91,7 +96,7 @@ contract DiplomaStorage {
     }
 
     function createStudent(string memory _firstName, string memory _lastName, uint _day, uint _month, uint _year) public {
-        //si l'etudiant n'exi ste pas encore
+        //si l'etudiant n'existe pas encore
             studentCount ++;
             students[studentCount] = Student(studentCount, _firstName, _lastName, _day, _month, _year);
             emit StudentCreated(studentCount,_firstName,_lastName, _day, _month, _year);
@@ -120,60 +125,58 @@ contract DiplomaStorage {
     C'est à dire on entre les caracteristiques de l'objet cherché et la fonction renvoie un uint 
     0 si l'objet existe pas
     Son id si il existe
+    ATTENTION les ids commencent à 1
 
-    faire pour Students,Degree,School
+    faire pour School
     
      */
+     
+     
 
-
-
-
-
-    // Cette fonction ne marche pas
-    
-    function checkDiploma(string memory _firstName, string memory _lastName, uint _year,uint _day, string memory _nameDegree, string memory _schoolName) public view returns(bool) {
+    function checkStudent(string memory _firstName, string memory _lastName, uint _month, uint _day,uint _year) public view returns(uint){
         Student memory stu;
-        Diploma memory dip;
-        Degree memory deg;
-
-
-        uint idS;
-        bool studentExists = true;
-
-        uint idD;
-        bool degreeExists = true;
-
-        //On parcours les eleves pour savoir si il existe puis on note son identifiant
-        for (uint i = 0; i < studentCount; i++){
-            stu = students[i];
-            if(stu.day == _day ){  
+        for (uint i = 1; i <= studentCount; i++){
+            stu=students[i];
+            if(stu.day == _day && stu.month == _month && stu.year ==_year){  
                 if(keccak256(abi.encodePacked(stu.firstName)) == keccak256(abi.encodePacked(_firstName)) && keccak256(abi.encodePacked(stu.lastName)) == keccak256(abi.encodePacked(_lastName))){
-                    idS = i +1;
-                    studentExists = true;
+                    return(i);
                 }
-                
             }
         }
-
-        //On parcours les diplomes pour savoir si il existe puis on note son identifiant
-        for (uint i = 0; i < degreeCount; i++){
+        return(0);
+    }
+    
+    
+    function checkDegree(uint _year, string memory _nameDegree, string memory _schoolName) public view returns (uint){
+        Degree memory deg;
+        for (uint i = 1; i<= degreeCount; i++){
             deg = degrees[i];
-            if(deg.year == _year ){
-                if(keccak256(abi.encodePacked(deg.schoolName)) == keccak256(abi.encodePacked(_schoolName)) && keccak256(abi.encodePacked(deg.nameDegree)) == keccak256(abi.encodePacked(_nameDegree))){
-                    idD = i +1;
-                    degreeExists = true;
-
+            if(keccak256(abi.encodePacked(deg.nameDegree)) == keccak256(abi.encodePacked(_nameDegree)) && keccak256(abi.encodePacked(deg.schoolName)) == keccak256(abi.encodePacked(_schoolName))){
+                if(deg.year == _year){
+                    return(i);
                 }
-                
             }
         }
+        return(0);
+    }
+
+
+
+
+
+   
+
+    function checkDiploma(string memory _firstName, string memory _lastName,uint _month ,uint _day,uint _sYear,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(bool) {
+        uint degreeId = checkDegree(_dYear, _nameDegree,_schoolName);
+        uint studentId = checkStudent(_firstName,_lastName,_month,_day,_sYear);
+        
+        Diploma memory dip;
 
         // Si l'eleve et le diplome exitent on va vérifier si il existe une telle association
-        if(studentExists && degreeExists){
-            return true;
-            for(uint k = 0; k < diplomaCount;k++){
+        if(studentId != 0 && degreeId != 0){
+            for(uint k = 1; k <= diplomaCount;k++){
                 dip = diplomas[k];
-                if (dip.idStudent == 3 && dip.idDegree == 1){
+                if (dip.idStudent == studentId && dip.idDegree == degreeId){
                     return true;
                 }
             }
@@ -183,7 +186,4 @@ contract DiplomaStorage {
         
     
     }
-
-
-
 }
