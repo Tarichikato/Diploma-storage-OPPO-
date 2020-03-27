@@ -92,7 +92,7 @@ App = {
 
         // Create the html for the task
         const $newTaskTemplate = $taskTemplate.clone()
-        $newTaskTemplate.find('.content').html(studentFirstName)
+        $newTaskTemplate.find('.studentFirstName').html(studentFirstName)
         $newTaskTemplate.find('input')
                         .prop('name', idStudent)
                         // .prop('checked', taskCompleted)
@@ -102,7 +102,7 @@ App = {
         // if (taskCompleted) {
         //   $('#completedTaskList').append($newTaskTemplate)
         // } else {
-        //   $('#taskList').append($newTaskTemplate)
+        $('#studentList').append($newTaskTemplate)
         // }
 
         // Show the task
@@ -112,8 +112,8 @@ App = {
 
   createStudent: async () => {
     App.setLoading(true)
-    const content = $('#newTask').val()
-    await App.todoList.createStudent(content)
+    const studentFirstName = $('#newStudent').val()
+    await App.diplomaStorage.createStudent(studentFirstName)
     window.location.reload()
   },
 
@@ -127,13 +127,13 @@ App = {
   setLoading: (boolean) => {
    App.loading = boolean
    const loader = $('#loader')
-   const content = $('#content')
+   const studentFirstName = $('#studentFirstName')
    if (boolean) {
      loader.show()
-     content.hide()
+     studentFirstName.hide()
    } else {
      loader.hide()
-     content.show()
+     studentFirstName.show()
    }
  }
 }
