@@ -7,6 +7,8 @@ contract DiplomaStorage {
     uint public schoolCount = 0;
     uint public degreeCount = 0;
 
+
+    //Association entre un élève et un diplome (c'est comme ça qu'on descerne le diplome)
     struct Diploma {
         uint idDegree;
         uint idStudent;
@@ -16,15 +18,20 @@ contract DiplomaStorage {
         uint idDegree,
         uint idStudent);
 
+    
+    //Ecole avec l'adresse ayant le droit de descerner les diplomes
     struct School {
+        address schoolAdress;
         uint idSchool;
         string schoolName;
     }
 
     event SchoolCreated(
+        address schoolAdress,
         uint idSchool,
         string schoolName);
 
+    //Diplome (un diplome different par promotion)
     struct Degree {
         uint idDegree;
         uint year;
@@ -38,23 +45,19 @@ contract DiplomaStorage {
         string nameDegree,
         string schoolName);
 
-
+    //Elève défini par Nom Prenom et date de naissance (on pourrai rajouter des champs à terme)
     struct Student {
         uint idStudent;
         string firstName;
         string lastName;
-        uint day;
-        uint month;
-        uint year;
+        uint birth;
     }
 
     event StudentCreated(
         uint idStudent,
         string firstName,
         string lastName,
-        uint day,
-        uint month,
-        uint year);
+        uint birth);
 
 
 
@@ -69,45 +72,66 @@ contract DiplomaStorage {
 
 
     constructor() public {
-        createStudent("Rudy", "Deflisque", 8, 7, 1999);
-        createStudent("Pierre", "Lourdelet", 28, 4, 1999);
-        createStudent("Noheila", "Lurot", 16, 8, 1999);
+        createStudent("Rudy", "Deflisque", 8071997);
+        createStudent("Pierre", "Lourdelet", 28041999);
+        createStudent("Noheila", "Lurot", 16081999);
 
         createDegree(2022,"Ingé","TSP");
         createDegree(2023,"Ingé","Arts et Métiers Lille");
 
-        createSchool("TSP");
-        createSchool("Arts et Métiers Lille")
+        createSchool(msg.sender,"TSP");
+        createSchool(msg.sender,"Arts et Métiers Lille");
 
-        createDiploma(2,3);
-        createDiploma(1,1);
-        createDiploma(1,2);
-
-
-
+        createDiplomaLL(2,3);
+        createDiplomaLL(1,1);
+        createDiplomaLL(1,2);
     }
 
-    function createDiploma(uint _idDegree, uint  _idStudent) public {
+
+    //fonction pour descerner des diplomes assez bas niveau (Il faut connaitre l'id de l'éleve et du diplome que l'on veut descerner)
+    
+    function createDiplomaLL(uint _idDegree, uint  _idStudent) internal {
         //si il existe un etudiant et une école avec ces id (peut etre ecrire des fonction pour vérifier ca histoire de garder un code lisible)
             diplomaCount ++;
             diplomas[diplomaCount] = Diploma(_idDegree,_idStudent);
             emit DiplomaCreated(_idDegree,_idStudent);
         //sinon erreur
     }
+    
+    //fonction plus haut niveau
+    
+    function createDiplomaHL(string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public returns(bool){
+        uint idS = checkStudent(_firstName,_lastName,_birth);
+        uint idD = checkDegree(_dYear,_nameDegree,_schoolName);
+        
+        //Si l'elève n'existe pas on le cree
+        if(idS == 0){
+            createStudent(_firstName,_lastName,_birth);
+        }
+        
+        //Si le diplome n'existe pas on ne le crèe pas sinon on risque de creer des diplomes à chaque faute de frappe
+        if(idD == 0){
+            return(false);
+        }
+        
+        //On crèe l'association
+        createDiplomaLL(idD,idS);
+        return(true);
+    }
 
-    function createStudent(string memory _firstName, string memory _lastName, uint _day, uint _month, uint _year) public {
+    function createStudent(string memory _firstName, string memory _lastName,uint _birth) public{
         //si l'etudiant n'existe pas encore
             studentCount ++;
-            students[studentCount] = Student(studentCount, _firstName, _lastName, _day, _month, _year);
-            emit StudentCreated(studentCount,_firstName,_lastName, _day, _month, _year);
+            students[studentCount] = Student(studentCount, _firstName,_lastName, _birth);
+            emit StudentCreated(studentCount,_firstName,_lastName,_birth);
         //sinon erreur
     }
 
-    function createSchool(string memory _schoolName) public {
+    function createSchool( address _schoolAdress, string memory _schoolName) public {
         //si l'ecole n'existe pas encore
             schoolCount ++;
-            schools[schoolCount] = School(schoolCount,_schoolName);
-            emit SchoolCreated(schoolCount,_schoolName);
+            schools[schoolCount] = School(_schoolAdress, schoolCount,_schoolName);
+            emit SchoolCreated(_schoolAdress, schoolCount,_schoolName);
         //sinon erreur
     }
 
@@ -133,11 +157,11 @@ contract DiplomaStorage {
      
      
 
-    function checkStudent(string memory _firstName, string memory _lastName, uint _month, uint _day,uint _year) public view returns(uint){
+    function checkStudent(string memory _firstName, string memory _lastName, uint _birth ) public view returns(uint){
         Student memory stu;
         for (uint i = 1; i <= studentCount; i++){
             stu=students[i];
-            if(stu.day == _day && stu.month == _month && stu.year ==_year){  
+            if(stu.birth ==_birth){  
                 if(keccak256(abi.encodePacked(stu.firstName)) == keccak256(abi.encodePacked(_firstName)) && keccak256(abi.encodePacked(stu.lastName)) == keccak256(abi.encodePacked(_lastName))){
                     return(i);
                 }
@@ -166,9 +190,9 @@ contract DiplomaStorage {
 
    
 
-    function checkDiploma(string memory _firstName, string memory _lastName,uint _month ,uint _day,uint _sYear,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(bool) {
+    function checkDiploma(string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(bool) {
         uint degreeId = checkDegree(_dYear, _nameDegree,_schoolName);
-        uint studentId = checkStudent(_firstName,_lastName,_month,_day,_sYear);
+        uint studentId = checkStudent(_firstName,_lastName,_birth);
         
         Diploma memory dip;
 
