@@ -89,8 +89,10 @@ contract DiplomaStorage {
 
 
     //fonction pour descerner des diplomes assez bas niveau (Il faut connaitre l'id de l'éleve et du diplome que l'on veut descerner)
+
+    //à metttre en internal à terme
     
-    function createDiplomaLL(uint _idDegree, uint  _idStudent) internal {
+    function createDiplomaLL(uint _idDegree, uint  _idStudent) public {
         //si il existe un etudiant et une école avec ces id (peut etre ecrire des fonction pour vérifier ca histoire de garder un code lisible)
             diplomaCount ++;
             diplomas[diplomaCount] = Diploma(_idDegree,_idStudent);
@@ -107,6 +109,7 @@ contract DiplomaStorage {
         //Si l'elève n'existe pas on le cree
         if(idS == 0){
             createStudent(_firstName,_lastName,_birth);
+            idS = studentCount;
         }
         
         //Si le diplome n'existe pas on ne le crèe pas sinon on risque de creer des diplomes à chaque faute de frappe
@@ -209,5 +212,19 @@ contract DiplomaStorage {
 
         
     
+    }
+
+    // à mettre en internal à terme
+    function checkDiplomaLL(uint _idStudent, uint _idDegree) public view returns (bool){
+        Diploma memory dip;
+        if(_idDegree!= 0 && _idStudent != 0){
+            for(uint k = 1; k <= diplomaCount;k++){
+                dip = diplomas[k];
+                if (dip.idStudent == _idStudent && dip.idDegree == _idDegree){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
