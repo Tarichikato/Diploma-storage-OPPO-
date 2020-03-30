@@ -7,13 +7,13 @@ contract DiplomaStorage {
     uint public schoolCount = 0;
     uint public degreeCount = 0;
     
-    //Adresse à modifier si tu veux faire des tests
-    //A terme on pourrait avoir un mapping avec les adresses master
+    //Address to be modified if you want to do tests
+    //Eventually we could have a mapping with the master addresses
     
-    address master = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
+    address master = msg.sender;
 
 
-    //Association entre un élève et un diplome (c'est comme ça qu'on descerne le diplome)
+    //Association between a student and a diploma (this is how the diploma is awarded).
     struct Diploma {
         uint idDegree;
         uint idStudent;
@@ -24,7 +24,7 @@ contract DiplomaStorage {
         uint idStudent);
 
     
-    //Ecole avec l'adresse ayant le droit de descerner les diplomes
+    //School with the address having the right to award diplomas
     struct School {
         address schoolAddress;
         uint idSchool;
@@ -36,7 +36,7 @@ contract DiplomaStorage {
         uint idSchool,
         string schoolName);
 
-    //Diplome (un diplome different par promotion)
+    //Diploma (one different diploma per year)
     struct Degree {
         uint idDegree;
         uint idSchool;
@@ -52,9 +52,10 @@ contract DiplomaStorage {
         string nameDegree,
         string schoolName);
 
-    //Elève défini par Nom Prenom et date de naissance (on pourrai rajouter des champs à terme)
+    //Student defined by Face,INE,Name, Surname, First name and date of birth
     struct Student {
         uint idStudent;
+        //uint faceHash;
         uint INE;
         string firstName;
         string lastName;
@@ -81,69 +82,72 @@ contract DiplomaStorage {
 
 
     constructor() public {
-        createStudent(12,"Rudy", "Deflisque", 8071999);
-        createStudent(64679,"Pierre", "Lourdelet", 28041999);
-        createStudent(54646,"Noheila", "Lurot", 16081999);
-
-       
-        createSchool(msg.sender,"TSP");
-        createSchool(msg.sender,"Arts et Métiers Lille");
         
-        createDegree(2022,"Ingé","TSP");
-        createDegree(2023,"Ingé","Arts et Métiers Lille");
+        //Creation of students
+        createStudent(18821453685,"Bob", "Martin", 20072015);
+        createStudent(64658482179,"Alice", "Durand", 19082008);
+        createStudent(54658741246,"Mallory","Dupond",1112008);
+       
+       
+        //Creation of schools with the master address (line 13)
+        createSchool(msg.sender,"Telecom Sud Paris");
+        createSchool(msg.sender,"Kryptosphere");
+        
+        
+        //Creation of diplomas to be awarded
+        createDegree(2022,"Blockchain Engineer","Telecom Sud Paris");
+        createDegree(2023,"Blockchain Developer","Kryptosphere");
 
-        createDiplomaLL(2,3);
-        createDiplomaLL(1,1);
-        createDiplomaLL(1,2);
+        //Awarding of diplomas
+        createDiploma(18821453685,"Bob","Martin",20072015,2022,"Blockchain Engineer", "Telecom Sud Paris");
+        createDiploma(64658482179,"Alice", "Durand", 19082008,2023,"Blockchain Developer","Kryptosphere");
+        createDiploma(18821453685,"Bob", "Martin", 20072015,2023,"Blockchain Developer","Kryptosphere");
     }
 
 
     /**
-     * FONCTIONS DE CREATION ----------------------------------------------------------------------------------------------------------------------------------
+     * CREATION FUNCTIONS ----------------------------------------------------------------------------------------------------------------------------------
      * 
      */
 
-    //fonction pour descerner des diplomes assez bas niveau (Il faut connaitre l'id de l'éleve et du diplome que l'on veut descerner)
+    //Relatively low level function to award diplomas (it is necessary to know the id of the pupil and the id of the diploma that one wants to award)
     
-    function createDiplomaLL(uint _idDegree, uint  _idStudent) public returns (bool){
+    function createDiplomaLL(uint _idDegree, uint  _idStudent) internal{
         if(_idStudent <= studentCount && _idDegree <= degreeCount){
             Degree memory deg = degrees[_idDegree];
             uint idSch = deg.idSchool;
             School memory sch = schools[idSch];
             
-            // On vérifie que l'adresse qui essaie d'attribuer un diplomes est bien celle qui à créé le diplome
+            //  We check that the address that is trying to assign a diploma is the one that created the diploma.
             
             if(sch.schoolAddress == msg.sender){
                 diplomaCount ++;
                 diplomas[diplomaCount] = Diploma(_idDegree,_idStudent);
                 emit DiplomaCreated(_idDegree,_idStudent);
-                return(true);
                 
             }
         }
-        return(false);
     }
     
-    //fonction plus haut niveau
+    //Relatively high level function
     
-    function createDiplomaHL(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public returns(bool){
+    function createDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public{
         uint idS = checkStudent(_INE,_firstName,_lastName,_birth);
         uint idD = checkDegree(_dYear,_nameDegree,_schoolName);
         
-        //Si l'elève n'existe pas on le cree
+        //If the student doesn't exist, we'll create one.
         if(idS == 0){
             createStudent(_INE,_firstName,_lastName,_birth);
         }
         
-        //Si le diplome n'existe pas on ne le crèe pas sinon on risque de creer des diplomes à chaque faute de frappe
+        //If the diploma doesn't exist, we don't create it, otherwise we risk creating new diplomas every time we make a typing mistake.
         if(idD == 0){
-            return(false);
         }
         else{
         
-        //On crèe l'association
+        //We create the association
+        
         createDiplomaLL(idD,idS);
-        return(true);
         }
     }
 
@@ -159,8 +163,8 @@ contract DiplomaStorage {
     function createSchool( address _schoolAdress, string memory _schoolName) public returns(string memory){
         if(msg.sender != master){
             
-            //On entre ici si on essaie de créer une école sans etre le gérant du smart contract 
-            //C'est nécessaire car si quelqu'un etait capable de crer des ecoles il pourrait creer des diplomes et go catastrophe
+            //We get in here if we try to create a school without being the manager of the smart contract. 
+            //This is necessary because if someone was able to create schools he could create and award diplomas and this would lead to disaster
             
             return("No servant can serve two masters (Luc 16:13)");
             
@@ -196,12 +200,13 @@ contract DiplomaStorage {
 
 
     /**
-    FONCTIONS DE VERIFICATION D'EXISTENCE----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    EXISTENCE CHECK FUNCTIONS----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    C'est à dire on entre les caracteristiques de l'objet cherché et la fonction renvoie un uint 
-    0 si l'objet existe pas
-    Son id si il existe
-    ATTENTION les ids commencent à 1
+    That is to say one enters the characteristics of the searched object and the function returns a uint which is the id
+    0 if the object does not exist
+    
+    WARNING ids start at 1 !
+    
      */
      
      
@@ -258,7 +263,7 @@ contract DiplomaStorage {
         
         Diploma memory dip;
 
-        // Si l'eleve et le diplome exitent on va vérifier si il existe une telle association
+        // If the student and the diploma exist, we will check if such an association exists
         
         if(studentId != 0 && degreeId != 0){
             for(uint k = 1; k <= diplomaCount;k++){
@@ -272,9 +277,9 @@ contract DiplomaStorage {
     }
     
     
-    //Fonction pour vérifier un diplome sans connaitre l'INE 
+    //Function to check a diploma without knowing the INE 
     /**
-     * Si l'eleve existe en double on demande l'INE
+     * If the student exists in duplicate, the INE is requested
      **/
     
     function checkDiplomaNoINE(string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(string memory){
@@ -301,7 +306,7 @@ contract DiplomaStorage {
         
         Diploma memory dip;
 
-        // Si l'eleve et le diplome exitent on va vérifier si il existe une telle association
+        // If the student and the diploma exist, we will check if such an association exists.
         
         if(studentId != 0 && degreeId != 0){
             for(uint k = 1; k <= diplomaCount;k++){
