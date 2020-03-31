@@ -67,73 +67,183 @@ App = {
     // Render Account
     $('#account').html(App.account)
 
-    // Render Tasks
-    await App.renderStudents()
+    // Render student
+    //wait App.renderStudents()
+
+    // Render diploma
+    // await App.renderDiplomas()
+
+    await App.checkDiploma()
+
 
     // Update loading state
     App.setLoading(false)
   },
 
-  renderStudents: async () => {
-      // Load the total task count from the blockchain
-      const studentCount = await App.diplomaStorage.studentCount()
-      const $taskTemplate = $('.taskTemplate')
+  // renderStudents: async () => {
+  //     // Load the total task count from the blockchain
+  //     const studentCount = await App.diplomaStorage.studentCount()
+  //     const $studentTemplate = $('.studentTemplate')
+  //
+  //     // Render out each task with a new task template
+  //     for (var i = 1; i <= studentCount; i++) {
+  //       // Fetch the task data from the blockchain
+  //       const student = await App.diplomaStorage.students(i)
+  //       const idStudent = student[0].toNumber()
+  //       const iNE = student[1].toNumber()
+  //       const studentFirstName = student[2]
+  //       const studentLastName = student[3]
+  //       const studentBirth = student[4].toNumber()
+  //
+  //       // Affiche le nom, la date de naissance et l'ID de l'étudiant.
+  //       const $newStudentTemplate = $studentTemplate.clone()
+  //       $newStudentTemplate.find('.studentFirstName').html(studentFirstName)
+  //       $newStudentTemplate.find('.studentLastName').html(studentLastName)
+  //       $newStudentTemplate.find('.studentBirth').html(studentBirth)
+  //       $newStudentTemplate.find('.idStudent').html(idStudent)
+  //       $newStudentTemplate.find('.iNE').html(iNE)
+  //       $newStudentTemplate.find('input')
+  //                       .prop('name', idStudent)
+  //
+  //       $('#studentList').append($newStudentTemplate)
+  //
+  //       // Show the student
+  //       $newStudentTemplate.show()
+  //     }
+  //   },
 
-      // Render out each task with a new task template
-      for (var i = 1; i <= studentCount; i++) {
-        // Fetch the task data from the blockchain
-        const student = await App.diplomaStorage.students(i)
-        const idStudent = student[0].toNumber()
-        const studentFirstName = student[1]
-        const studentLastName = student[2]
-        const studentDay = student[3].toNumber()
-        const studentMonth = student[4].toNumber()
-        const studentYear = student[5].toNumber()
+//     renderDiplomas: async () => {
+//         // Load the total task count from the blockchain
+//         const diplomaCount = await App.diplomaStorage.diplomaCount()
+//         const $diplomaTemplate = $('.diplomaTemplate')
+//
+//         // Render out each task with a new task template
+//         for (var i = 1; i <= diplomaCount; i++) {
+//           // Fetch the task data from the blockchain
+//           const diploma = await App.diplomaStorage.diplomas(i)
+//           const ine = diploma[0].toNumber()
+//           const firstname = diploma[1]
+//           const lastname = diploma[2]
+//           const birth = diploma[3].toNumber()
+//           const yearDegree = diploma[4].toNumber()
+//           const namedegree = diploma[5]
+//           const schoolname = diploma[6]
+//
+// //createDiploma(64658482179,"Alice", "Durand", 19082008,2023,"Blockchain Developer","Kryptosphere");
+//           // Affiche le nom, la date de naissance et l'ID de l'étudiant.
+//           const $newDiplomaTemplate = $diplomaTemplate.clone()
+//           $newDiplomaTemplate.find('.ine').html(ine)
+//           $newDiplomaTemplate.find('.firstname').html(firstname)
+//           $newDiplomaTemplate.find('.lastname').html(lastname)
+//           $newDiplomaTemplate.find('.birth').html(birth)
+//           $newDiplomaTemplate.find('.yearDegree').html(yearDegree)
+//           $newDiplomaTemplate.find('.namedegree').html(namedegree)
+//           $newDiplomaTemplate.find('.schoolname').html(schoolname)
+//           $newDiplomaTemplate.find('input')
+//                           .prop('name', ine)
+//
+//           $('#diplomaList').append($newDiplomaTemplate)
+//
+//           // Show the student
+//           $newDiplomaTemplate.show()
+//         }
+//       },
 
-        // Create the html for the task
-        const $newTaskTemplate = $taskTemplate.clone()
-        $newTaskTemplate.find('.studentFirstName').html(studentFirstName)
-        $newTaskTemplate.find('input')
-                        .prop('name', idStudent)
-                        // .prop('checked', taskCompleted)
-                        // .on('click', App.toggleCompleted)
 
-        // Put the task in the correct list
-        // if (taskCompleted) {
-        //   $('#completedTaskList').append($newTaskTemplate)
-        // } else {
-        $('#studentList').append($newTaskTemplate)
-        // }
-
-        // Show the task
-        $newTaskTemplate.show()
-      }
-    },
-
-  createStudent: async () => {
-    App.setLoading(true)
-    const studentFirstName = $('#newStudent').val()
-    await App.diplomaStorage.createStudent(studentFirstName)
-    window.location.reload()
-  },
-
-  //   toggleCompleted: async (e) => {
+    //Cette partie permet de créer un étudiant sur le HTML
+  // createStudent: async () => {
   //   App.setLoading(true)
-  //   const taskId = e.target.name
-  //   await App.todoList.toggleCompleted(taskId)
+  //   const iNE = $('#newStudentINE').val()
+  //   const studentFirstName = $('#newStudentFName').val()
+  //   const studentLastName = $('#newStudentLName').val()
+  //   const studentbirth = $('#newStudentBirth').val()
+  //   await App.diplomaStorage.createStudent(iNE, studentFirstName, studentLastName, studentbirth)
   //   window.location.reload()
   // },
+
+  checkDiploma: async() => {
+    App.setLoading(true)
+    diplomaCount = await App.diplomaStorage.diplomaCount()
+    for (var i = 1; i <= diplomaCount; i++) {
+      // Fetch the task data from the blockchain
+      const diploma = await App.diplomaStorage.diplomas(i)
+      const idDegree = diploma[0].toNumber()
+      const idStudent = diploma[1].toNumber()
+    }
+
+    studentCount = await App.diplomaStorage.studentCount()
+    for (var j = 1; j <= studentCount; j++) {
+      const student = await App.diplomaStorage.students(j)
+      const idStudent = student[0].toNumber()
+      const iNE = student[1].toNumber()
+      const studentFirstName = student[2]
+      const studentLastName = student[3]
+      const studentBirth = student[4].toNumber()
+      const studentID = await App.diplomaStorage.checkStudent(iNE, studentFirstName, studentLastName, studentBirth)
+    }
+
+    degreeCount = await App.diplomaStorage.degreeCount()
+    for (var k = 1; k <= degreeCount; k++) {
+      const degree = await App.diplomaStorage.degrees(k)
+      const idSchool = degree[0].toNumber()
+      const dYear = degree[1]
+      const nameDegree = degree[2]
+      const schoolName = degree[3]
+      const degreeID = await App.diplomaStorage.checkDegree(dYear, nameDegree, schoolName)
+    }
+
+    schoolCount = await App.diplomaStorage.schoolCount()
+    for (var l = 1; l <= schoolCount; l++) {
+      const school = await App.diplomaStorage.schools(l)
+      const schoolAddress = school[0]
+      const schoolCount = school[1]
+      const schoolName = school[2]
+    }
+
+    await App.diplomaStorage.checkDiploma(iNE, studentFirstName, studentLastName, studentBirth, dYear, nameDegree, schoolName)
+    window.location.reload()
+
+
+    const iNE = $('#checkStudentINE').val()
+    const studentFirstName = $('#checkStudentFName').val()
+    const studentLastName = $('#checkStudentLName').val()
+    const studentbirth = $('#checkStudentBirth').val()
+    const dYear = $('#checkDegreeYear').val()
+    const nameDegree = $('#checkNamedegree').val()
+    const schoolName = $('#checkSchoolName').val()
+
+},
+
 
   setLoading: (boolean) => {
    App.loading = boolean
    const loader = $('#loader')
+   const iNE = $('#iNE')
    const studentFirstName = $('#studentFirstName')
+   const studentLastName = $('#studentLastName')
+   const studentbirth = $('#studentBirth')
+   const dYear = $('#dYear')
+   const nameDegree = $('#nameDegree')
+   const schoolName = $('#schoolName')
+
    if (boolean) {
      loader.show()
+     iNE.hide()
      studentFirstName.hide()
+     studentLastName.hide()
+     studentbirth.hide()
+     dYear.hide()
+     nameDegree.hide()
+     schoolName.hide()
    } else {
      loader.hide()
      studentFirstName.show()
+     studentLastName.show()
+     iNE.show()
+     studentbirth.show()
+     dYear.show()
+     nameDegree.show()
+     schoolName.show()
    }
  }
 }
