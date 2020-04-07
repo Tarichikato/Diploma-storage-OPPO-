@@ -67,72 +67,13 @@ App = {
     // Render Account
     $('#account').html(App.account)
 
-
-    await App.checkInformations()
-
     await App.checkDiploma()
-
 
     // Update loading state
     App.setLoading(false)
   },
 
-  checkInformations: async() => {
-    App.setLoading(true)
-    App.contracts.DiplomaStorage.deployed()
-
-    var loader = $("#loader")
-    var content = $("#content")
-
-    var infosResults = $("#infosResults")
-
-    const studentCount = await App.diplomaStorage.studentCount()
-
-    for (var j = 1; j <= studentCount; j++) {
-      const student = await App.diplomaStorage.students(j)
-      const idStudent = student[0].toNumber()
-      const iNE = student[1].toNumber()
-      const studentFirstName = student[2]
-      const studentLastName = student[3]
-      const studentBirth = student[4].toNumber()
-      const studentID = (await App.diplomaStorage.checkStudent(iNE, studentFirstName, studentLastName, studentBirth)).toNumber()
-
-
-    const degreeCount = await App.diplomaStorage.degreeCount()
-
-    for (var k = 1; k <= degreeCount; k++) {
-      const degree = await App.diplomaStorage.degrees(k)
-      const idDegree = degree[0].toNumber()
-      const idSchool = degree[1].toNumber()
-      const dYear = degree[2].toNumber()
-      const nameDegree = degree[3]
-      const schoolName = degree[4]
-      const degreeID = (await App.diplomaStorage.checkDegree(dYear, nameDegree, schoolName)).toNumber()
-
-
-
-    const schoolCount = await App.diplomaStorage.schoolCount()
-    for (var l = 1; l <= schoolCount; l++) {
-      const school = await App.diplomaStorage.schools(l)
-      const schoolAddress = school[0]
-      const schoolCount = school[1]
-      const schoolName = school[2]
-
-      var diploma = await App.diplomaStorage.checkDiploma(iNE, studentFirstName, studentLastName, studentBirth, dYear, nameDegree, schoolName)
-
-      var infosTemplate = "<tr><th>" + studentID + "</th><td>" + degreeID + "</td><td>" + iNE + "</td><td>" + studentFirstName + "</td><td>" + studentLastName + "</td><td>" + studentBirth + "</td><td>" + dYear + "</td><td>" + nameDegree + "</td><td>" + schoolName + "</td><td>" + diploma + "</td><tr>"
-      //infosResults.append(infosTemplate)
-
-      //content.show()
-
-    }
-    }
-  }
-},
-
-
     checkDiploma: async () => {
-    App.checkInformations(true)
     var content = $("#content")
     var infosResults = $("#infosResults")
 
@@ -147,7 +88,12 @@ App = {
 
     var infosTemplate = "<tr><th>" + iNE + "</th><td>" + studentFirstName + "</td><td>" + studentLastName + "</td><td>" + studentBirth + "</td><td>" + dYear + "</td><td>" + nameDegree + "</td><td>" + schoolName + "</td><td>" + diploma + "</td><tr>"
     infosResults.append(infosTemplate)
-    content.show()
+
+    if (iNE == "" && studentFirstName == "" && studentLastName == "" && studentBirth == "" && dYear == "" && nameDegree == "" && schoolName == "" && diploma == false) {
+      content.hide()
+    } else {
+      content.show()
+    }
 },
 
 

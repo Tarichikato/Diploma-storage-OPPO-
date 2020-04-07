@@ -77,7 +77,7 @@ App = {
   },
 
   renderStudents: async () => {
-    App.contracts.DiplomaStorage.deployed()
+    //App.contracts.DiplomaStorage.deployed()
         var loader = $("#loader")
         var content = $("#content")
         // Load the total task count from the blockchain
@@ -110,7 +110,7 @@ App = {
         const studentLastName = $('#newStudentLName').val()
         const studentbirth = $('#newStudentBirth').val()
         await App.diplomaStorage.createStudent(iNE, studentFirstName, studentLastName, studentbirth)
-        window.location.reload()
+
       },
 
 
