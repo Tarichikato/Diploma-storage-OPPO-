@@ -68,6 +68,8 @@ App = {
     $('#account').html(App.account)
 
 
+    await App.checkInformations()
+
     await App.checkDiploma()
 
 
@@ -75,7 +77,7 @@ App = {
     App.setLoading(false)
   },
 
-  checkDiploma: async() => {
+  checkInformations: async() => {
     App.setLoading(true)
     App.contracts.DiplomaStorage.deployed()
 
@@ -119,16 +121,20 @@ App = {
       var diploma = await App.diplomaStorage.checkDiploma(iNE, studentFirstName, studentLastName, studentBirth, dYear, nameDegree, schoolName)
 
       var infosTemplate = "<tr><th>" + studentID + "</th><td>" + degreeID + "</td><td>" + iNE + "</td><td>" + studentFirstName + "</td><td>" + studentLastName + "</td><td>" + studentBirth + "</td><td>" + dYear + "</td><td>" + nameDegree + "</td><td>" + schoolName + "</td><td>" + diploma + "</td><tr>"
-      infosResults.append(infosTemplate)
+      //infosResults.append(infosTemplate)
 
-      content.show()
+      //content.show()
 
     }
     }
   }
+},
 
 
-    // window.location.reload()
+    checkDiploma: async () => {
+    App.checkInformations(true)
+    var content = $("#content")
+    var infosResults = $("#infosResults")
 
     const iNE = $('#checkStudentINE').val()
     const studentFirstName = $('#checkStudentFName').val()
@@ -137,9 +143,11 @@ App = {
     const dYear = $('#checkDegreeYear').val()
     const nameDegree = $('#checkNamedegree').val()
     const schoolName = $('#checkSchoolName').val()
+    diploma = await App.diplomaStorage.checkDiploma(iNE, studentFirstName, studentLastName, studentBirth, dYear, nameDegree, schoolName)
 
-
-
+    var infosTemplate = "<tr><th>" + iNE + "</th><td>" + studentFirstName + "</td><td>" + studentLastName + "</td><td>" + studentBirth + "</td><td>" + dYear + "</td><td>" + nameDegree + "</td><td>" + schoolName + "</td><td>" + diploma + "</td><tr>"
+    infosResults.append(infosTemplate)
+    content.show()
 },
 
 
