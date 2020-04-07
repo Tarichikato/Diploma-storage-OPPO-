@@ -27,6 +27,16 @@
           <div id="loader">
             <p class="text-center">Loading...</p>
           </div>
+          <!-- Créer un nouvel étudiant -->
+          <div id="student">
+            <form onSubmit="App.createStudent(); return false;">
+              <input id="newStudentINE" type="text" class="form-control" placeholder="INE of the student" required>
+              <input id="newStudentFName" type="text" class="form-control" placeholder="First name of the student" required>
+              <input id="newStudentLName" type="text" class="form-control" placeholder="Last name of the student" required>
+              <input id="newStudentBirth" type="text" class="form-control" placeholder="Birthday of the student" required>
+              <input type="submit" hidden="">
+            </form>
+        </div>
           <div id="content" style="display: none;">
             <table class="table">
               <thead>
@@ -42,15 +52,6 @@
               </tbody>
             </table>
             <hr/>
-            <!-- Créer un nouvel étudiant -->
-              <!-- <form onSubmit="App.createStudent(); return false;">
-                <input id="newStudentINE" type="text" class="form-control" placeholder="INE of the student" required>
-                <input id="newStudentFName" type="text" class="form-control" placeholder="First name of the student" required>
-                <input id="newStudentLName" type="text" class="form-control" placeholder="Last name of the student" required>
-                <input id="newStudentBirth" type="text" class="form-control" placeholder="Birthday of the student" required>
-                <input type="submit" hidden="">
-              </form> -->
-          </div>
         </div>
       </div>
     </div>

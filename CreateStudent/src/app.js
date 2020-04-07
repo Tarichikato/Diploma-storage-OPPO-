@@ -70,7 +70,7 @@ App = {
 
     await App.renderStudents()
 
-    // await App.createStudent()
+    await App.createStudent()
 
     // Update loading state
     App.setLoading(false)
@@ -82,7 +82,7 @@ App = {
         var content = $("#content")
         // Load the total task count from the blockchain
         const studentCount = await App.diplomaStorage.studentCount()
-        
+
         var studentsResults = $("#studentsResults")
 
         // Render out each task with a new task template
@@ -101,6 +101,16 @@ App = {
           content.show()
 
         }
+      },
+
+      createStudent: async () => {
+        App.setLoading(true)
+        const iNE = $('#newStudentINE').val()
+        const studentFirstName = $('#newStudentFName').val()
+        const studentLastName = $('#newStudentLName').val()
+        const studentbirth = $('#newStudentBirth').val()
+        await App.diplomaStorage.createStudent(iNE, studentFirstName, studentLastName, studentbirth)
+        window.location.reload()
       },
 
 
