@@ -70,8 +70,6 @@ App = {
 
     await App.renderSchools()
 
-    await App.createSchool()
-
     // Update loading state
     App.setLoading(false)
   },
@@ -104,6 +102,7 @@ App = {
         const schoolAddress = $('#newSchoolAddress').val()
         const schoolName = $('#newSchoolName').val()
         await App.diplomaStorage.createSchool(schoolAddress, schoolName)
+        window.location.reload()
       },
 
 
