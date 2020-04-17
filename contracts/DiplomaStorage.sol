@@ -1,4 +1,5 @@
 pragma solidity ^0.5.16;
+pragma experimental ABIEncoderV2;
 
 
 contract DiplomaStorage {
@@ -258,22 +259,35 @@ contract DiplomaStorage {
    
 
     function checkDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(bool) {
-        uint degreeId = checkDegree(_dYear, _nameDegree,_schoolName);
-        uint studentId = checkStudent(_INE,_firstName,_lastName,_birth);
-        
-        Diploma memory dip;
-
-        // If the student and the diploma exist, we will check if such an association exists
-        
-        if(studentId != 0 && degreeId != 0){
-            for(uint k = 1; k <= diplomaCount;k++){
-                dip = diplomas[k];
-                if (dip.idStudent == studentId && dip.idDegree == degreeId){
-                    return true;
-                }
+        //enter 0 if INE unknown
+        if (_INE==0){
+            string memory reponse = checkDiplomaNoINE(_firstName,  _lastName, _birth, _dYear, _nameDegree, _schoolName);
+            if (keccak256(abi.encodePacked(reponse)) == keccak256(abi.encodePacked("OK"))){
+                return true;
+            }
+            else{
+                return false;
             }
         }
-        return false;
+        else{
+            uint degreeId = checkDegree(_dYear, _nameDegree,_schoolName);
+            uint studentId = checkStudent(_INE,_firstName,_lastName,_birth);
+        
+            Diploma memory dip;
+
+            // If the student and the diploma exist, we will check if such an association exists
+         
+           if(studentId != 0 && degreeId != 0){
+              for(uint k = 1; k <= diplomaCount;k++){
+                  dip = diplomas[k];
+                  if (dip.idStudent == studentId && dip.idDegree == degreeId){
+                     return true;
+                    }
+              }
+           }
+          return false; 
+        }
+
     }
     
     
@@ -282,7 +296,7 @@ contract DiplomaStorage {
      * If the student exists in duplicate, the INE is requested
      **/
     
-    function checkDiplomaNoINE(string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public view returns(string memory){
+    function checkDiplomaNoINE(string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) internal view returns(string memory){
        uint studentId = 0;
        Student memory stu;
        uint c = 0;
@@ -319,6 +333,24 @@ contract DiplomaStorage {
         return("NO");
         }
        
-    } 
+    }
+    
+
+    //Display the list of degrees owned by the student (doesn't work)
+    function checkStudentDegrees(uint _INE, string memory _firstName, string memory _lastName,uint _birth) public view returns(Degree[] memory) {
+        uint i = 0;
+        Degree[] memory list= new Degree[](0);
+        for(uint k=0; k<= degreeCount; k++){
+            if(checkDiploma(_INE, _firstName, _lastName, _birth, degrees[k].year, degrees[k].nameDegree, degrees[k].schoolName)){
+                Degree[] memory L = new Degree[](i+1);
+                for (uint l=0; l<i; l++){
+                    L[l]=list[l];
+                }
+                L[i]=degrees[k];
+                list = L;
+            }
+        }
+        
+    }
     
 }
