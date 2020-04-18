@@ -335,21 +335,41 @@ contract DiplomaStorage {
        
     }
     
-
-    //Display the list of degrees owned by the student (doesn't work)
-    function checkStudentDegrees(uint _INE, string memory _firstName, string memory _lastName,uint _birth) public view returns(Degree[] memory) {
-        uint i = 0;
-        Degree[] memory list= new Degree[](0);
+    // Returns the degrees owned by the student with a string "Degree : nameDegree1 ; School : nameSchool1 || Degree : nameDegree2 ; School : nameSchool2".
+    
+    function checkStudentDegrees(uint _INE, string memory _firstName, string memory _lastName,uint _birth) public view returns(string memory) {
+        bytes memory _list = bytes("");
         for(uint k=0; k<= degreeCount; k++){
             if(checkDiploma(_INE, _firstName, _lastName, _birth, degrees[k].year, degrees[k].nameDegree, degrees[k].schoolName)){
-                Degree[] memory L = new Degree[](i+1);
-                for (uint l=0; l<i; l++){
-                    L[l]=list[l];
+	        	//Concatenates strings
+                bytes memory _text1 = bytes(" || Degree : ");
+                bytes memory _text2 = bytes(" ; School : ");
+                bytes memory _nameDeg = bytes(degrees[k].nameDegree);
+                bytes memory _nameSchool = bytes(degrees[k].schoolName);
+                string memory _list2 = new string(_text1.length + _text2.length + _list.length + _nameDeg.length + _nameSchool.length);
+                bytes memory _anotherList = bytes(_list2);
+                for (uint l=0 ; l< _anotherList.length ; l++){
+                    if (l < _list.length){
+                        _anotherList[l]=_list[l];
+                    }
+                    else if (l-_list.length<_text1.length){
+                        _anotherList[l]=_text1[l-_list.length];
+                    }
+                    else if (l-_list.length-_text1.length<_nameDeg.length){
+                        _anotherList[l]=_nameDeg[l-_list.length-_text1.length];
+                    }
+                    else if (l-_list.length-_text1.length-_nameDeg.length<_text2.length){
+                        _anotherList[l]=_text2[l-_list.length-_text1.length-_nameDeg.length];
+                    }
+                    else {
+                        _anotherList[l]=_nameSchool[l-_list.length-_text1.length-_nameDeg.length-_text2.length];
+                    }
                 }
-                L[i]=degrees[k];
-                list = L;
+                _list=_anotherList;
             }
         }
+        
+        return string(_list);
         
     }
     
