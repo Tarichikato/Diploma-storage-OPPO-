@@ -123,8 +123,8 @@ export class CheckStudent extends Component {
     event.preventDefault();
     this.setState({id:4})
     console.log('value',event.target.value)
-    console.log('id',this.state.id)
-    this.getStudent(this.getDiplomaStorageAddress(),4)
+    console.log('id',parseInt(this.state.id))
+    this.getStudent(this.getDiplomaStorageAddress(),parseInt(this.state.id))
 
     
 }
