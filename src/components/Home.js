@@ -19,9 +19,11 @@ export class Home extends Component {
             <div>
                 <Header as='h1'>Diploma Storage</Header>
 
+            
+
                 <Form>
                     <Form.Input
-                        label='Contract Address'
+                        label='Fonction'
                         type='text'
                         value={this.state.address}
                         onChange={this.onChange}
@@ -33,6 +35,8 @@ export class Home extends Component {
                         Submit
                     </Button>
                 </Form>
+                
+               
             </div>
         );
     }
@@ -43,6 +47,11 @@ export class Home extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.history.push(`/createStudent/${this.state.address}`)
+        this.props.history.push(`/${this.state.address}`)
+    }
+
+    onCS(event){
+        event.preventDefault();
+        this.props.history.push(`/checkStudent`)
     }
 }

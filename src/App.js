@@ -6,6 +6,8 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { Component } from 'react';
 import history from "./history"
 import { Home } from './components/Home';
+import {NotFound} from './components/NotFound';
+import {CheckStudent} from './components/CheckStudent';
 
 class App extends Component {
 
@@ -24,8 +26,9 @@ class App extends Component {
 
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/createStudent/:address' component={CreateStudent}
-            /> 
+            <Route path='/createStudent/' component={CreateStudent} /> 
+            <Route path='/checkStudent/' component={CheckStudent} />
+            <Route  component ={NotFound} />
           </Switch>
 
         </Container>
