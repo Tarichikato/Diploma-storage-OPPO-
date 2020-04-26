@@ -4,9 +4,10 @@ import { Table } from 'semantic-ui-react'
 
 
 
+
 export class CreateStudent extends Component {
 
-    state = {
+   /*  state = {
         students: {
             name:'N/A',
             idStudent: 0,
@@ -16,14 +17,17 @@ export class CreateStudent extends Component {
             birth: 0,
         }
 
-    }
+    } */
 
   async componentDidMount () {
-    const currentStudents = await this.getStudents(this.getDiplomaStorageAddress()
+    await this.getStudents(this.getDiplomaStorageAddress()
+    )
+    
+    /* const currentStudents = await this.getStudents(this.getDiplomaStorageAddress()
     )
     this.setState({
         students: currentStudents
-    })
+    }) */
   }
   
   getDiplomaStorageAddress () {
@@ -32,13 +36,24 @@ export class CreateStudent extends Component {
 
   async getStudents(address) {
     const contract = createContract(address)
+    
     this.setState({ contract })
+    console.log(contract)
 
-    const student = await contract.methods.students(1).call().then(console.log)
-    this.setState({student}) 
+    const student = await contract.methods.students(1).call()
+    this.setState({
+        students: [student]
+    })
+    console.log("student", this.state.students)
+
+    const studentCount = await contract.methods.studentCount().call()
+    this.setState({studentCount})
+    
+    
+    
  
-    const idStudent =  contract.new({data: "idStudent"})
-    this.setState({idStudent})
+   /*  const idStudent =  await contract.methods.students(1).student.bind(0)
+    console.log(idStudent)
     const INE = await contract.methods.students(1).call()
     this.setState({INE})
     const firstName = await contract.methods.students(1).call()
@@ -46,7 +61,7 @@ export class CreateStudent extends Component {
     const lastName = await contract.methods.students(1).call()
     this.setState({lastName})
     const birth = await contract.methods.students(1).call()
-    this.setState({birth})
+    this.setState({birth}) */
     
     /* const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount}) */
@@ -64,15 +79,23 @@ export class CreateStudent extends Component {
     this.setState({
         students:[...this.state.students, student]
     }) */
-    return {
+   /*  return {
         idStudent: idStudent,
         INE: INE,
         firstName: firstName,
         lastName: lastName,
         birth: birth,
+    } */
+    
+}
+
+constructor(props) {
+    super(props)
+    this.state = {
+      studentCount: 0,
+      students: [],
     }
-};
-  
+}
 
 
   /* createStudent(INE, firstName, lastName, birth) {
@@ -101,25 +124,48 @@ export class CreateStudent extends Component {
                      Student
                   </Table.Cell>
                   <Table.Cell sigleline="true">
-                      {this.state.students.idStudent}
+            
+              <ul id="taskList" className="list-unstyled">
+                { this.state.students.map((student, key) => {
+            return(
+              <div className="taskTemplate"  key={key}>
+                
+                  
+                {student.idStudent}
+                
+              
+              </div>
+            )
+          })}
+        </ul>
+                 
+
+
                   </Table.Cell>
                   </Table.Row>
 
                   <Table.Row>
                   <Table.Cell ssigleline="true"> 
-                     idStudent
-                  </Table.Cell>
-                  <Table.Cell sigleline="true">
-                      {this.state.students.idStudent}
-                  </Table.Cell>
-                  </Table.Row>
-
-                  <Table.Row>
-                  <Table.Cell sigleline="true"> 
                      INE
                   </Table.Cell>
                   <Table.Cell sigleline="true">
-                      {this.state.students.INE}
+
+
+                  <ul id="taskList" className="list-unstyled">
+                { this.state.students.map((student, key) => {
+            return(
+              <div className="taskTemplate"  key={key}>
+                
+                  
+                {student.INE}
+               
+              
+              </div>
+            )
+          })}
+        </ul>
+
+
                   </Table.Cell>
                   </Table.Row>
 
@@ -128,7 +174,22 @@ export class CreateStudent extends Component {
                      First Name 
                   </Table.Cell>
                   <Table.Cell sigleline="true">
-                      {this.state.students.firstName}
+
+
+                  <ul id="taskList" className="list-unstyled">
+                { this.state.students.map((student, key) => {
+            return(
+              <div className="taskTemplate"  key={key}>
+                
+                  
+                {student.firstName}
+               
+              
+              </div>
+            )
+          })}
+        </ul>
+
                   </Table.Cell>
                   </Table.Row>
 
@@ -137,16 +198,48 @@ export class CreateStudent extends Component {
                      Last Name
                   </Table.Cell>
                   <Table.Cell sigleline="true">
-                      {this.state.students.lastName}
+
+
+                  <ul id="taskList" className="list-unstyled">
+                { this.state.students.map((student, key) => {
+            return(
+              <div className="taskTemplate"  key={key}>
+                
+                  
+                {student.lastName}
+               
+              
+              </div>
+            )
+          })}
+        </ul>
+
+
                   </Table.Cell>
                   </Table.Row>
 
                   <Table.Row>
                   <Table.Cell sigleline="true"> 
-                     Birthday 
+                     Birthday
                   </Table.Cell>
                   <Table.Cell sigleline="true">
-                      {this.state.students.birth}
+
+
+                  <ul id="taskList" className="list-unstyled">
+                { this.state.students.map((student, key) => {
+            return(
+              <div className="taskTemplate"  key={key}>
+                
+                  
+                {student.birth}
+               
+              
+              </div>
+            )
+          })}
+        </ul>
+
+
                   </Table.Cell>
                   </Table.Row>
 
