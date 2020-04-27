@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button,Form,Checkbox } from 'semantic-ui-react'
 import Web3 from 'web3'
 import { web3 } from '../ethereum/web3'
 
@@ -152,36 +152,40 @@ export class CreateStudent extends Component {
         <label>
           INE :
           <input
+            placeholder= 'Enter INE here'
             name="INE"
             type="number"
-            value={this.state.INE}
+            //value={this.state.INE}
             onChange={this.onChange} />
         </label>
         <br />
         <label>
           firstName :
           <input
+            placeholder='First Name'
             name="firstName"
             type="text"
-            value={this.state.firstName}
+            //value={this.state.firstName}
             onChange={this.onChange} />
         </label>
         <br />
         <label>
           lastName :
           <input
+            placeholder='Last Name'
             name="lastName"
             type="text"
-            value={this.state.lastName}
+            //value={this.state.lastName}
             onChange={this.onChange} />
         </label>
         <br />
         <label>
           Birth :
           <input
+            placeholder='Birth'
             name="birth"
             type="number"
-            value={this.state.birth}
+            //value={this.state.birth}
             onChange={this.onChange} />
         </label>
       </form>
@@ -192,6 +196,7 @@ export class CreateStudent extends Component {
           >
           Submit
       </Button>
+
           
         
 
