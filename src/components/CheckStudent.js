@@ -3,7 +3,7 @@ import { createContract } from '../ethereum/DiplomaStorageContract'
 import { Table } from 'semantic-ui-react'
 import Web3 from 'web3'
 import { web3 } from '../ethereum/web3'
-import { Button, Header, Form} from 'semantic-ui-react';
+import { Button, Header, Form, Checkbox} from 'semantic-ui-react';
 
 
 
@@ -12,6 +12,12 @@ export class CheckStudent extends Component {
 
 
     state = {
+        gotIt: "",
+        INE: 0,
+        firstName: 'N/A',
+        lastName: 'N/A',
+        birth: 0,
+        id: 0,
         students: {
             idStudent: 0,
             INE: 0,
@@ -30,7 +36,6 @@ export class CheckStudent extends Component {
     this.getContractState(contract)
     await this.getStudent(this.getDiplomaStorageAddress(),this.state.id)
     this.getStudentId(16, 'Pierre', 'lastName', 28041999)
-    //this.createStudent(16, 'Pierre', 'lastName', 28041999)
   }
 
   async getStudentId(INE,firstName,lastName,birth){
@@ -63,15 +68,20 @@ export class CheckStudent extends Component {
     this.setState({contract})
     const studentCount = await this.state.contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
-    console.log('stuentCount LBD',studentCount)
   }
  
   constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this);
-      this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      id : 1,
+      gotIt: '',
+      contract: createContract(this.getDiplomaStorageAddress()),
+      INE: 0,
+      firstName: 'N/A',
+      lastName: 'N/A',
+      birth: 0,
+      id : 0,
       account: '',
       studentCount: 0,
       students: [],
@@ -104,27 +114,36 @@ export class CheckStudent extends Component {
   
 
 
-   async createStudent(INE, firstName, lastName, birth) {
-    this.setState({loading:true})
-    const contract = createContract(this.getDiplomaStorageAddress())
-    this.setState({contract})
-    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: '0xfd9e5D7BbB1871453b772B310632245ba9bf37F8' })
-    const studentCount = await contract.methods.studentCount()
-    //this.setState({studentCount: studentCount})
-    console.log("studentCount2",studentCount)
-  } 
 
-  onChange(event) {
-    this.setState({id: event.target.value});
-}
+  async onChange(event) {
+    
+      const target = event.target;
+      const value =  target.value;
+      const name = target.name;
+  
+      await this.setState({
+        [name]: value
+      });
+      console.log(name,value,this.state)  
+  }
+
+  
+
+
 
     async onSubmit(event) {
     const contract = createContract(this.getDiplomaStorageAddress())
     event.preventDefault();
-    this.setState({id:4})
-    console.log('value',event.target.value)
-    console.log('id',parseInt(this.state.id))
-    this.getStudent(this.getDiplomaStorageAddress(),parseInt(this.state.id))
+    const id = await this.getStudentId(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+    console.log('idf',id)
+    if (id > 0) {
+      this.setState({gotIt : "HO YEAY BROOOOOO YOU EXISTS"});
+    } else{
+      this.setState({gotIt : ""});
+    }
+
+    await this.getStudent(this.getDiplomaStorageAddress(),parseInt(id))
+
 
     
 }
@@ -136,25 +155,64 @@ export class CheckStudent extends Component {
       
         <div>
 
-                  <Form>
-                    <Form.Input
-                        label='Id'
-                        type='number'
-                        value={this.state.address}
-                        onChange={this.onChange}
-                    />
-                    <Button
-                        type='submit'
-                        onClick={this.onSubmit}
-                    >
-                        Submit
-                    </Button>
-                </Form>
+<form>
+        <label>
+          INE :
+          <input
+            name="INE"
+            type="number"
+            value={this.state.INE}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          firstName :
+          <input
+            name="firstName"
+            type="text"
+            value={this.state.firstName}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          lastName :
+          <input
+            name="lastName"
+            type="text"
+            value={this.state.lastName}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          Birth :
+          <input
+            name="birth"
+            type="number"
+            value={this.state.birth}
+            onChange={this.onChange} />
+        </label>
+      </form>
+
+      <Button
+          type='submit'
+          onClick={this.onSubmit}
+          >
+          Submit
+      </Button>
 
 
           <p>Account : {this.state.account}</p>
+          <p>INE : {this.state.INE} </p>
+          <p>firstName : {this.state.firstName} </p>
+          <p>lastName : {this.state.lastName} </p>
+          <p>Birth : {this.state.birth} </p>
 
-          <p>Id : {this.state.id} </p>
+
+
+          <p>id : {this.state.id} </p>
+
+
+    <Header as='h1'>{this.state.firstName} {this.state.lastName} {this.state.gotIt} </Header>
 
           <p>StudentCount : {this.state.studentCount}</p>
 

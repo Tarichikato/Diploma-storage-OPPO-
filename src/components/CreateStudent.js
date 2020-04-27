@@ -115,6 +115,8 @@ export class CreateStudent extends Component {
 
           <p>Contract address: {this.getDiplomaStorageAddress()}</p>
 
+         
+
             <Table celled padded color ="yellow">
                 <Table.Header>
                     <Table.Row>

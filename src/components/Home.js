@@ -34,6 +34,9 @@ export class Home extends Component {
                     >
                         Submit
                     </Button>
+                    
+                    <p>Fonctions disponibles : checkStudentWithId, createStudent, checkStudent, checkDiploma</p>
+                    
                 </Form>
                 
                
@@ -50,8 +53,5 @@ export class Home extends Component {
         this.props.history.push(`/${this.state.address}`)
     }
 
-    onCS(event){
-        event.preventDefault();
-        this.props.history.push(`/checkStudent`)
-    }
+   
 }
