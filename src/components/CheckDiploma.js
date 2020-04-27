@@ -18,12 +18,18 @@ export class CheckDiploma extends Component {
         lastName: 'N/A',
         birth: 0,
         id: 0,
-        students: {
-            idStudent: 0,
+        dYear : 0,
+        nameDegree : '',
+        nameSchool : '',
+        diplomas: {
+            id: 0,
             INE: 0,
-            fisrtName: 'N/A',
-            lastName: 'N/A',
+            firstName: '',
+            lastName: '',
             birth: 0,
+            idDegree: 0,
+            nameDegree: 0,
+            schoolName: 'N/A',
         }
 
     }
@@ -34,24 +40,24 @@ export class CheckDiploma extends Component {
     this.setState({contract})
     console.log("contrat",contract)
     this.getContractState(contract)
-    await this.getStudent(this.getDiplomaStorageAddress(),this.state.id)
+    //await this.getDiploma(this.getDiplomaStorageAddress(),this.state.id)
   }
 
-  async getStudentId(INE,firstName,lastName,birth){
+  async getDiplomaId(INE,firstName,lastName,birth,dYear,nameDegree,nameSchool){
     const contract = createContract(this.getDiplomaStorageAddress())
-    const id = await contract.methods.checkStudent(INE,firstName,lastName,birth).call()
+    const id = await contract.methods.getIdDiploma(INE,firstName,lastName,birth,dYear,nameDegree,'Telecom Sud Paris').call()
     this.setState({id})
-    console.log('id',id)
+    console.log('idGetDiplomaID',id)
     return(id)
   }
 
   async getContractState(contract){
     this.setState({loading:true})
-    const master = contract.methods.master().call()
-    console.log('master')
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
-    console.log('studentCount GCS',studentCount)
+    const master = await contract.methods.master().call()
+    console.log('master',master)
+    const diplomaCount = await contract.methods.diplomaCount().call()
+    this.setState({diplomaCount: diplomaCount})
+    console.log('dilplomaCount GCS',diplomaCount)
   }
 
   async loadBcData(){
@@ -65,8 +71,8 @@ export class CheckDiploma extends Component {
 
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
-    const studentCount = await this.state.contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
+    const diplomaCount = await this.state.contract.methods.diplomaCount().call()
+    this.setState({diplomaCount: diplomaCount})
   }
  
   constructor(props) {
@@ -81,9 +87,12 @@ export class CheckDiploma extends Component {
       lastName: 'N/A',
       birth: 0,
       id : 0,
+      dYear : 0,
+      nameDegree : 'N/A',
+      nameSchool : 'N/A',
       account: '',
-      studentCount: 0,
-      students: [],
+      diplomaCount: 0,
+      diplomas: [],
 
       
     }
@@ -94,20 +103,20 @@ export class CheckDiploma extends Component {
     return '0x64399f5759209029856F40854699f65e57ED4225'
   }
 
-  async getStudent(address,id) {
+  async getDiploma(address,id) {
     const contract = createContract(address)
     
     this.setState({ contract })
     console.log(contract)
 
-    const student = await contract.methods.students(id).call()
+    const diploma = await contract.methods.diplomas(id).call()
     this.setState({
-        students: [student]
+        diplomas: [diploma]
     })
-    console.log("student", this.state.students)
+    console.log("diploma", this.state.diplomas)
 
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount})
+    const diplomaCount = await contract.methods.diplomaCount().call()
+    this.setState({diplomaCount})
   }
 
   
@@ -133,15 +142,18 @@ export class CheckDiploma extends Component {
     async onSubmit(event) {
     const contract = createContract(this.getDiplomaStorageAddress())
     event.preventDefault();
-    const id = await this.getStudentId(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+    const id = await this.getDiplomaId(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth,
+        this.state.dYear,this.state.nameDegree,this.state.nameSchool)
     console.log('idf',id)
     if (id > 0) {
-      this.setState({gotIt : "HO YEAY BROOOOOO YOU EXISTS"});
+      this.setState({gotIt : "HO YEAY BROOOOOO YOU GOT IT"});
     } else{
-      this.setState({gotIt : ""});
+      this.setState({gotIt : "SORRY BRO"});
     }
 
-    await this.getStudent(this.getDiplomaStorageAddress(),parseInt(id))
+    await this.getDiploma(this.getDiplomaStorageAddress(),parseInt(id))
+    await this.getDiploma(this.getDiplomaStorageAddress(),this.state.id)
+    console.log('student',this.state.student)
 
 
     
@@ -196,7 +208,7 @@ export class CheckDiploma extends Component {
           <input
             name="dYear"
             type="number"
-            value={this.state.birth}
+            value={this.state.dYear}
             onChange={this.onChange} />
         </label>
         <br />
@@ -205,7 +217,7 @@ export class CheckDiploma extends Component {
           <input
             name="nameDegree"
             type="text"
-            value={this.state.birth}
+            value={this.state.nameDegree}
             onChange={this.onChange} />
         </label>
         <br />
@@ -214,7 +226,7 @@ export class CheckDiploma extends Component {
           <input
             name="schoolName"
             type="text"
-            value={this.state.birth}
+            value={this.state.schoolName}
             onChange={this.onChange} />
         </label>
       </form>
@@ -228,21 +240,17 @@ export class CheckDiploma extends Component {
 
 
           <p>Account : {this.state.account}</p>
-          <p>INE : {this.state.INE} </p>
-          <p>firstName : {this.state.firstName} </p>
-          <p>lastName : {this.state.lastName} </p>
-          <p>Birth : {this.state.birth} </p>
-
-
-
-          <p>id : {this.state.id} </p>
+          
+          <p>Diploma Id: {this.state.diplomaId} </p>
 
 
     <Header as='h1'>{this.state.firstName} {this.state.lastName} {this.state.gotIt} </Header>
 
-          <p>StudentCount : {this.state.studentCount}</p>
+          <p>StudentCount : {this.state.diplomaCount}</p>
 
           <p>Contract address: {this.getDiplomaStorageAddress()}</p>
+
+          
 
             <Table celled padded color ="yellow">
                 <Table.Header>
@@ -256,17 +264,16 @@ export class CheckDiploma extends Component {
   
                     <Table.Row>
                     <Table.Cell sigleline="true"> 
-                       Student
+                       Diploma
                     </Table.Cell>
                     <Table.Cell sigleline="true">
               
                 <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.diplomas.map((diploma, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
-                    
-                  {student.idStudent}
+                  {diploma.id}
                   
                 
                 </div>
@@ -287,12 +294,12 @@ export class CheckDiploma extends Component {
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.diplomas.map((diploma, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.INE}
+                  {diploma.INE}
                  
                 
                 </div>
@@ -312,12 +319,12 @@ export class CheckDiploma extends Component {
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.diplomas.map((diploma, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.firstName}
+                  {diploma.firstName}
                  
                 
                 </div>
@@ -336,12 +343,12 @@ export class CheckDiploma extends Component {
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.diplomas.map((diploma, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.lastName}
+                  {diploma.lastName}
                  
                 
                 </div>
@@ -361,12 +368,12 @@ export class CheckDiploma extends Component {
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.diplomas.map((diploma, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.birth}
+                  {diploma.birth}
                  
                 
                 </div>
@@ -381,6 +388,8 @@ export class CheckDiploma extends Component {
   
                 </Table.Body>
             </Table>
+
+        
           
         </div>
     );

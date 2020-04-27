@@ -17,7 +17,7 @@ export class NotFound extends Component {
     render() {
         return (
             <div>
-                <Header as='h1'>Error *** (Trust Me you don't whant to know the nomber of errors that exist) </Header>
+                <Header as='h1'>Error 1 (Yes we don't have so much imagination) </Header>
                 <p>
                     Click on the button "Home" to go back in a safe place
                 </p>

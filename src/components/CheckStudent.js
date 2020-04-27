@@ -35,7 +35,6 @@ export class CheckStudent extends Component {
     console.log("contrat",contract)
     this.getContractState(contract)
     await this.getStudent(this.getDiplomaStorageAddress(),this.state.id)
-    this.getStudentId(16, 'Pierre', 'lastName', 28041999)
   }
 
   async getStudentId(INE,firstName,lastName,birth){
@@ -137,7 +136,7 @@ export class CheckStudent extends Component {
     const id = await this.getStudentId(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
     console.log('idf',id)
     if (id > 0) {
-      this.setState({gotIt : "HO YEAY BROOOOOO YOU EXISTS"});
+      this.setState({gotIt : "HO YEAY YOU EXIST"});
     } else{
       this.setState({gotIt : ""});
     }

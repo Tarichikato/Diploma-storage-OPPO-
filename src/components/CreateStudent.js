@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import Web3 from 'web3'
 import { web3 } from '../ethereum/web3'
 
@@ -9,13 +9,14 @@ import { web3 } from '../ethereum/web3'
 export class CreateStudent extends Component {
 
     state = {
-        students: {
+       
             idStudent: 0,
             INE: 0,
             fisrtName: 'N/A',
             lastName: 'N/A',
             birth: 0,
-        }
+            studentCount: 0,
+        
 
     }
 
@@ -63,10 +64,16 @@ export class CreateStudent extends Component {
  
   constructor(props) {
     super(props)
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      account: '',
+      
+      idStudent: 0,
+      INE: 0,
+      fisrtName: 'N/A',
+      lastName: 'N/A',
+      birth: 0,
       studentCount: 0,
-      students: [],
     }
   }
   
@@ -99,162 +106,100 @@ export class CreateStudent extends Component {
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
     contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: '0xfd9e5D7BbB1871453b772B310632245ba9bf37F8' })
-    const studentCount = await contract.methods.studentCount()
-    //this.setState({studentCount: studentCount})
+    const studentCount = await contract.methods.studentCount().call()
+    this.setState({studentCount: studentCount})
     console.log("studentCount2",studentCount)
   } 
 
-  render() {
+  async onChange(event) {
+    
+    const target = event.target;
+    const value =  target.value;
+    const name = target.name;
+    console.log(name,value,this.state) 
+    this.setState({
+      [name]: value
+    });
+    console.log(name,value,this.state)  
+}
+
+
+
+
+
+  async onSubmit(event) {
+  event.preventDefault();
+  await this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+}
+
+ 
+
+          render() {
     return (
+
       
       
         <div>
-          <p>Account : {this.state.account}</p>
 
-          <p>StudentCount : {this.state.studentCount}</p>
+<p>Account : {this.state.account}</p>
 
-          <p>Contract address: {this.getDiplomaStorageAddress()}</p>
+<p>StudentCount : {this.state.studentCount}</p>
 
-         
+<p>Contract address: {this.getDiplomaStorageAddress()}</p>
 
-            <Table celled padded color ="yellow">
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Value</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-  
-                <Table.Body>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       Student
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-              
-                <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.idStudent}
-                  
-                
-                </div>
-              )
-            })}
-          </ul>
-                   
-  
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell ssigleline="true"> 
-                       INE
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.INE}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
-  
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       First Name 
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.firstName}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       Last Name
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.lastName}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
-  
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       Birthday
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.birth}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
-  
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-  
-                </Table.Body>
-            </Table>
+
+<form>
+        <label>
+          INE :
+          <input
+            name="INE"
+            type="number"
+            value={this.state.INE}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          firstName :
+          <input
+            name="firstName"
+            type="text"
+            value={this.state.firstName}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          lastName :
+          <input
+            name="lastName"
+            type="text"
+            value={this.state.lastName}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          Birth :
+          <input
+            name="birth"
+            type="number"
+            value={this.state.birth}
+            onChange={this.onChange} />
+        </label>
+      </form>
+
+      <Button
+          type='submit'
+          onClick={this.onSubmit}
+          >
+          Submit
+      </Button>
           
+        
+
+        <p>INE: {this.state.INE}</p>
+        <p>FirstName: {this.state.firstName}</p>
+        <p>LastName: {this.state.lastName}</p>
+        <p>Birth: {this.state.birth}</p>
+        
         </div>
     );
   }
