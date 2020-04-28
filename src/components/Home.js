@@ -43,6 +43,6 @@ export class Home extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.history.push(`/createStudent/${this.state.address}`)
+        this.props.history.push(`/FunctionsChoice/${this.state.address}`)
     }
 }

@@ -6,6 +6,8 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { Component } from 'react';
 import history from "./history"
 import { Home } from './components/Home';
+import { FunctionsChoice } from './components/FunctionsChoice';
+import { CheckDiploma } from './components/CheckDiploma';
 
 class App extends Component {
 
@@ -24,8 +26,10 @@ class App extends Component {
 
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/createStudent/:address' component={CreateStudent}
-            /> 
+            <Route path ='/FunctionsChoice/:address' component={FunctionsChoice} />
+            <Route path='/CreateStudent/:address' component={CreateStudent}/>
+            <Route path='/CheckDiploma/:address' component={CheckDiploma}/>
+             
           </Switch>
 
         </Container>
