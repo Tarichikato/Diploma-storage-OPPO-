@@ -5,7 +5,7 @@ import { Header, Button, Form } from 'semantic-ui-react';
 export class FunctionsChoice extends Component{
 
     state = {
-        address: '0x08180a4D9290e977203c42E58328c44E147DE93A'
+        address: '0x7977FD3234b6915022F0c50EBe845618fD8a802f'
     }
 
     constructor(props) {

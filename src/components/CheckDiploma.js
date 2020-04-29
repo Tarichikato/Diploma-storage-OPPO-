@@ -123,7 +123,7 @@ constructor(props) {
 
 
     async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
-    const contract = createContract('0x08180a4D9290e977203c42E58328c44E147DE93A')
+    const contract = createContract('0x7977FD3234b6915022F0c50EBe845618fD8a802f')
     
     this.setState({ contract })
     console.log(contract)
