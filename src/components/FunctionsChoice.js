@@ -46,7 +46,7 @@ export class FunctionsChoice extends Component{
 
     onSubmitCreateStudent(event) {
         event.preventDefault();
-         this.props.history.push(`/CheckDiploma/${this.state.address}`)
+         this.props.history.push(`/CreateStudent/${this.state.address}`)
     }
 
     onSubmitCheckDiploma(event) {

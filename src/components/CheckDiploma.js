@@ -8,7 +8,12 @@ import { web3 } from './../ethereum/web3'
 
 export class CheckDiploma extends Component {
 
-   /*  state = {
+    state = {
+        diplomas: {
+            idStudent: 0,
+            idDegree: 0,
+        },
+
         students: {
             name:'N/A',
             idStudent: 0,
@@ -16,9 +21,26 @@ export class CheckDiploma extends Component {
             fisrtName: 'N/A',
             lastName: 'N/A',
             birth: 0,
-        }
+        }, 
 
-    } */
+        degrees: {
+            idDegree: 0,
+            idSchool: 0,
+            year: 0,
+            nameDegree: 'N/A',
+            schoolName: 'N/A', 
+        },
+
+        schools: {
+            schoolAddress: 'N/A',
+            idSchool: 0,
+            schoolName: 'N/A',
+        },
+
+        diplomaResult: false,
+
+    }
+
 
   async componentDidMount () {
     await this.getDiplomas(this.getDiplomaStorageAddress()
@@ -29,9 +51,9 @@ export class CheckDiploma extends Component {
     return this.props.match.params.address
   }
 
-  async getDiplomaId(INE,firstName,lastName,birth,degreeYear,degreeName,nameSchool){
+  async getDiplomaId(INE, firstName, lastName, birth, dYear, nameDegree, nameSchool){
     const contract = createContract(this.getDiplomaStorageAddress())
-    const id = await contract.methods.getIdDiploma(INE, firstName, lastName, birth, degreeYear, degreeYear, nameSchool).call()
+    const id = await contract.methods.getIdDiploma(INE, firstName, lastName, birth, dYear, nameDegree, nameSchool).call()
     this.setState({id})
     console.log('idGetDiplomaID',id)
     return(id)
@@ -50,13 +72,44 @@ export class CheckDiploma extends Component {
     const diplomaCount = await contract.methods.diplomaCount().call()
     this.setState({diplomaCount})
 
-    for (var i = 1; i <= diplomaCount; i++) {
-        const diploma = await contract.methods.diplomas(i).call()
+    const studentCount = await contract.methods.studentCount().call()
+    this.setState({studentCount})
+
+    const degreeCount = await contract.methods.degreeCount().call()
+    this.setState({degreeCount})
+    
+    const schoolCount = await contract.methods.schoolCount().call()
+    this.setState([schoolCount])
+
+    for (var i = 1; i <= studentCount; i++) {
+        const student = await contract.methods.students(i).call()
+        this.setState({
+          students: [...this.state.students, student]
+        })
+      }
+
+
+    for (var j = 1; j <= diplomaCount; j++) {
+        const diploma = await contract.methods.diplomas(j).call()
         this.setState({
           diplomas: [...this.state.diplomas, diploma]
         })
       }
-    
+
+
+      for (var k = 1; k <= schoolCount; k++) {
+        const school = await contract.methods.schools(k).call()
+        this.setState({
+          schools: [...this.state.schools, school]
+        })
+      }
+
+      for (var l = 1; l <= degreeCount; l++) {
+        const degree = await contract.methods.degrees(l).call()
+        this.setState({
+          degrees: [...this.state.degrees, degree]
+        })
+      }
 }
 
 constructor(props) {
@@ -64,20 +117,38 @@ constructor(props) {
     this.state = {
       account:'',
       diplomaCount: 0,
+      studentCount: 0,
+      degreeCount: 0,
+      schoolCount:0,
+      students: [],
+      schools: [],
+      degrees: [],
       diplomas: [],
+      diplomaResult: false,
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 }
 
 
-checkDiploma(INE, firstName, lastName, birth, degreeYear, degreeName, schoolName) {
-    this.state.contract.methods.checkDiploma(INE, firstName, lastName, birth, degreeYear, degreeName, schoolName).send({ from: this.state.account })
-    console.log("Account" , this.state.account)
+async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
+    const contract = createContract('0x08180a4D9290e977203c42E58328c44E147DE93A')
+    
+    this.setState({ contract })
+    console.log(contract)
+    
+    
+    const diplomaResult = await contract.methods.checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName).call()
+    this.setState({diplomaResult})
+    console.log('Diplomaaaa Result: ', diplomaResult)
+
+    return {
+        diplomaResult: diplomaResult,
+    }
 }
 
 
-async onChange(event) {
+    onChange(event) {
     
     const target = event.target;
     const value =  target.value;
@@ -90,11 +161,12 @@ async onChange(event) {
 }
 
 
-async onSubmit(event) {
+    async onSubmit(event) {
     event.preventDefault();
-    const diplomaResult = await this.checkDiploma(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth, this.state.degreeYear, this.state.degreeName, this.state.schoolName)
-    this.setState({diplomaResult})
-    console.log(diplomaResult)
+    const contract = createContract(this.getDiplomaStorageAddress())
+
+    const diplomaResult = await this.checkDiploma(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth, this.state.dYear, this.state.nameDegree, this.state.schoolName)
+    this.setState(diplomaResult)
 }
 
 
@@ -146,8 +218,8 @@ async onSubmit(event) {
           Degree Year :
           <input
             placeholder='Enter the Degree Year'
-            name="YearDegree"
-            type="number"
+            name="dYear"
+            type="text"
             //value={this.state.degreeYear}
             onChange={this.onChange} />
         </label>
@@ -181,7 +253,7 @@ async onSubmit(event) {
                     Check Diploma
             </Button>
           </form>
-
+            
           <Table celled padded color ="yellow">
               <Table.Header>
                   <Table.Row>
@@ -203,11 +275,11 @@ async onSubmit(event) {
                   <Table.Cell>
             
               <ul id="taskList" className="list-unstyled">
-                { this.state.diplomas.map((diploma, key) => {
+                { this.state.students.map((student, key) => {
                      return(
                         <div className="taskTemplate"  key={key}>
             
-                        {diploma.id}
+                        {student.idStudent}
         
                         </div>
                          )
@@ -219,11 +291,11 @@ async onSubmit(event) {
             <Table.Cell sigleline="true">
 
             <ul id="taskList" className="list-unstyled">
-                { this.state.diplomas.map((diploma, key) => {
+                { this.state.students.map((student, key) => {
                     return(
                          <div className="taskTemplate"  key={key}>
 
-                        {diploma.INE}
+                        {student.INE}
                         
                         </div>
                         )
@@ -235,11 +307,11 @@ async onSubmit(event) {
                 <Table.Cell>
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.students.map((student, key) => {
                          return(
                           <div className="taskTemplate"  key={key}>
              
-                            {diploma.firstName}
+                            {student.firstName}
         
                             </div>
                         )
@@ -251,11 +323,11 @@ async onSubmit(event) {
                  <Table.Cell sigleline="true">
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.students.map((student, key) => {
                         return(
                          <div className="taskTemplate"  key={key}>
                 
-                        {diploma.lastName}
+                        {student.lastName}
 
                         </div>
                         )
@@ -267,11 +339,11 @@ async onSubmit(event) {
                 <Table.Cell sigleline="true">
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.students.map((student, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
                 
-                        {diploma.birth}
+                        {student.birth}
                
                         </div>
                         )
@@ -283,11 +355,11 @@ async onSubmit(event) {
                 <Table.Cell sigleline="true">
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.degrees.map((degree, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
                 
-                        {diploma.degreeYear}
+                        {degree.year}
                
                         </div>
                         )
@@ -299,11 +371,11 @@ async onSubmit(event) {
                 <Table.Cell sigleline="true">
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.degrees.map((degree, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
                 
-                        {diploma.degreeName}
+                        {degree.nameDegree}
                
                         </div>
                         )
@@ -315,11 +387,11 @@ async onSubmit(event) {
                 <Table.Cell sigleline="true">
 
                 <ul id="taskList" className="list-unstyled">
-                    { this.state.diplomas.map((diploma, key) => {
+                    { this.state.schools.map((school, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
                 
-                        {diploma.schoolName}
+                        {school.schoolName}
                
                         </div>
                         )
@@ -327,9 +399,22 @@ async onSubmit(event) {
                 </ul>
 
                 </Table.Cell>
+
                 <Table.Cell sigleline="true">
 
-                {this.state.diplomaResult}
+                    {this.state.diplomaResult}
+
+
+                {/* {  this.state.diplomas.map((diplomaResult, key) => {
+                    return(
+                         <div className="taskTemplate"  key={key}>
+
+                        {diplomaResult.idStudent}
+                        
+                        </div>
+                        )
+                    })}  */}
+               
 
                 </Table.Cell>
                 </Table.Row>

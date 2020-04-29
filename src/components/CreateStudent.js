@@ -68,7 +68,7 @@ createStudent(INE, firstName, lastName, birth) {
 }
 
 
-async onChange(event) {
+    onChange(event) {
     
     const target = event.target;
     const value =  target.value;
@@ -81,9 +81,9 @@ async onChange(event) {
 }
 
 
-async onSubmit(event) {
+    onSubmit(event) {
     event.preventDefault();
-    await this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+    this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
   }
 
 
