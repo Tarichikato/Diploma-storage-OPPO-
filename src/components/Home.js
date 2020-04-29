@@ -11,6 +11,7 @@ export class Home extends Component {
         super(props);
 
         this.onSubmitCreateStudent = this.onSubmitCreateStudent.bind(this);
+        this.onSubmitCreateSchool = this.onSubmitCreateSchool.bind(this);
         this.onSubmitCheckStudent = this.onSubmitCheckStudent.bind(this);
         this.onSubmitCheckStudentWithId = this.onSubmitCheckStudentWithId.bind(this);
         this.onSubmitCheckDiploma = this.onSubmitCheckDiploma.bind(this);
@@ -57,6 +58,12 @@ export class Home extends Component {
                 </Button>
                 <Button
                         type='submit'
+                        onClick={this.onSubmitCreateSchool}
+                    >
+                        CreateSchool
+                </Button>
+                <Button
+                        type='submit'
                         onClick={this.onSubmitCheckStudent}
                     >
                         CheckStudent
@@ -84,6 +91,11 @@ export class Home extends Component {
     onSubmitCreateStudent(event) {
         event.preventDefault();
          this.props.history.push(`/createStudent`)
+    }
+
+    onSubmitCreateSchool(event) {
+        event.preventDefault();
+         this.props.history.push(`/createSchool`)
     }
 
     onSubmitCheckDiploma(event) {

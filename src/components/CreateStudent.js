@@ -25,10 +25,7 @@ export class CreateStudent extends Component {
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
     console.log("contrat",contract)
-    this.getContractState(contract)
-    await this.getStudent(this.getDiplomaStorageAddress(),4)
-    this.getStudentId(16, 'Pierre', 'lastName', 28041999)
-    //this.createStudent(16, 'Pierre', 'lastName', 28041999)
+    this.getContractState(contract)  
   }
 
   async getStudentId(INE,firstName,lastName,birth){

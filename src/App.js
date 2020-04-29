@@ -10,6 +10,8 @@ import {NotFound} from './components/NotFound';
 import {CheckStudentWithId} from './components/CheckStudentWithId';
 import {CheckStudent} from './components/CheckStudent';
 import {CheckDiploma} from './components/CheckDiploma';
+import { CreateSchool } from './components/CreateSchool';
+import {CheckDiplomaRudy} from './components/CheckDiplomaRudy';
 
 class App extends Component {
 
@@ -29,9 +31,11 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/createStudent/' component={CreateStudent} /> 
+            <Route path='/createSchool/' component={CreateSchool} /> 
             <Route path='/checkStudentWithId/' component={CheckStudentWithId} />
             <Route path='/checkStudent/' component={CheckStudent} />
             <Route path='/checkDiploma/' component={CheckDiploma} />
+            <Route path='/checkDiplomaRudy/' component={CheckDiplomaRudy} />
             <Route  component ={NotFound} />
           </Switch>
 
