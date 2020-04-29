@@ -51,15 +51,6 @@ export class CheckDiploma extends Component {
     return this.props.match.params.address
   }
 
-  async getDiplomaId(INE, firstName, lastName, birth, dYear, nameDegree, nameSchool){
-    const contract = createContract(this.getDiplomaStorageAddress())
-    const id = await contract.methods.getIdDiploma(INE, firstName, lastName, birth, dYear, nameDegree, nameSchool).call()
-    this.setState({id})
-    console.log('idGetDiplomaID',id)
-    return(id)
-  }
-
-
   async getDiplomas(address) {
     const contract = createContract(address)
     const accounts = await web3.eth.getAccounts()
@@ -131,7 +122,7 @@ constructor(props) {
 }
 
 
-async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
+    async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
     const contract = createContract('0x08180a4D9290e977203c42E58328c44E147DE93A')
     
     this.setState({ contract })
@@ -141,10 +132,6 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
     const diplomaResult = await contract.methods.checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName).call()
     this.setState({diplomaResult})
     console.log('Diplomaaaa Result: ', diplomaResult)
-
-    return {
-        diplomaResult: diplomaResult,
-    }
 }
 
 
@@ -161,12 +148,13 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
 }
 
 
-    async onSubmit(event) {
+    onSubmit(event) {
     event.preventDefault();
-    const contract = createContract(this.getDiplomaStorageAddress())
+    //const contract = createContract(this.getDiplomaStorageAddress())
 
-    const diplomaResult = await this.checkDiploma(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth, this.state.dYear, this.state.nameDegree, this.state.schoolName)
+    const diplomaResult =  this.checkDiploma(this.state.INE, this.state.firstName, this.state.lastName, this.state.birth, this.state.dYear, this.state.nameDegree, this.state.schoolName)
     this.setState(diplomaResult)
+    
 }
 
 
@@ -253,11 +241,12 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                     Check Diploma
             </Button>
           </form>
+
+
             
           <Table celled padded color ="yellow">
               <Table.Header>
                   <Table.Row>
-                      <Table.HeaderCell>Student n°</Table.HeaderCell>
                       <Table.HeaderCell>INE</Table.HeaderCell>
                       <Table.HeaderCell>First Name</Table.HeaderCell>
                       <Table.HeaderCell>Last Name</Table.HeaderCell>
@@ -272,25 +261,12 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
               <Table.Body>
 
                   <Table.Row>
-                  <Table.Cell>
-            
-              <ul id="taskList" className="list-unstyled">
-                { this.state.students.map((student, key) => {
-                     return(
-                        <div className="taskTemplate"  key={key}>
-            
-                        {student.idStudent}
-        
-                        </div>
-                         )
-                 })}
-            </ul>
-                 
-            </Table.Cell>
             
             <Table.Cell sigleline="true">
 
-            <ul id="taskList" className="list-unstyled">
+                {this.state.INE}
+
+            {/* ul id="taskList" className="list-unstyled">
                 { this.state.students.map((student, key) => {
                     return(
                          <div className="taskTemplate"  key={key}>
@@ -300,13 +276,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                  
                 <Table.Cell>
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.firstName}
+
+                {/* <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                          return(
                           <div className="taskTemplate"  key={key}>
@@ -316,13 +294,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                             </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                   
                  <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                     {this.state.lastName}
+
+             {/*    <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                         return(
                          <div className="taskTemplate"  key={key}>
@@ -332,13 +312,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         </div>
                         )
                      })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                   
                 <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.birth}
+
+                {/* <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
@@ -348,13 +330,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
 
                 <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.dYear}
+
+               {/*  <ul id="taskList" className="list-unstyled">
                     { this.state.degrees.map((degree, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
@@ -364,13 +348,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
 
                 <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.nameDegree}
+
+               {/*  <ul id="taskList" className="list-unstyled">
                     { this.state.degrees.map((degree, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
@@ -380,13 +366,15 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
 
                 <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.schoolName}
+
+                {/* <ul id="taskList" className="list-unstyled">
                     { this.state.schools.map((school, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
@@ -397,7 +385,7 @@ async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolNam
                         )
                     })}
                 </ul>
-
+ */}
                 </Table.Cell>
 
                 <Table.Cell sigleline="true">
