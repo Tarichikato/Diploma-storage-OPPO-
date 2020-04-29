@@ -89,6 +89,7 @@ export class CheckStudentWithId extends Component {
     console.log(contract)
 
     const student = await contract.methods.students(id).call()
+    console.log('student',student)
     this.setState({
         students: [student]
     })

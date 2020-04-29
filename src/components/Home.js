@@ -4,12 +4,16 @@ import { Button, Header, Form} from 'semantic-ui-react';
 export class Home extends Component {
 
     state = {
-        address: ''
+        function: ''
     }
 
     constructor(props) {
         super(props);
 
+        this.onSubmitCreateStudent = this.onSubmitCreateStudent.bind(this);
+        this.onSubmitCheckStudent = this.onSubmitCheckStudent.bind(this);
+        this.onSubmitCheckStudentWithId = this.onSubmitCheckStudentWithId.bind(this);
+        this.onSubmitCheckDiploma = this.onSubmitCheckDiploma.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -39,18 +43,62 @@ export class Home extends Component {
                     
                 </Form>
                 
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCheckDiploma}
+                    >
+                        CheckDiploma
+                </Button>
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCreateStudent}
+                    >
+                        CreateStudent
+                </Button>
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCheckStudent}
+                    >
+                        CheckStudent
+                </Button>
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCheckStudentWithId}
+                    >
+                        CheckStudentWithId
+                </Button>
                
             </div>
         );
     }
 
     onChange(event) {
-        this.setState({address: event.target.value});
+        this.setState({function: event.target.value});
     }
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.history.push(`/${this.state.address}`)
+        this.props.history.push(`/${this.state.function}`)
+    }
+
+    onSubmitCreateStudent(event) {
+        event.preventDefault();
+         this.props.history.push(`/createStudent`)
+    }
+
+    onSubmitCheckDiploma(event) {
+        event.preventDefault();
+         this.props.history.push(`/checkDiploma`)
+    }
+
+    onSubmitCheckStudentWithId(event) {
+        event.preventDefault();
+         this.props.history.push(`/checkStudentWithId`)
+    }
+
+    onSubmitCheckStudent(event) {
+        event.preventDefault();
+         this.props.history.push(`/checkStudent`)
     }
 
    
