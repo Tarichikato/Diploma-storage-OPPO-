@@ -62,5 +62,8 @@ export class Home extends Component {
     onSubmit(event) {
         event.preventDefault();
         this.props.history.push(`/FunctionsChoice/${this.state.address}`)
+        const contractAddress = this.state.address
+        console.log(contractAddress)
     }
 }
+export default Home;

@@ -5,8 +5,12 @@ import { Header, Button, Form } from 'semantic-ui-react';
 export class FunctionsChoice extends Component{
 
     state = {
-        address: '0x7977FD3234b6915022F0c50EBe845618fD8a802f'
+        address: this.getDiplomaStorageAddress()
     }
+
+    getDiplomaStorageAddress () {
+        return this.props.match.params.address
+      }
 
     constructor(props) {
         super(props);
@@ -38,6 +42,7 @@ export class FunctionsChoice extends Component{
                 Check Diploma
              </Button>
          </Form>
+
          </div>
         );
     }
