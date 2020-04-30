@@ -163,7 +163,7 @@ createStudent(INE, firstName, lastName, birth) {
                      return(
                         <div className="taskTemplate"  key={key}>
             
-                        {student.idStudent}
+                        {student.id}
         
                         </div>
                          )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Form} from 'semantic-ui-react';
+import { Button, Header, Form, Image, Container} from 'semantic-ui-react';
 
 export class Home extends Component {
 
@@ -17,22 +17,40 @@ export class Home extends Component {
     render() {
         return (
             <div>
+                
                 <Header as='h1'>Diploma Storage</Header>
+
+                <Container as='h2'>
+                    <p>
+                        This application allows you to know if your candidates has the real diploma of his school!
+                    </p>
+                </Container>
+                
+                <Container as='h3'>
+                    <p>
+                        Please, enter the address contract : 
+                    </p>
+                </Container>
 
                 <Form>
                     <Form.Input
-                        label='Contract Address'
                         type='text'
                         value={this.state.address}
                         onChange={this.onChange}
                     />
-                    <Button
+
+
+                    <Button basic color = 'red' content='Submit'
                         type='submit'
                         onClick={this.onSubmit}
                     >
-                        Submit
+                        
+                       
                     </Button>
                 </Form>
+
+                <Image src='https://i0.wp.com/kryptosphere.org/wp-content/uploads/2019/08/logo-sans-fondnegatifnoir.png?fit=940%2C788&ssl=1' size='small' circular />
+            
             </div>
         );
     }

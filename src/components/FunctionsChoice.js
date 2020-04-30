@@ -36,7 +36,7 @@ export class FunctionsChoice extends Component{
             onClick={this.onSubmitCheckDiploma}
             >
                 Check Diploma
-            </Button>
+             </Button>
          </Form>
          </div>
         );

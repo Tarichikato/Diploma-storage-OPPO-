@@ -22,5 +22,14 @@ input {
 }
 
 h1.ui.header {
+  margin-left: 50%;
+  margin-right: 50%;
+  width: 350px;
+  
+  
+  color: rgb(4, 0, 255);
+}
+
+ui.red.basic.button {
   color: red;
 }
