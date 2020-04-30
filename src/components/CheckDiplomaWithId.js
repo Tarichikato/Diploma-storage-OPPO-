@@ -16,6 +16,7 @@ export class CheckDiplomaWithId extends Component {
       diplomaId: 0,
       degreeId: 0,
       schoolId: 0,
+      valid: '',
       DiplomaEditor: '',
       studentId: 0,
       INE: 0,
@@ -115,6 +116,10 @@ export class CheckDiplomaWithId extends Component {
     console.log("diploma", this.state.diplomas[0][0])
     this.setState({degreeId : this.state.diplomas[0][0]})
     this.setState({studentId : this.state.diplomas[0][1]})
+    if(this.state.diplomas[0][2]){
+      this.setState({valid : 'True'})
+    }else{this.setState({valid : 'False'})}
+
     this.setState({DiplomaEditor : this.state.diplomas[0][3]})
 
     const student = await contract.methods.students(this.state.studentId).call()
@@ -176,6 +181,7 @@ export class CheckDiplomaWithId extends Component {
           <p><font size = '5'>Diploma</font></p>
           <p>&emsp;&emsp;&emsp;Degree Id : {this.state.degreeId} </p>
           <p>&emsp;&emsp;&emsp;StudentId : {this.state.studentId} </p>
+          <p>&emsp;&emsp;&emsp;Valid : {this.state.valid} </p>
 
           
           <p><font size = '5'> Student</font></p>
