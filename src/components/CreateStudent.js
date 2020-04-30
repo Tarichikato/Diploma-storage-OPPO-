@@ -102,7 +102,7 @@ export class CreateStudent extends Component {
     this.setState({loading:true})
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
-    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: '0xfd9e5D7BbB1871453b772B310632245ba9bf37F8' })
+    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: '0xeFb7aFb416f0626a8f08AD4bF397773355E702ef' })
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
     console.log("studentCount2",studentCount)

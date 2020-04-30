@@ -8,10 +8,13 @@ import history from "./history"
 import { Home } from './components/Home';
 import {NotFound} from './components/NotFound';
 import {CheckStudentWithId} from './components/CheckStudentWithId';
+import {CheckSchoolWithId} from './components/CheckSchoolWithId';
 import {CheckStudent} from './components/CheckStudent';
 import {CheckDiploma} from './components/CheckDiploma';
 import { CreateSchool } from './components/CreateSchool';
 import {CheckDiplomaRudy} from './components/CheckDiplomaRudy';
+import { CreateDiploma } from './components/CreateDiploma';
+import {CheckDiplomaWithId} from './components/CheckDiplomaWithId';
 
 class App extends Component {
 
@@ -33,9 +36,12 @@ class App extends Component {
             <Route path='/createStudent/' component={CreateStudent} /> 
             <Route path='/createSchool/' component={CreateSchool} /> 
             <Route path='/checkStudentWithId/' component={CheckStudentWithId} />
+            <Route path='/checkDiplomaWithId/' component={CheckDiplomaWithId} />
+            <Route path='/checkSchoolWithId/' component={CheckSchoolWithId} />
             <Route path='/checkStudent/' component={CheckStudent} />
             <Route path='/checkDiploma/' component={CheckDiploma} />
             <Route path='/checkDiplomaRudy/' component={CheckDiplomaRudy} />
+            <Route path='/createDiploma/' component={CreateDiploma} /> 
             <Route  component ={NotFound} />
           </Switch>
 

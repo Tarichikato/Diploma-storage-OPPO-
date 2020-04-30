@@ -12,12 +12,10 @@ export class CheckSchoolWithId extends Component {
 
 
     state = {
-        students: {
-            idStudent: 0,
-            INE: 0,
-            fisrtName: 'N/A',
-            lastName: 'N/A',
-            birth: 0,
+        schools: {
+            idSchool: 0,
+            name: 'N/A',
+            editor: 'N/A',
         }
 
     }
@@ -28,24 +26,13 @@ export class CheckSchoolWithId extends Component {
     this.setState({contract})
     console.log("contrat",contract)
     this.getContractState(contract)
-    await this.getStudent(this.getDiplomaStorageAddress(),this.state.id)
   }
 
-  async getStudentId(INE,firstName,lastName,birth){
-    const contract = createContract(this.getDiplomaStorageAddress())
-    const id = await contract.methods.checkStudent(INE,firstName,lastName,birth).call()
-    this.setState({id})
-    console.log('id',id)
-    return(id)
-  }
 
   async getContractState(contract){
     this.setState({loading:true})
     const master = contract.methods.master().call()
-    console.log('master')
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
-    console.log('studentCount GCS',studentCount)
+    console.log('master',master)
   }
 
   async loadBcData(){
@@ -59,8 +46,6 @@ export class CheckSchoolWithId extends Component {
 
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
-    const studentCount = await this.state.contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
   }
  
   constructor(props) {
@@ -70,8 +55,8 @@ export class CheckSchoolWithId extends Component {
     this.state = {
       id : 0,
       account: '',
-      studentCount: 0,
-      students: [],
+      schoolCount: 0,
+      schools: [],
 
       
     }
@@ -82,21 +67,21 @@ export class CheckSchoolWithId extends Component {
     return '0x64399f5759209029856F40854699f65e57ED4225'
   }
 
-  async getStudent(address,id) {
+  async getSchool(address,id) {
     const contract = createContract(address)
     
     this.setState({ contract })
     console.log(contract)
 
-    const student = await contract.methods.students(id).call()
-    console.log('student',student)
+    const school = await contract.methods.schools(id).call()
+    console.log('school',school)
     this.setState({
-        students: [student]
+        schools: [school]
     })
-    console.log("student", this.state.students)
+    console.log("schools", this.state.schools)
 
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount})
+    const schoolCount = await contract.methods.schoolCount().call()
+    this.setState({schoolCount})
   }
 
   
@@ -110,7 +95,7 @@ export class CheckSchoolWithId extends Component {
     async onSubmit(event) {
     event.preventDefault();
     this.setState({id: event.target.value});
-    this.getStudent(this.getDiplomaStorageAddress(),parseInt(this.state.id))
+    this.getSchool(this.getDiplomaStorageAddress(),parseInt(this.state.id))
 
     
 }
@@ -142,7 +127,7 @@ export class CheckSchoolWithId extends Component {
 
           <p>Id : {this.state.id} </p>
 
-          <p>StudentCount : {this.state.studentCount}</p>
+          <p>SchoolCount : {this.state.schoolCount}</p>
 
           <p>Contract address: {this.getDiplomaStorageAddress()}</p>
 
@@ -158,17 +143,17 @@ export class CheckSchoolWithId extends Component {
   
                     <Table.Row>
                     <Table.Cell sigleline="true"> 
-                       Student
+                       School
                     </Table.Cell>
                     <Table.Cell sigleline="true">
               
                 <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.schools.map((student, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.idStudent}
+                  {student.idSchool}
                   
                 
                 </div>
@@ -183,18 +168,18 @@ export class CheckSchoolWithId extends Component {
   
                     <Table.Row>
                     <Table.Cell ssigleline="true"> 
-                       INE
+                       Name
                     </Table.Cell>
                     <Table.Cell sigleline="true">
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.schools.map((school, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.INE}
+                  {school.name}
                  
                 
                 </div>
@@ -208,73 +193,26 @@ export class CheckSchoolWithId extends Component {
   
                     <Table.Row>
                     <Table.Cell sigleline="true"> 
-                       First Name 
+                       Editor
                     </Table.Cell>
                     <Table.Cell sigleline="true">
   
   
                     <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
+                  { this.state.schools.map((school, key) => {
               return(
                 <div className="taskTemplate"  key={key}>
                   
                     
-                  {student.firstName}
+                  {school.editor}
                  
                 
                 </div>
               )
             })}
-          </ul>
+            </ul>
+
   
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       Last Name
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.lastName}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
-  
-  
-                    </Table.Cell>
-                    </Table.Row>
-  
-                    <Table.Row>
-                    <Table.Cell sigleline="true"> 
-                       Birthday
-                    </Table.Cell>
-                    <Table.Cell sigleline="true">
-  
-  
-                    <ul id="taskList" className="list-unstyled">
-                  { this.state.students.map((student, key) => {
-              return(
-                <div className="taskTemplate"  key={key}>
-                  
-                    
-                  {student.birth}
-                 
-                
-                </div>
-              )
-            })}
-          </ul>
   
   
                     </Table.Cell>

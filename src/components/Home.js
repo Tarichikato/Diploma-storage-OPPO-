@@ -11,9 +11,12 @@ export class Home extends Component {
         super(props);
 
         this.onSubmitCreateStudent = this.onSubmitCreateStudent.bind(this);
+        this.onSubmitCreateDiploma = this.onSubmitCreateDiploma.bind(this);
         this.onSubmitCreateSchool = this.onSubmitCreateSchool.bind(this);
         this.onSubmitCheckStudent = this.onSubmitCheckStudent.bind(this);
         this.onSubmitCheckStudentWithId = this.onSubmitCheckStudentWithId.bind(this);
+        this.onSubmitCheckDiplomaWithId = this.onSubmitCheckDiplomaWithId.bind(this);
+        this.onSubmitCheckSchoolWithId = this.onSubmitCheckSchoolWithId.bind(this);
         this.onSubmitCheckDiploma = this.onSubmitCheckDiploma.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,7 +25,10 @@ export class Home extends Component {
     render() {
         return (
             <div>
+
+                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://kryptosphere.org/" target="_blank"> Kryptosphere | DiplomaStorage</a>
                 <Header as='h1'>Diploma Storage</Header>
+
 
             
 
@@ -64,6 +70,12 @@ export class Home extends Component {
                 </Button>
                 <Button
                         type='submit'
+                        onClick={this.onSubmitCreateDiploma}
+                    >
+                        CreateDiploma
+                </Button>
+                <Button
+                        type='submit'
                         onClick={this.onSubmitCheckStudent}
                     >
                         CheckStudent
@@ -73,6 +85,20 @@ export class Home extends Component {
                         onClick={this.onSubmitCheckStudentWithId}
                     >
                         CheckStudentWithId
+                </Button>
+
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCheckDiplomaWithId}
+                    >
+                        CheckDiplomaWithId
+                </Button>
+
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitCheckSchoolWithId}
+                    >
+                        CheckSchoolWithId
                 </Button>
                
             </div>
@@ -98,6 +124,12 @@ export class Home extends Component {
          this.props.history.push(`/createSchool`)
     }
 
+
+    onSubmitCreateDiploma(event) {
+        event.preventDefault();
+         this.props.history.push(`/createDiploma`)
+    }
+
     onSubmitCheckDiploma(event) {
         event.preventDefault();
          this.props.history.push(`/checkDiploma`)
@@ -106,6 +138,16 @@ export class Home extends Component {
     onSubmitCheckStudentWithId(event) {
         event.preventDefault();
          this.props.history.push(`/checkStudentWithId`)
+    }
+
+    onSubmitCheckSchoolWithId(event) {
+        event.preventDefault();
+         this.props.history.push(`/checkSchoolWithId`)
+    }
+
+    onSubmitCheckDiplomaWithId(event) {
+        event.preventDefault();
+         this.props.history.push(`/checkDiplomaWithId`)
     }
 
     onSubmitCheckStudent(event) {

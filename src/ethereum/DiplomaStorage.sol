@@ -109,12 +109,6 @@ contract DiplomaStorage {
        
        mas.push(0x5Ae24DA69915218E800Bd28dF558C92Aa266BFEF);
        
-     
-        
-        
-        
-        
-        
         //Creation of students
         createStudent(18821453685,"Bob", "Martin", 20072015);
         createStudent(64658482179,"Alice", "Durand", 19082008);

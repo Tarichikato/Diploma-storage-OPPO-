@@ -206,6 +206,7 @@ constructor(props) {
             //value={this.state.birth}
             onChange={this.onChange} />
         </label>
+        <br />
         <label>
           Degree Year :
           <input
@@ -235,6 +236,7 @@ constructor(props) {
             //value={this.state.schoolName}
             onChange={this.onChange} />
         </label>
+        <br />
       
 
 

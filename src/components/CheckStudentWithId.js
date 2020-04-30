@@ -42,7 +42,7 @@ export class CheckStudentWithId extends Component {
   async getContractState(contract){
     this.setState({loading:true})
     const master = contract.methods.master().call()
-    console.log('master')
+    console.log('master',master)
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
     console.log('studentCount GCS',studentCount)
@@ -269,6 +269,30 @@ export class CheckStudentWithId extends Component {
                   
                     
                   {student.birth}
+                 
+                
+                </div>
+              )
+            })}
+          </ul>
+
+                    </Table.Cell>
+                    </Table.Row>
+  
+                    <Table.Row>
+                    <Table.Cell sigleline="true"> 
+                       Editor
+                    </Table.Cell>
+                    <Table.Cell sigleline="true">
+  
+  
+                    <ul id="taskList" className="list-unstyled">
+                  { this.state.students.map((student, key) => {
+              return(
+                <div className="taskTemplate"  key={key}>
+                  
+                    
+                  {student.editor}
                  
                 
                 </div>
