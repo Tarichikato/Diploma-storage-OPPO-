@@ -6,9 +6,14 @@ import { web3 } from './../ethereum/web3'
 
 
 
-export class CreateStudent extends Component {
+export class CreateDiploma extends Component {
 
     state = {
+        diplomas: {
+            idStudent: 0,
+            idDegree: 0,
+        },
+
         students: {
             name:'N/A',
             idStudent: 0,
@@ -16,12 +21,26 @@ export class CreateStudent extends Component {
             fisrtName: 'N/A',
             lastName: 'N/A',
             birth: 0,
-        }
+        }, 
 
+        degrees: {
+            idDegree: 0,
+            idSchool: 0,
+            year: 0,
+            nameDegree: 'N/A',
+            schoolName: 'N/A', 
+        },
+
+        schools: {
+            schoolAddress: 'N/A',
+            idSchool: 0,
+            schoolName: 'N/A',
+        },
     }
 
+
   async componentDidMount () {
-    await this.getStudents(this.getDiplomaStorageAddress()
+    await this.getDiplomas(this.getDiplomaStorageAddress()
     )
   }
   
@@ -29,7 +48,7 @@ export class CreateStudent extends Component {
     return this.props.match.params.address
   }
 
-  async getStudents(address) {
+  async getDiplomas(address) {
     const contract = createContract(address)
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
@@ -38,8 +57,17 @@ export class CreateStudent extends Component {
     this.setState({ contract })
     console.log(contract)
 
+    const diplomaCount = await contract.methods.diplomaCount().call()
+    this.setState({diplomaCount})
+
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount})
+
+    const degreeCount = await contract.methods.degreeCount().call()
+    this.setState({degreeCount})
+    
+    const schoolCount = await contract.methods.schoolCount().call()
+    this.setState([schoolCount])
 
     for (var i = 1; i <= studentCount; i++) {
         const student = await contract.methods.students(i).call()
@@ -47,23 +75,51 @@ export class CreateStudent extends Component {
           students: [...this.state.students, student]
         })
       }
-    
+
+
+    for (var j = 1; j <= diplomaCount; j++) {
+        const diploma = await contract.methods.diplomas(j).call()
+        this.setState({
+          diplomas: [...this.state.diplomas, diploma]
+        })
+      }
+
+
+      for (var k = 1; k <= schoolCount; k++) {
+        const school = await contract.methods.schools(k).call()
+        this.setState({
+          schools: [...this.state.schools, school]
+        })
+      }
+
+      for (var l = 1; l <= degreeCount; l++) {
+        const degree = await contract.methods.degrees(l).call()
+        this.setState({
+          degrees: [...this.state.degrees, degree]
+        })
+      }
 }
 
 constructor(props) {
     super(props)
     this.state = {
       account:'',
+      diplomaCount: 0,
       studentCount: 0,
+      degreeCount: 0,
+      schoolCount:0,
       students: [],
+      schools: [],
+      degrees: [],
+      diplomas: [],
+      diplomaResult: false,
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 }
 
-
-createStudent(INE, firstName, lastName, birth) {
-    this.state.contract.methods.createStudent(INE, firstName, lastName, birth).send({ from: this.state.account })
+createDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
+    this.state.contract.methods.createDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName).send({ from: this.state.account })
     console.log("Account" , this.state.account)
 }
 
@@ -83,22 +139,21 @@ createStudent(INE, firstName, lastName, birth) {
 
     onSubmit(event) {
     event.preventDefault();
-    this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+    this.createDiploma(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth, this.state.dYear, this.state.nameDegree, this.state.schoolName)
   }
 
-
-  render() {
+render() {
     return (
       <div>
-          <Header as='h1'> Create or read students </Header>
+
+        <Header as='h1'> Create Diploma </Header>
         
-          <Container as='h2'>
-                    <p>
-                        Please, enter the informations to create student : 
-                    </p>
-            </Container>
-
-
+        <Container as='h2'>
+                  <p>
+                      Please, enter the informations to create diploma :
+                  </p>
+          </Container>
+          
           <form>
         <label>
           INE :
@@ -139,6 +194,35 @@ createStudent(INE, firstName, lastName, birth) {
             //value={this.state.birth}
             onChange={this.onChange} />
         </label>
+        <label>
+          Degree Year :
+          <input
+            placeholder='Enter the Degree Year'
+            name="dYear"
+            type="text"
+            //value={this.state.degreeYear}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          Name Degree :
+          <input
+            placeholder='Enter the Degree Name'
+            name="nameDegree"
+            type="text"
+            //value={this.state.degreeName}
+            onChange={this.onChange} />
+        </label>
+        <br />
+        <label>
+          Name of the School :
+          <input
+            placeholder='Enter the Name School'
+            name="schoolName"
+            type="text"
+            //value={this.state.schoolName}
+            onChange={this.onChange} />
+        </label>
       
 
 
@@ -146,43 +230,34 @@ createStudent(INE, firstName, lastName, birth) {
                 type='submit'
                 onClick={this.onSubmit}
                 >
-                    Create Student
+                    Create Diploma
             </Button>
           </form>
 
+
+            
           <Table celled padded color ="yellow">
               <Table.Header>
                   <Table.Row>
-                      <Table.HeaderCell>Student n°</Table.HeaderCell>
                       <Table.HeaderCell>INE</Table.HeaderCell>
                       <Table.HeaderCell>First Name</Table.HeaderCell>
                       <Table.HeaderCell>Last Name</Table.HeaderCell>
                       <Table.HeaderCell>Birthday</Table.HeaderCell>
+                      <Table.HeaderCell>Year Degree</Table.HeaderCell>
+                      <Table.HeaderCell>Name Degree</Table.HeaderCell>
+                      <Table.HeaderCell>School Name</Table.HeaderCell>
                   </Table.Row>
               </Table.Header>
 
               <Table.Body>
 
                   <Table.Row>
-                  <Table.Cell>
-            
-              <ul id="taskList" className="list-unstyled">
-                { this.state.students.map((student, key) => {
-                     return(
-                        <div className="taskTemplate"  key={key}>
-            
-                        {student.id}
-        
-                        </div>
-                         )
-                 })}
-            </ul>
-                 
-            </Table.Cell>
             
             <Table.Cell sigleline="true">
 
-            <ul id="taskList" className="list-unstyled">
+                {this.state.INE}
+
+            {/* ul id="taskList" className="list-unstyled">
                 { this.state.students.map((student, key) => {
                     return(
                          <div className="taskTemplate"  key={key}>
@@ -192,13 +267,15 @@ createStudent(INE, firstName, lastName, birth) {
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                  
                 <Table.Cell>
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.firstName}
+
+                {/* <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                          return(
                           <div className="taskTemplate"  key={key}>
@@ -208,13 +285,15 @@ createStudent(INE, firstName, lastName, birth) {
                             </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                   
                  <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                     {this.state.lastName}
+
+             {/*    <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                         return(
                          <div className="taskTemplate"  key={key}>
@@ -224,13 +303,15 @@ createStudent(INE, firstName, lastName, birth) {
                         </div>
                         )
                      })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
                   
                 <Table.Cell sigleline="true">
 
-                <ul id="taskList" className="list-unstyled">
+                    {this.state.birth}
+
+                {/* <ul id="taskList" className="list-unstyled">
                     { this.state.students.map((student, key) => {
                         return(
                         <div className="taskTemplate"  key={key}>
@@ -240,9 +321,65 @@ createStudent(INE, firstName, lastName, birth) {
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
 
                 </Table.Cell>
+
+                <Table.Cell sigleline="true">
+
+                    {this.state.dYear}
+
+               {/*  <ul id="taskList" className="list-unstyled">
+                    { this.state.degrees.map((degree, key) => {
+                        return(
+                        <div className="taskTemplate"  key={key}>
+                
+                        {degree.year}
+               
+                        </div>
+                        )
+                    })}
+                </ul> */}
+
+                </Table.Cell>
+
+                <Table.Cell sigleline="true">
+
+                    {this.state.nameDegree}
+
+               {/*  <ul id="taskList" className="list-unstyled">
+                    { this.state.degrees.map((degree, key) => {
+                        return(
+                        <div className="taskTemplate"  key={key}>
+                
+                        {degree.nameDegree}
+               
+                        </div>
+                        )
+                    })}
+                </ul> */}
+
+                </Table.Cell>
+
+                <Table.Cell sigleline="true">
+
+                    {this.state.schoolName}
+
+                {/* <ul id="taskList" className="list-unstyled">
+                    { this.state.schools.map((school, key) => {
+                        return(
+                        <div className="taskTemplate"  key={key}>
+                
+                        {school.schoolName}
+               
+                        </div>
+                        )
+                    })}
+                </ul>
+ */}
+                </Table.Cell>
+
+                
                 </Table.Row>
 
 
@@ -280,4 +417,4 @@ createStudent(INE, firstName, lastName, birth) {
     }
 }
 
-export default CreateStudent;
+export default CreateDiploma;

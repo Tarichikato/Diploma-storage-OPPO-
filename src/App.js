@@ -8,6 +8,7 @@ import history from "./history"
 import { Home } from './components/Home';
 import { FunctionsChoice } from './components/FunctionsChoice';
 import { CheckDiploma } from './components/CheckDiploma';
+import { CreateDiploma } from './components/CreateDiploma';
 
 class App extends Component {
 
@@ -29,7 +30,7 @@ class App extends Component {
             <Route path ='/FunctionsChoice/:address' component={FunctionsChoice} />
             <Route path='/CreateStudent/:address' component={CreateStudent}/>
             <Route path='/CheckDiploma/:address' component={CheckDiploma}/>
-             
+            <Route path='/CreateDiploma/:address' component={CreateDiploma}/>
           </Switch>
 
         </Container>

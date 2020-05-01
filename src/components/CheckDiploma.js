@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, Header, Container, Image } from 'semantic-ui-react'
 import { web3 } from './../ethereum/web3'
 
 
@@ -161,6 +161,14 @@ constructor(props) {
   render() {
     return (
       <div>
+
+        <Header as='h1'> Check Diploma </Header>
+        
+        <Container as='h2'>
+                  <p>
+                      Please, enter the informations to check diploma student : 
+                  </p>
+        </Container>
           
           <form>
         <label>
@@ -410,10 +418,36 @@ constructor(props) {
 
               </Table.Body>
           </Table>
+
+          <Button 
+            type="submit"
+            onClick={this.onSubmitBack}
+            >
+                Back
+             </Button>
+
+             <Button 
+            type="submit"
+            onClick={this.onSubmitReload}
+            >
+                Refresh
+             </Button>
+
+          <Image src='https://i0.wp.com/kryptosphere.org/wp-content/uploads/2019/08/logo-sans-fondnegatifnoir.png?fit=940%2C788&ssl=1' size='small' circular />
         
       </div>
     );
   }
+
+  onSubmitBack(event) {
+    event.preventDefault();
+    window.history.back()
+    }
+
+    onSubmitReload(event) {
+        event.preventDefault();
+        window.location.reload()
+    }
 }
 
 export default CheckDiploma;
