@@ -194,7 +194,7 @@ contract DiplomaStorage {
             return("Degree doesn't exists");
         }
         uint idSch = degrees[idD].schoolId;
-        if(isAutorized(idSch,msg.sender) == 0){
+        if(isAutorized(idSch,msg.sender) != 0){
             bool valid = false;
             //We create the association
             if(isAutorized(idSch,msg.sender) >= 2){
