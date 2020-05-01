@@ -168,7 +168,8 @@ constructor(props) {
           
           <form>
         <label>
-          INE :
+          INE (put 0 if you dont know it):
+          <br />
           <input
             placeholder= 'Enter the INE number'
             name="INE"
@@ -179,6 +180,7 @@ constructor(props) {
         <br />
         <label>
           firstName :
+          <br />
           <input
             placeholder='Enter the First Name'
             name="firstName"
@@ -189,6 +191,7 @@ constructor(props) {
         <br />
         <label>
           lastName :
+          <br />
           <input
             placeholder='Enter the Last Name'
             name="lastName"
@@ -199,6 +202,7 @@ constructor(props) {
         <br />
         <label>
           Birth :
+          <br />
           <input
             placeholder='Enter the Birthday'
             name="birth"
@@ -209,6 +213,7 @@ constructor(props) {
         <br />
         <label>
           Degree Year :
+          <br />
           <input
             placeholder='Enter the Degree Year'
             name="dYear"
@@ -219,6 +224,7 @@ constructor(props) {
         <br />
         <label>
           Name Degree :
+          <br />
           <input
             placeholder='Enter the Degree Name'
             name="nameDegree"
@@ -229,6 +235,7 @@ constructor(props) {
         <br />
         <label>
           Name of the School :
+          <br />
           <input
             placeholder='Enter the Name School'
             name="schoolName"

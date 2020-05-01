@@ -31,7 +31,7 @@ export class Home extends Component {
 
 
             
-
+                
                 <Form>
                     <Form.Input
                         label='Fonction'
@@ -46,54 +46,61 @@ export class Home extends Component {
                         Submit
                     </Button>
                     
-                    <p>Fonctions disponibles : checkStudentWithId, createStudent, checkStudent, checkDiploma</p>
                     
                 </Form>
-                
+                <p>&emsp;</p>
+
+                &emsp;&emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCheckDiploma}
                     >
                         CheckDiploma
                 </Button>
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCreateStudent}
                     >
                         CreateStudent
                 </Button>
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCreateSchool}
                     >
                         CreateSchool
                 </Button>
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCreateDiploma}
                     >
                         CreateDiploma
                 </Button>
+                <br />
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCheckStudent}
                     >
                         CheckStudent
                 </Button>
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCheckStudentWithId}
                     >
                         CheckStudentWithId
                 </Button>
-
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCheckDiplomaWithId}
                     >
                         CheckDiplomaWithId
                 </Button>
-
+                &emsp;
                 <Button
                         type='submit'
                         onClick={this.onSubmitCheckSchoolWithId}
