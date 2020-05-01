@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table, Button, Header, Container, Image } from 'semantic-ui-react'
+import { Table, Button, Header, Container, Image, Form } from 'semantic-ui-react'
 import { web3 } from './../ethereum/web3'
 
 
@@ -385,7 +385,8 @@ render() {
 
               </Table.Body>
           </Table>
-
+            
+            <Form>
           <Button 
             type="submit"
             onClick={this.onSubmitBack}
@@ -399,6 +400,7 @@ render() {
             >
                 Refresh
              </Button>
+             </Form>
 
           <Image src='https://i0.wp.com/kryptosphere.org/wp-content/uploads/2019/08/logo-sans-fondnegatifnoir.png?fit=940%2C788&ssl=1' size='small' circular />
         

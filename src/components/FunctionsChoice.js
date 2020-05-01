@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Button, Form, Container, Image } from 'semantic-ui-react';
+import { Header, Button, Form, Container } from 'semantic-ui-react';
 
 
 export class FunctionsChoice extends Component{
@@ -24,16 +24,15 @@ export class FunctionsChoice extends Component{
     render () {
         return (
             <div>
-        
-            <Header as='h1'> What do you want? </Header>
+                <div className="site-wrapper">
 
-            <Container as='h2'>
-                    <p>
-                        Please, choose a function below : 
-                    </p>
-            </Container>
+                <div className="site-wrapper-inner">
+
+                <div className="container">
         
-        <Form>
+           
+        
+        {/* <Form>
         
         <Button 
             type="submit"
@@ -48,6 +47,7 @@ export class FunctionsChoice extends Component{
             >
                 Check Diploma
              </Button>
+
              <Button 
             type="submit"
             onClick={this.onSubmitCreateDiploma}
@@ -57,6 +57,7 @@ export class FunctionsChoice extends Component{
 
          </Form>
 
+            <Form>
          <Button 
             type="submit"
             onClick={this.onSubmitBack}
@@ -70,10 +71,65 @@ export class FunctionsChoice extends Component{
             >
                 Refresh
              </Button>
-
-         <Image src='https://i0.wp.com/kryptosphere.org/wp-content/uploads/2019/08/logo-sans-fondnegatifnoir.png?fit=940%2C788&ssl=1' size='small' circular />
-
+             </Form>
+ */}
+         
+                
+            </div>
          </div>
+         <div className="inner cover">
+          <h1 className="cover-heading">Diploma Storage</h1>
+          <p className="lead">Si'il vous plais, choisisez la fonction voulu ci dessous : </p>
+          
+            <p>
+            
+            <Button content ='Create Student'
+            className="btn btn-lg btn-default"
+            type="submit"
+            onClick={this.onSubmitCreateStudent}
+            >
+            </Button>
+
+            <Button content = 'Check Diploma'
+            className="btn btn-lg btn-default"
+            type="submit"
+            onClick={this.onSubmitCheckDiploma}
+            >
+             </Button>
+
+             <Button content = 'Create Diploma'
+            className="btn btn-lg btn-default"
+            type="submit"
+            onClick={this.onSubmitCreateDiploma}
+            >
+             </Button>
+
+             </p>
+
+             <p className='back-refresh'>
+             
+             <Button content = "Back"
+             className="btn btn-lg btn-default"
+            type="submit"
+            onClick={this.onSubmitBack}
+            >
+                Back
+             </Button>
+
+             <Button content = 'Refresh'
+             className="btn btn-lg btn-default"
+            type="submit"
+            onClick={this.onSubmitReload}
+            >
+             </Button>
+             </p>
+                
+          
+            </div>
+        </div>
+    </div>
+
+        
         );
     }
 

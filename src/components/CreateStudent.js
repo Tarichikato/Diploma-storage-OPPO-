@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table, Button, Header, Container, Image } from 'semantic-ui-react'
+import { Table, Button, Header, Container, Image, Form } from 'semantic-ui-react'
 import { web3 } from './../ethereum/web3'
 
 
@@ -90,67 +90,83 @@ createStudent(INE, firstName, lastName, birth) {
   render() {
     return (
       <div>
-          <Header as='h1'> Create or read students </Header>
-        
-          <Container as='h2'>
-                    <p>
-                        Please, enter the informations to create student : 
-                    </p>
-            </Container>
+
+        <div className="site-wrapper">
+
+            <div className="site-wrapper-inner">
+
+                <div className="container">
+
+                <div className="inner cover">
+            </div>
+        </div>
+
+          <h1 className="cover-heading">Diploma Storage</h1>
+          <p className="lead">Rentrer les informations suivantes afin de créeer un étudiant :</p>
+          
 
 
-          <form>
+          <p>
         <label>
           INE :
           <input
             placeholder= 'Enter the INE number'
             name="INE"
             type="number"
-            //value={this.state.INE}
             onChange={this.onChange} />
         </label>
-        <br />
+        </p>
+
+        <p>
+        
         <label>
           firstName :
           <input
             placeholder='Enter the First Name'
             name="firstName"
             type="text"
-            //value={this.state.firstName}
             onChange={this.onChange} />
         </label>
-        <br />
+        </p>
+
+        <p>
+        
         <label>
           lastName :
           <input
             placeholder='Enter the Last Name'
             name="lastName"
             type="text"
-            //value={this.state.lastName}
             onChange={this.onChange} />
         </label>
-        <br />
+        </p>
+
+        <p>
         <label>
           Birth :
           <input
             placeholder='Enter the Birthday'
             name="birth"
             type="number"
-            //value={this.state.birth}
             onChange={this.onChange} />
         </label>
+
+        </p>
       
 
-
-            <Button
-                type='submit'
-                onClick={this.onSubmit}
+        <p>
+            <Button content = "Create Student"
+            className="btn btn-lg btn-default"
+            type='submit'
+            onClick={this.onSubmit}
                 >
-                    Create Student
             </Button>
-          </form>
 
-          <Table celled padded color ="yellow">
+        </p>
+
+        <p>
+
+          <Table className = "student-table" >
               <Table.Header>
                   <Table.Row>
                       <Table.HeaderCell>Student n°</Table.HeaderCell>
@@ -249,23 +265,33 @@ createStudent(INE, firstName, lastName, birth) {
               </Table.Body>
           </Table>
 
-          <Button 
+          </p>
+            
+            
+
+            <p>   
+          <Button content ="Back"
+            className="btn btn-lg btn-default"
             type="submit"
             onClick={this.onSubmitBack}
             >
-                Back
              </Button>
 
-             <Button 
+             <Button content = "Refresh"
+             className="btn btn-lg btn-default"
             type="submit"
             onClick={this.onSubmitReload}
             >
-                Refresh
              </Button>
+             </p> 
 
-          <Image src='https://i0.wp.com/kryptosphere.org/wp-content/uploads/2019/08/logo-sans-fondnegatifnoir.png?fit=940%2C788&ssl=1' size='small' circular />
+            
+
+          
         
       </div>
+      </div>
+     </div>
     );
   }
 
