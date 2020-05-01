@@ -1,4 +1,4 @@
-pragma solidity ^0.5.16;
+pragma solidity >=0.5.16;
 
 
 contract DiplomaStorage {
@@ -9,7 +9,7 @@ contract DiplomaStorage {
     uint public masterCount = 0;
     
     //Address to be modified if you want to do tests
-    address payable public master = msg.sender;
+    address public master = msg.sender;
     
     
     
@@ -20,6 +20,7 @@ contract DiplomaStorage {
 
     //Association between a student and a diploma (this is how the diploma is awarded).
     struct Diploma {
+        uint id;
         uint idDegree;
         uint idStudent;
         bool valid;
@@ -105,7 +106,7 @@ contract DiplomaStorage {
 
     constructor() public {
         
-        addMaster(msg.sender)
+        addMaster(msg.sender);  
        
        
         //Creation of students
@@ -139,71 +140,70 @@ contract DiplomaStorage {
      * 
      */
      
-     function addMaster(address _newMaster) public {
+     function addMaster(address _newMaster) internal {
          masterCount ++;
          masters[masterCount] = _newMaster;
      }
      
      function addAddress(string memory _schoolName,address _address, uint _lv) public {
-         if(_lv == 3){
-             addMaster(_address);
-         }
-         uint idSch = checkSchool(_schoolName);
-         School  storage Sch = schools[idSch];
-         if (_lv == 1){
-             Sch.count1 ++;
-             Sch.lv1[Sch.count1] = _address;
-         }
-         if (_lv == 2){
-             Sch.count1 ++;
-             Sch.lv1[Sch.count2] = _address;
+         if(isAutorized(0,msg.sender) == 3){
+             if(_lv == 3){
+                 addMaster(_address);
+             }
+             uint idSch = checkSchool(_schoolName);
+             School  storage Sch = schools[idSch];
+             if (_lv == 1){
+                 Sch.count1 ++;
+                 Sch.lv1[Sch.count1] = _address;
+             }
+             if (_lv == 2){
+                 Sch.count1 ++;
+                 Sch.lv1[Sch.count2] = _address;
+             }
          }
      }
 
     //Relatively low level function to award diplomas (it is necessary to know the id of the pupil and the id of the diploma that one wants to award)
     
-    function createDiplomaLL(uint _idDegree, uint  _idStudent,bool _valid, address _creator) internal{
+    function createDiplomaLL(uint _idDegree, uint  _idStudent,bool _valid, address _creator) internal returns(string memory){
         if(_idStudent <= studentCount && _idDegree <= degreeCount){
-            Degree memory deg = degrees[_idDegree];
-            uint idSch = deg.schoolId;
-            //School memory sch = schools[idSch];
-            
-            //  We check that the address that is trying to assign a diploma is the one that created the diploma.
-            
+            uint idSch = degrees[_idDegree].schoolId;
             if(isAutorized(idSch,msg.sender)!=0){
                 diplomaCount ++;
-                diplomas[diplomaCount] = Diploma(_idDegree,_idStudent,_valid,_creator);
+                diplomas[diplomaCount] = Diploma(diplomaCount,_idDegree,_idStudent,_valid,_creator);
                 emit DiplomaCreated(_idDegree,_idStudent,_valid,_creator);
-                
+                return("Diploma Successfully Created");
             }
         }
     }
     
     //Relatively high level function
     
-    function createDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public{
-        uint idS = checkStudent(_INE,_firstName,_lastName,_birth);
+    function createDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public returns ( string memory){
+        uint idSt = checkStudent(_INE,_firstName,_lastName,_birth);
         uint idD = checkDegree(_dYear,_nameDegree,_schoolName);
         
         //If the student doesn't exist, we'll create one.
-        if(idS == 0){
+        if(idSt == 0){
             createStudent(_INE,_firstName,_lastName,_birth);
-            idS = studentCount;
+            idSt = studentCount;
         }
         
         //If the diploma doesn't exist, we don't create it, otherwise we risk creating new diplomas every time we make a typing mistake.
         if(idD == 0){
+            return("Degree doesn't exists");
         }
-        else{
-            
+        uint idSch = degrees[idD].schoolId;
+        if(isAutorized(idSch,msg.sender) == 0){
             bool valid = false;
-        
             //We create the association
-            if(msg.sender == master){
+            if(isAutorized(idSch,msg.sender) >= 2){
                 valid = true;
             }
         
-            createDiplomaLL(idD,idS,valid,msg.sender);
+            createDiplomaLL(idD,idSt,valid,msg.sender);
+        }else{
+        return("Permission Denied check if your address is autorized");
         }
     }
 
