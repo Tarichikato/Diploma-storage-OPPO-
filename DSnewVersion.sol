@@ -55,7 +55,7 @@ contract DiplomaStorage {
         string name;
         string schoolName;
         uint year;
-        uint schoolId;
+        uint idSchool;
         address editor;
      
     }
@@ -156,8 +156,8 @@ contract DiplomaStorage {
                  Sch.lv1[Sch.count1] = _address;
              }
              if (_lv == 2){
-                 Sch.count1 ++;
-                 Sch.lv1[Sch.count2] = _address;
+                 Sch.count2 ++;
+                 Sch.lv2[Sch.count2] = _address;
              }
          }
      }
@@ -166,13 +166,10 @@ contract DiplomaStorage {
     
     function createDiplomaLL(uint _idDegree, uint  _idStudent,bool _valid, address _creator) internal{
         if(_idStudent <= studentCount && _idDegree <= degreeCount){
-            Degree memory deg = degrees[_idDegree];
-            uint idSch = deg.schoolId;
-            //School memory sch = schools[idSch];
-            
+
             //  We check that the address that is trying to assign a diploma is the one that created the diploma.
             
-            if(isAutorized(idSch,msg.sender)!=0){
+            if(isAutorized(degrees[_idDegree].idSchool,msg.sender)!=0){
                 diplomaCount ++;
                 diplomas[diplomaCount] = Diploma(_idDegree,_idStudent,_valid,_creator);
                 emit DiplomaCreated(_idDegree,_idStudent,_valid,_creator);
@@ -194,14 +191,13 @@ contract DiplomaStorage {
         }
         
         //If the diploma doesn't exist, we don't create it, otherwise we risk creating new diplomas every time we make a typing mistake.
-        if(idD == 0){
-        }
-        else{
+        uint autorisation = isAutorized(degrees[idD].idSchool,msg.sender);
+        if((idD != 0) && ( autorisation != 0)){
             
             bool valid = false;
         
             //We create the association
-            if(msg.sender == master){
+            if(autorisation >= 2){
                 valid = true;
             }
         
@@ -219,12 +215,12 @@ contract DiplomaStorage {
         
     }
 
-    function createSchool( string memory _schoolName,address _address2) public returns(string memory){
+    function createSchool( string memory _schoolName,address _address) public returns(string memory){
         if (isMaster(msg.sender) !=0){
             if (checkSchool(_schoolName) == 0){
                 schoolCount ++;
                 schools[schoolCount] = School(schoolCount,_schoolName,0,0,msg.sender);
-                schools[schoolCount].lv2[1] = _address2;
+                addAddress(_schoolName,_address,2);
                 
                 emit SchoolCreated(schoolCount,_schoolName,msg.sender);
                 return("SchoolCreated");
@@ -252,7 +248,6 @@ contract DiplomaStorage {
             degrees[degreeCount] = Degree(degreeCount,_nameDegree, _schoolName, _year,idSch, msg.sender);
             emit DegreeCreated(degreeCount,idSch, _year,_nameDegree,_schoolName);
         }
-        
     }
     
 
