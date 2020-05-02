@@ -9,7 +9,7 @@ contract DiplomaStorage {
     uint public masterCount = 0;
     
     //Address to be modified if you want to do tests
-    address public master = msg.sender;
+    address payable public master = msg.sender;
     
     
     
@@ -20,11 +20,10 @@ contract DiplomaStorage {
 
     //Association between a student and a diploma (this is how the diploma is awarded).
     struct Diploma {
-        uint id;
         uint idDegree;
         uint idStudent;
         bool valid;
-        address creator;
+        address editor;
     }
 
     event DiplomaCreated(
@@ -165,45 +164,48 @@ contract DiplomaStorage {
 
     //Relatively low level function to award diplomas (it is necessary to know the id of the pupil and the id of the diploma that one wants to award)
     
-    function createDiplomaLL(uint _idDegree, uint  _idStudent,bool _valid, address _creator) internal returns(string memory){
+    function createDiplomaLL(uint _idDegree, uint  _idStudent,bool _valid, address _creator) internal{
         if(_idStudent <= studentCount && _idDegree <= degreeCount){
-            uint idSch = degrees[_idDegree].schoolId;
+            Degree memory deg = degrees[_idDegree];
+            uint idSch = deg.schoolId;
+            //School memory sch = schools[idSch];
+            
+            //  We check that the address that is trying to assign a diploma is the one that created the diploma.
+            
             if(isAutorized(idSch,msg.sender)!=0){
                 diplomaCount ++;
-                diplomas[diplomaCount] = Diploma(diplomaCount,_idDegree,_idStudent,_valid,_creator);
+                diplomas[diplomaCount] = Diploma(_idDegree,_idStudent,_valid,_creator);
                 emit DiplomaCreated(_idDegree,_idStudent,_valid,_creator);
-                return("Diploma Successfully Created");
+                
             }
         }
     }
     
     //Relatively high level function
     
-    function createDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public returns ( string memory){
-        uint idSt = checkStudent(_INE,_firstName,_lastName,_birth);
+    function createDiploma(uint _INE,string memory _firstName, string memory _lastName,uint _birth,uint _dYear,string memory _nameDegree, string memory _schoolName) public{
+        uint idS = checkStudent(_INE,_firstName,_lastName,_birth);
         uint idD = checkDegree(_dYear,_nameDegree,_schoolName);
         
         //If the student doesn't exist, we'll create one.
-        if(idSt == 0){
+        if(idS == 0){
             createStudent(_INE,_firstName,_lastName,_birth);
-            idSt = studentCount;
+            idS = studentCount;
         }
         
         //If the diploma doesn't exist, we don't create it, otherwise we risk creating new diplomas every time we make a typing mistake.
         if(idD == 0){
-            return("Degree doesn't exists");
         }
-        uint idSch = degrees[idD].schoolId;
-        if(isAutorized(idSch,msg.sender) == 0){
+        else{
+            
             bool valid = false;
+        
             //We create the association
-            if(isAutorized(idSch,msg.sender) >= 2){
+            if(msg.sender == master){
                 valid = true;
             }
         
-            createDiplomaLL(idD,idSt,valid,msg.sender);
-        }else{
-        return("Permission Denied check if your address is autorized");
+            createDiplomaLL(idD,idS,valid,msg.sender);
         }
     }
 
@@ -235,8 +237,8 @@ contract DiplomaStorage {
     }
     
     
+    function createDegree(uint _year,string memory _nameDegree, string memory _schoolName) public{
 
-    function createDegree(uint _year,string memory _nameDegree, string memory _schoolName) public {
         School memory sch;
         uint idSch = 0;
         for(uint i = 0; i <= schoolCount; i++){
@@ -267,7 +269,6 @@ contract DiplomaStorage {
      
      //TODO
      
-     //NON TESTEE
     function isAutorized(uint _idSch,address _address) public view returns (uint){
         if (isMaster(_address) != 0){
             return 3;

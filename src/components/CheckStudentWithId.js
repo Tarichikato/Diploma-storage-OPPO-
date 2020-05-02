@@ -58,7 +58,7 @@ export class CheckStudentWithId extends Component {
     console.log("addresseContrat",this.getDiplomaStorageAddress())
 
     const contract = createContract(this.getDiplomaStorageAddress())
-    this.setState({contract})
+    console.log('contract',contract)
     const studentCount = await this.state.contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
   }
@@ -86,7 +86,7 @@ export class CheckStudentWithId extends Component {
     const contract = createContract(address)
     
     this.setState({ contract })
-    console.log(contract)
+    console.log('contract',contract)
 
     const student = await contract.methods.students(id).call()
     console.log('student',student)

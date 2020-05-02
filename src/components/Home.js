@@ -18,6 +18,8 @@ export class Home extends Component {
         this.onSubmitCheckDiplomaWithId = this.onSubmitCheckDiplomaWithId.bind(this);
         this.onSubmitCheckSchoolWithId = this.onSubmitCheckSchoolWithId.bind(this);
         this.onSubmitCheckDiploma = this.onSubmitCheckDiploma.bind(this);
+        this.onSubmitAddAddress = this.onSubmitAddAddress.bind(this);
+        this.onSubmitIsAutorised = this.onSubmitIsAutorised.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -107,6 +109,20 @@ export class Home extends Component {
                     >
                         CheckSchoolWithId
                 </Button>
+                &emsp;
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitIsAutorised}
+                    >
+                        IsAutorised
+                </Button>
+                &emsp;
+                <Button
+                        type='submit'
+                        onClick={this.onSubmitAddAddress}
+                    >
+                        AddAddress
+                </Button>
                
             </div>
         );
@@ -160,6 +176,16 @@ export class Home extends Component {
     onSubmitCheckStudent(event) {
         event.preventDefault();
          this.props.history.push(`/checkStudent`)
+    }
+
+    onSubmitAddAddress(event) {
+        event.preventDefault();
+         this.props.history.push(`/AddAddress`)
+    }
+
+    onSubmitIsAutorised(event) {
+        event.preventDefault();
+         this.props.history.push(`/isAutorised`)
     }
 
    
