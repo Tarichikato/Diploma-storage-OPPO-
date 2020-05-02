@@ -59,7 +59,7 @@ export class IsAutorised extends Component {
   
   
   getDiplomaStorageAddress () {
-    return '0x64399f5759209029856F40854699f65e57ED4225'
+    return '0xbE41F8E5073E899aa266De4f6603cec84Bb073bc'
   }
 
   async isAutorised(id,address) {

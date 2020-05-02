@@ -79,7 +79,7 @@ export class CheckStudentWithId extends Component {
   
   
   getDiplomaStorageAddress () {
-    return '0x64399f5759209029856F40854699f65e57ED4225'
+    return '0x68B9CE886FbA55cE1E18e448aA92E21812903323'
   }
 
   async getStudent(address,id) {

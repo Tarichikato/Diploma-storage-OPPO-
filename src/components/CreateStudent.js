@@ -16,6 +16,7 @@ export class CreateStudent extends Component {
             lastName: 'N/A',
             birth: 0,
             studentCount: 0,
+            account: '',
         
 
     }
@@ -37,7 +38,7 @@ export class CreateStudent extends Component {
   async getContractState(contract){
     this.setState({loading:true})
     const master = contract.methods.master().call()
-    console.log('master')
+    console.log('master',master)
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
     console.log('studentCount GCS',studentCount)
@@ -76,7 +77,7 @@ export class CreateStudent extends Component {
   
   
   getDiplomaStorageAddress () {
-    return '0x64399f5759209029856F40854699f65e57ED4225'
+    return '0x68B9CE886FbA55cE1E18e448aA92E21812903323'
   }
 
   async getStudent(address,id) {
@@ -102,7 +103,7 @@ export class CreateStudent extends Component {
     this.setState({loading:true})
     const contract = createContract(this.getDiplomaStorageAddress())
     this.setState({contract})
-    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: '0xeFb7aFb416f0626a8f08AD4bF397773355E702ef' })
+    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: this.state.account })
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount: studentCount})
     console.log("studentCount2",studentCount)

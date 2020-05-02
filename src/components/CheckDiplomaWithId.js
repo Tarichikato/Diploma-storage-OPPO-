@@ -96,7 +96,7 @@ export class CheckDiplomaWithId extends Component {
   
   
   getDiplomaStorageAddress () {
-    return '0x64399f5759209029856F40854699f65e57ED4225'
+    return '0xbE41F8E5073E899aa266De4f6603cec84Bb073bc'
   }
 
   async getDiploma(address,id) {
@@ -120,7 +120,7 @@ export class CheckDiplomaWithId extends Component {
       this.setState({valid : 'True'})
     }else{this.setState({valid : 'False'})}
 
-    this.setState({DiplomaEditor : this.state.diplomas[0][3]})
+    //this.setState({DiplomaEditor : this.state.diplomas[0][3]})
 
     const student = await contract.methods.students(this.state.studentId).call()
     this.setState({INE : student[1]})
@@ -160,7 +160,7 @@ export class CheckDiplomaWithId extends Component {
 
                   <Form>
                     <Form.Input
-                        label='Id'
+                        label='id'
                         type='number'
                         value={this.state.address}
                         onChange={this.onChange}
