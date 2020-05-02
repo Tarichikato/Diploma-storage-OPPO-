@@ -15,6 +15,8 @@ import { CreateSchool } from './components/CreateSchool';
 import {CheckDiplomaRudy} from './components/CheckDiplomaRudy';
 import { CreateDiploma } from './components/CreateDiploma';
 import {CheckDiplomaWithId} from './components/CheckDiplomaWithId';
+import { IsAutorised } from './components/IsAutorised';
+import { AddAddress } from './components/AddAddress';
 
 class App extends Component {
 
@@ -42,6 +44,8 @@ class App extends Component {
             <Route path='/checkDiploma/' component={CheckDiploma} />
             <Route path='/checkDiplomaRudy/' component={CheckDiplomaRudy} />
             <Route path='/createDiploma/' component={CreateDiploma} /> 
+            <Route path='/IsAutorised/' component={IsAutorised} /> 
+            <Route path='/AddAddress/' component={AddAddress} /> 
             <Route  component ={NotFound} />
           </Switch>
 
