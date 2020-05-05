@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown, Form,  FormControl, Button, InputGroup, Card, ButtonGroup} from 'react-bootstrap';
 import NavBar from './../assets/NavBar';
 
+
 export class FunctionsChoice extends Component {
 
   state = {
@@ -9,7 +10,7 @@ export class FunctionsChoice extends Component {
 }
 
 getDiplomaStorageAddress () {
-    return this.props.match.params.address
+    return this.props.match.params.address  
   }
 
 constructor(props) {

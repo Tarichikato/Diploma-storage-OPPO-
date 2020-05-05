@@ -1,13 +1,16 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Button, ButtonGroup, Form } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, Spinner, Modal, ButtonToolbar } from 'react-bootstrap';
 import { web3 } from './../ethereum/web3';
 import NavBar from './../assets/NavBar';
+import { Popup } from './../assets/Popup';
 
 
 
 
 export class CreateStudent extends Component {
+
+  
 
     state = {
         students: {
@@ -57,6 +60,7 @@ constructor(props) {
       account:'',
       studentCount: 0,
       students: [],
+      ModalShow: false,
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -89,6 +93,8 @@ createStudent(INE, firstName, lastName, birth) {
 
 
   render() {
+    let ModalClose =() => this.setState({ModalShow:false})
+
     return (
       <div>
         <div>
@@ -148,10 +154,20 @@ createStudent(INE, firstName, lastName, birth) {
         </Form>
       
         <div>
+        
+      <ButtonToolbar>
         <Button variant="primary" 
-                 onClick={this.onSubmit}
+                 onClick={() => this.setState({ModalShow: true})}
                 >Create Student
         </Button>
+
+        <Popup
+          show={this.state.ModalShow}
+          onHide={ModalClose}
+          onSubmit={this.onSubmit}
+        />
+      </ButtonToolbar> 
+
         </div>
 
         <div className="container">
