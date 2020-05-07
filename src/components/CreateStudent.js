@@ -102,7 +102,7 @@ createStudent(INE, firstName, lastName, birth) {
         </div>
 
         <div className="container">
-        <div className="row mt-5 text-center center">
+          <div className="row mt-5 text-center center">
             <div className="col-lg-10 mb-4 grid-margin">
               <div className="card h-100">
                   <h4 className="card-header">Create Student</h4>
@@ -157,8 +157,8 @@ createStudent(INE, firstName, lastName, birth) {
         
       <ButtonToolbar>
         <Button variant="primary" 
-                 onClick={() => this.setState({ModalShow: true})}
-                >Create Student
+          onClick={() => this.setState({ModalShow: true})}
+          >Create Student
         </Button>
 
         <Popup
@@ -196,9 +196,9 @@ createStudent(INE, firstName, lastName, birth) {
     window.history.back()
     }
 
-    onSubmitReload(event) {
-        event.preventDefault();
-        window.location.reload()
+  onSubmitReload(event) {
+    event.preventDefault();
+    window.location.reload()
     }
 }
 

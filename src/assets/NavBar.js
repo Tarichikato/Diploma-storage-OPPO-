@@ -10,7 +10,7 @@ function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <Nav.Link href="http://localhost:3000/" className ="text-white text-uppercase ml-5">Home</Nav.Link>
-              <Nav.Link href="https://react-bootstrap.netlify.app/components/button-group/" className ="text-white text-uppercase ml-5">Link</Nav.Link>
+              <Nav.Link href="http://localhost:3000/FunctionsChoice/0x0Ea8a6f81c03504D8bb7396178EccE66AB3c3Ce4" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
               <DropDown/>
           </Nav>
           <Form inline>

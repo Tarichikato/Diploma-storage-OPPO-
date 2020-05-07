@@ -19,6 +19,19 @@ constructor(props) {
     
     this.onSubmitRenderStudents = this.onSubmitRenderStudents.bind(this);
     this.onSubmitCreateStudent = this.onSubmitCreateStudent.bind(this);
+    this.onSubmitCheckStudents = this.onSubmitCheckStudents.bind(this);
+
+    this.onSubmitRenderDiplomas = this.onSubmitRenderDiplomas.bind(this);
+    this.onSubmitCreateDiploma = this.onSubmitCreateDiploma.bind(this);
+    this.onSubmitCheckDiplomas = this.onSubmitCheckDiplomas.bind(this);
+
+    this.onSubmitRenderSchools = this.onSubmitRenderSchools.bind(this);
+    this.onSubmitCreateSchool = this.onSubmitCreateSchool.bind(this);
+    this.onSubmitCheckSchools = this.onSubmitCheckSchools.bind(this);
+
+    this.onSubmitRenderDegrees = this.onSubmitRenderDegrees.bind(this);
+    this.onSubmitCreateDegree = this.onSubmitCreateDegree.bind(this);
+    this.onSubmitCheckDegrees = this.onSubmitCheckDegrees.bind(this);
 }
 
     render() {
@@ -55,7 +68,7 @@ constructor(props) {
 
                 <ButtonGroup vertical >
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCheckStudents}
                     >Check Students
                 </Button>
                 <Button variant="light" 
@@ -82,15 +95,15 @@ constructor(props) {
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCheckDiplomas}
                     >Check Diplomas
                 </Button>
                 <Button variant="light" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitRenderDiplomas}
                     >Renders Diplomas
                 </Button>
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCreateDiploma}
                     >Create Diplomas
                 </Button>
                 </ButtonGroup>
@@ -108,15 +121,15 @@ constructor(props) {
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCheckDegrees}
                     >Check Degrees
                 </Button>
                 <Button variant="light" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitRenderDegrees}
                     >Renders Degrees
                 </Button>
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCreateDegree}
                     >Create Degrees
                 </Button>
                 </ButtonGroup>
@@ -134,15 +147,15 @@ constructor(props) {
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCheckSchools}
                     >Check Schools
                 </Button>
                 <Button variant="light" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitRenderSchools}
                     >Renders Schools
                 </Button>
                 <Button variant="primary" 
-                    onClick={this.onSubmit}
+                    onClick={this.onSubmitCreateSchool}
                     >Create Schools
                 </Button>
                 </ButtonGroup>
@@ -159,15 +172,76 @@ constructor(props) {
         );
     }
 
-    onSubmitRenderStudents(event) {
-      event.preventDefault();
-       this.props.history.push(`/RenderStudents/${this.state.address}`)
-  }
+
+    //STUDENTS INFORMATIONS
+onSubmitRenderStudents(event) {
+    event.preventDefault();
+    this.props.history.push(`/RenderStudents/${this.state.address}`)
+}
 
   onSubmitCreateStudent(event) {
     event.preventDefault();
-     this.props.history.push(`/CreateStudent/${this.state.address}`)
+    this.props.history.push(`/CreateStudent/${this.state.address}`)
 }
+
+onSubmitCheckStudents(event) {
+  event.preventDefault();
+  this.props.history.push(`/CheckStudent/${this.state.address}`)
+}
+
+
+    //DIPLOMAS INFORMATIONS
+onSubmitRenderDiplomas(event) {
+    event.preventDefault();
+    this.props.history.push(`/RenderDiplomas/${this.state.address}`)
+}
+
+onSubmitCreateDiploma(event) {
+  event.preventDefault();
+  this.props.history.push(`/CreateDiploma/${this.state.address}`)
+}
+
+onSubmitCheckDiplomas(event) {
+  event.preventDefault();
+  this.props.history.push(`/CheckDiplomas/${this.state.address}`)
+}
+
+
+    //SCHOOLS INFORMATIONS
+onSubmitRenderSchools(event) {
+    event.preventDefault();
+    this.props.history.push(`/RenderSchools/${this.state.address}`)
+}
+
+onSubmitCreateSchool(event) {
+  event.preventDefault();
+  this.props.history.push(`/CreateSchool/${this.state.address}`)
+}
+
+onSubmitCheckSchools(event) {
+  event.preventDefault();
+  this.props.history.push(`/CheckSchools/${this.state.address}`)
+}
+
+
+    //DEGREES INFORMATIONS
+onSubmitRenderDegrees(event) {
+    event.preventDefault();
+    this.props.history.push(`/RenderDegrees/${this.state.address}`)
+}
+
+onSubmitCreateDegree(event) {
+  event.preventDefault();
+  this.props.history.push(`/CreateDegree/${this.state.address}`)
+}
+
+onSubmitCheckDegrees(event) {
+  event.preventDefault();
+  this.props.history.push(`/CheckDegrees/${this.state.address}`)
+}
+
+
+
 
 
 }

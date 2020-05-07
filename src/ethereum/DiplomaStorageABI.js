@@ -1,4 +1,4 @@
-export const contractAddress = '0x7F40EB094ACa301A3D7B20193ec9F89FF68F255E'
+export const contractAddress = '0x0Ea8a6f81c03504D8bb7396178EccE66AB3c3Ce4'
 
 export const diplomaStorageABI = [
   {
@@ -185,7 +185,7 @@ export const diplomaStorageABI = [
       },
       {
         "internalType": "uint256",
-        "name": "schoolId",
+        "name": "idSchool",
         "type": "uint256"
       },
       {
@@ -226,11 +226,6 @@ export const diplomaStorageABI = [
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "idDegree",
         "type": "uint256"
       },
@@ -246,7 +241,7 @@ export const diplomaStorageABI = [
       },
       {
         "internalType": "address",
-        "name": "creator",
+        "name": "editor",
         "type": "address"
       }
     ],
@@ -260,7 +255,7 @@ export const diplomaStorageABI = [
     "name": "master",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "address payable",
         "name": "",
         "type": "address"
       }
@@ -487,13 +482,7 @@ export const diplomaStorageABI = [
       }
     ],
     "name": "createDiploma",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -538,7 +527,7 @@ export const diplomaStorageABI = [
       },
       {
         "internalType": "address",
-        "name": "_address2",
+        "name": "_address",
         "type": "address"
       }
     ],
