@@ -1,2 +1,0 @@
-checkDiplomaWithId:
-    si on ne change pas l'imput et qu'on submit une 2eme fois =>  Unhandled Rejection (Error): invalid number value (arg="", coderType="uint256", value=null) (l108)
