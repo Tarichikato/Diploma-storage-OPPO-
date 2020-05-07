@@ -1,115 +1,79 @@
 import React, { Component }  from 'react'
 import { createContract } from './../ethereum/DiplomaStorageContract'
-import { Table, Button,Form,Checkbox } from 'semantic-ui-react'
-import Web3 from 'web3'
-import { web3 } from '../ethereum/web3'
+import { Button, ButtonGroup, Form, Spinner, Modal, ButtonToolbar } from 'react-bootstrap';
+import { web3 } from './../ethereum/web3';
+import NavBar from './../assets/NavBar';
+import { Popup } from './../assets/Popup';
+
 
 
 
 export class CreateStudent extends Component {
 
+  
+
     state = {
-       
+        students: {
+            name:'N/A',
             idStudent: 0,
             INE: 0,
             fisrtName: 'N/A',
             lastName: 'N/A',
             birth: 0,
-            studentCount: 0,
-            account: '',
-        
+        }
 
     }
 
   async componentDidMount () {
-    this.loadBcData()
-    const contract = createContract(this.getDiplomaStorageAddress())
-    this.setState({contract})
-    console.log("contrat",contract)
-    this.getContractState(contract)  
+    await this.getStudents(this.getDiplomaStorageAddress()
+    )
   }
-
-  async getStudentId(INE,firstName,lastName,birth){
-    const contract = createContract(this.getDiplomaStorageAddress())
-    const id = await contract.methods.checkStudent(INE,firstName,lastName,birth).call()
-    console.log('id',id)
-  }
-
-  async getContractState(contract){
-    this.setState({loading:true})
-    const master = contract.methods.master().call()
-    console.log('master',master)
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
-    console.log('studentCount GCS',studentCount)
-  }
-
-  async loadBcData(){
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    const network = await web3.eth.net.getNetworkType()
-    console.log("network",network)
-    const accounts = await web3.eth.getAccounts()
-    console.log("account", accounts[0])
-    this.setState({account: accounts[0]})
-    console.log("addresseContrat",this.getDiplomaStorageAddress())
-
-    const contract = createContract(this.getDiplomaStorageAddress())
-    this.setState({contract})
-    const studentCount = await this.state.contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
-    console.log('stuentCount LBD',studentCount)
-  }
- 
-  constructor(props) {
-    super(props)
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      
-      idStudent: 0,
-      INE: 0,
-      fisrtName: 'N/A',
-      lastName: 'N/A',
-      birth: 0,
-      studentCount: 0,
-    }
-  }
-  
   
   getDiplomaStorageAddress () {
-    return '0x68B9CE886FbA55cE1E18e448aA92E21812903323'
+    return this.props.match.params.address
   }
 
-  async getStudent(address,id) {
+  async getStudents(address) {
     const contract = createContract(address)
+    const accounts = await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
+    console.log(accounts)
     
     this.setState({ contract })
     console.log(contract)
 
-    const student = await contract.methods.students(id).call()
-    this.setState({
-        students: [student]
-    })
-    console.log("student", this.state.students)
-
     const studentCount = await contract.methods.studentCount().call()
     this.setState({studentCount})
-  }
 
-  
+    for (var i = 1; i <= studentCount; i++) {
+        const student = await contract.methods.students(i).call()
+        this.setState({
+          students: [...this.state.students, student]
+        })
+      }
+    
+}
+
+constructor(props) {
+    super(props)
+    this.state = {
+      account:'',
+      studentCount: 0,
+      students: [],
+      ModalShow: false,
+    }
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+}
 
 
-   async createStudent(INE, firstName, lastName, birth) {
-    this.setState({loading:true})
-    const contract = createContract(this.getDiplomaStorageAddress())
-    this.setState({contract})
-    contract.methods.createStudent(INE,firstName,lastName,birth).send({ from: this.state.account })
-    const studentCount = await contract.methods.studentCount().call()
-    this.setState({studentCount: studentCount})
-    console.log("studentCount2",studentCount)
-  } 
+createStudent(INE, firstName, lastName, birth) {
+    this.state.contract.methods.createStudent(INE, firstName, lastName, birth).send({ from: this.state.account })
+    console.log("Account" , this.state.account)
+}
 
-  async onChange(event) {
+
+    onChange(event) {
     
     const target = event.target;
     const value =  target.value;
@@ -122,90 +86,120 @@ export class CreateStudent extends Component {
 }
 
 
+    onSubmit(event) {
+    event.preventDefault();
+    this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
+  }
 
 
+  render() {
+    let ModalClose =() => this.setState({ModalShow:false})
 
-  async onSubmit(event) {
-  event.preventDefault();
-  await this.createStudent(this.state.INE,this.state.firstName,this.state.lastName,this.state.birth)
-}
-
- 
-
-          render() {
     return (
+      <div>
+        <div>
+            <NavBar/>
+        </div>
 
-      
+        <div className="container">
+        <div className="row mt-5 text-center center">
+            <div className="col-lg-10 mb-4 grid-margin">
+              <div className="card h-100">
+                  <h4 className="card-header">Create Student</h4>
+                  <div className="card-body">
+                    <p className="card-text">Rentrez les informations de l'étudiant que vous voulez créer:  </p>
+                  </div>
+              </div>
+            </div>
+        </div>    
+      </div>
+
+
+        <Form>
+            <Form.Group controlId="formGroupEmail">
+                <Form.Label>INE number</Form.Label>
+                <Form.Control 
+                    placeholder= 'Enter the INE number'
+                    name="INE"
+                    type="number"
+                    onChange={this.onChange} />
+            </Form.Group>
+            
+            <Form.Group controlId="formGroupPassword">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control 
+                    placeholder='Enter the First Name'
+                    name="firstName"
+                    type="text"
+                    onChange={this.onChange} />
+            </Form.Group>
+
+            <Form.Group controlId="formGroupPassword">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control 
+                    placeholder= 'Enter the Last Name'
+                    name="lastName"
+                    type="text"
+                    onChange={this.onChange} />
+            </Form.Group>
+
+            <Form.Group controlId="formGroupPassword">
+                <Form.Label>Birthday</Form.Label>
+                <Form.Control 
+                    placeholder= 'Enter the Birthday'
+                    name="birth"
+                    type="number"
+                    onChange={this.onChange} />
+            </Form.Group>
+        </Form>
       
         <div>
-
-<p>Account : {this.state.account}</p>
-
-<p>StudentCount : {this.state.studentCount}</p>
-
-<p>Contract address: {this.getDiplomaStorageAddress()}</p>
-
-
-<form>
-        <label>
-          INE :
-          <input
-            placeholder= 'Enter INE here'
-            name="INE"
-            type="number"
-            //value={this.state.INE}
-            onChange={this.onChange} />
-        </label>
-        <br />
-        <label>
-          firstName :
-          <input
-            placeholder='First Name'
-            name="firstName"
-            type="text"
-            //value={this.state.firstName}
-            onChange={this.onChange} />
-        </label>
-        <br />
-        <label>
-          lastName :
-          <input
-            placeholder='Last Name'
-            name="lastName"
-            type="text"
-            //value={this.state.lastName}
-            onChange={this.onChange} />
-        </label>
-        <br />
-        <label>
-          Birth :
-          <input
-            placeholder='Birth'
-            name="birth"
-            type="number"
-            //value={this.state.birth}
-            onChange={this.onChange} />
-        </label>
-      </form>
-
-      <Button
-          type='submit'
-          onClick={this.onSubmit}
-          >
-          Submit
-      </Button>
-
-          
         
+      <ButtonToolbar>
+        <Button variant="primary" 
+                 onClick={() => this.setState({ModalShow: true})}
+                >Create Student
+        </Button>
 
-        <p>INE: {this.state.INE}</p>
-        <p>FirstName: {this.state.firstName}</p>
-        <p>LastName: {this.state.lastName}</p>
-        <p>Birth: {this.state.birth}</p>
-        
+        <Popup
+          show={this.state.ModalShow}
+          onHide={ModalClose}
+          onSubmit={this.onSubmit}
+        />
+      </ButtonToolbar> 
+
         </div>
+
+        <div className="container">
+          <div className="row mt-5">
+            <div className="col-lg-4 mb-4 grid-margin">
+          <ButtonGroup size="lg" >
+                <Button variant="primary" 
+                    onClick={this.onSubmitBack}
+                    >Back
+                </Button>
+                <Button variant="light" 
+                    onClick={this.onSubmitReload}
+                    >Refresh
+                </Button>
+          </ButtonGroup>
+        </div>
+      </div>
+    </div> 
+            
+      </div>
     );
   }
+
+  onSubmitBack(event) {
+    event.preventDefault();
+    window.history.back()
+    }
+
+    onSubmitReload(event) {
+        event.preventDefault();
+        window.location.reload()
+    }
 }
 
 export default CreateStudent;

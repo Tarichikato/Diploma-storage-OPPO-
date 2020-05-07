@@ -1,192 +1,108 @@
 import React, { Component } from 'react';
-import { Button, Header, Form} from 'semantic-ui-react';
+import { Navbar, Nav, NavDropdown, Form,  FormControl, Button, InputGroup, Card} from 'react-bootstrap';
+import NavBar from './../assets/NavBar';
+
+
 
 export class Home extends Component {
 
     state = {
-        function: ''
+        address: ''
     }
 
     constructor(props) {
         super(props);
 
-        this.onSubmitCreateStudent = this.onSubmitCreateStudent.bind(this);
-        this.onSubmitCreateDiploma = this.onSubmitCreateDiploma.bind(this);
-        this.onSubmitCreateSchool = this.onSubmitCreateSchool.bind(this);
-        this.onSubmitCheckStudent = this.onSubmitCheckStudent.bind(this);
-        this.onSubmitCheckStudentWithId = this.onSubmitCheckStudentWithId.bind(this);
-        this.onSubmitCheckDiplomaWithId = this.onSubmitCheckDiplomaWithId.bind(this);
-        this.onSubmitCheckSchoolWithId = this.onSubmitCheckSchoolWithId.bind(this);
-        this.onSubmitCheckDiploma = this.onSubmitCheckDiploma.bind(this);
-        this.onSubmitAddAddress = this.onSubmitAddAddress.bind(this);
-        this.onSubmitIsAutorised = this.onSubmitIsAutorised.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    render() {
-        return (
-            <div>
+render() {
+  return (
+    <div className="App">
+      <header>
+        <NavBar/>
+      </header>
+      <div className="container">
+        <div className="row mt-5">
+            <div className="col-lg-4 mb-4 grid-margin">
+              <div className="card h-100">
+                  <h4 className="card-header">About us</h4>
+                  <div className="card-body">
+                    <p className="card-text">Nous sommes étudiants à Télécom Sud Paris et nous avons conçu cette application full stack.</p>
+                  </div>
+                  <div className="card-footer">
+                    <Button variant="btn btn-primary">Learn More</Button>
+                  </div>
+              </div>
+            </div>
+            <div className="col-lg-4 mb-4 grid-margin">
+              <div className="card h-100">
+                  <h4 className="card-header">About this application</h4>
+                  <div className="card-body">
+                    <p className="card-text">Cette application offre plusieurs possibilité comme vérifier le diplôme d'un candidat, ou bien ajouter un étudiant à une école...</p>
+                  </div>
+                  <div className="card-footer">
+                    <Button variant="btn btn-primary">Learn More</Button>
+                  </div>
+              </div>
+            </div>
+            <div className="col-lg-4 mb-4 grid-margin">
+              <div className="card h-100">
+                  <h4 className="card-header">About Blockchain</h4>
+                  <div className="card-body">
+                    <p className="card-text">Cette applciation a été codé et insérer sur la blockchain Ethereum : immuable, inviolable et immodifiable.</p>
+                  </div>
+                  <div className="card-footer">
+                    <Button variant="btn btn-primary">Learn More</Button>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
 
-                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://kryptosphere.org/" target="_blank"> Kryptosphere | DiplomaStorage</a>
-                <Header as='h1'>Diploma Storage</Header>
-
-
-            
-                
-                <Form>
-                    <Form.Input
-                        label='Fonction'
-                        type='text'
+      <div>
+        <Card className="bg-dark text-white">
+            <Card.Header as="h5">Contract Address</Card.Header>
+            <Card.Body>
+                <Card.Title>Acces to the functions</Card.Title>
+                <Card.Text>
+                Pour rentrer dans les fonctions de cette applciation, rentrer l'adresse de votre contrat s'il vous plait ci dessous: 
+                </Card.Text>
+                <InputGroup size="lg">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text id="inputGroup-sizing-lg">Contract Address</InputGroup.Text>
+                        </InputGroup.Prepend>
+                            <FormControl
+                        aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Address contract..."
                         value={this.state.address}
                         onChange={this.onChange}
                     />
-                    <Button
-                        type='submit'
-                        onClick={this.onSubmit}
-                    >
-                        Submit
-                    </Button>
-                    
-                    
-                </Form>
-                <p>&emsp;</p>
-
-                &emsp;&emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCheckDiploma}
-                    >
-                        CheckDiploma
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCreateStudent}
-                    >
-                        CreateStudent
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCreateSchool}
-                    >
-                        CreateSchool
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCreateDiploma}
-                    >
-                        CreateDiploma
-                </Button>
-                <br />
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCheckStudent}
-                    >
-                        CheckStudent
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCheckStudentWithId}
-                    >
-                        CheckStudentWithId
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCheckDiplomaWithId}
-                    >
-                        CheckDiplomaWithId
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitCheckSchoolWithId}
-                    >
-                        CheckSchoolWithId
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitIsAutorised}
-                    >
-                        IsAutorised
-                </Button>
-                &emsp;
-                <Button
-                        type='submit'
-                        onClick={this.onSubmitAddAddress}
-                    >
-                        AddAddress
-                </Button>
-               
-            </div>
-        );
+                    </InputGroup>
+                <Button variant="primary" 
+                    onClick={this.onSubmit}
+                    >Submit</Button>
+            </Card.Body>
+        </Card>
+        </div> 
+    </div>
+    
+    );
+  
     }
 
     onChange(event) {
-        this.setState({function: event.target.value});
+        this.setState({address: event.target.value});
     }
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.history.push(`/${this.state.function}`)
+        this.props.history.push(`/FunctionsChoice/${this.state.address}`)
+        const contractAddress = this.state.address
+        console.log(contractAddress)
     }
-
-    onSubmitCreateStudent(event) {
-        event.preventDefault();
-         this.props.history.push(`/createStudent`)
-    }
-
-    onSubmitCreateSchool(event) {
-        event.preventDefault();
-         this.props.history.push(`/createSchool`)
-    }
-
-
-    onSubmitCreateDiploma(event) {
-        event.preventDefault();
-         this.props.history.push(`/createDiploma`)
-    }
-
-    onSubmitCheckDiploma(event) {
-        event.preventDefault();
-         this.props.history.push(`/checkDiploma`)
-    }
-
-    onSubmitCheckStudentWithId(event) {
-        event.preventDefault();
-         this.props.history.push(`/checkStudentWithId`)
-    }
-
-    onSubmitCheckSchoolWithId(event) {
-        event.preventDefault();
-         this.props.history.push(`/checkSchoolWithId`)
-    }
-
-    onSubmitCheckDiplomaWithId(event) {
-        event.preventDefault();
-         this.props.history.push(`/checkDiplomaWithId`)
-    }
-
-    onSubmitCheckStudent(event) {
-        event.preventDefault();
-         this.props.history.push(`/checkStudent`)
-    }
-
-    onSubmitAddAddress(event) {
-        event.preventDefault();
-         this.props.history.push(`/AddAddress`)
-    }
-
-    onSubmitIsAutorised(event) {
-        event.preventDefault();
-         this.props.history.push(`/isAutorised`)
-    }
-
-   
 }
+
+
+export default Home;
+
