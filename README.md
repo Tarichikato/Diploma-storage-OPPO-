@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tenter de faire un petit site joli :
 
-## Available Scripts
+## Créer un project React 
 
-In the project directory, you can run:
+>npm init react-app my-app
 
-### `npm start`
+Puis aller dans my-app 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Lancer l'application 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+> npm start 
 
-### `npm test`
+## Installer les dépendances 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> npm install "nom_de_la_dépendance" 
 
-### `npm run build`
+EX : >npm install react-script 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Voici la listes des dépendances que j'utilise : 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    "react-bootstrap":
+    "react-dom": 
+    "react-router-dom"
+    "react-scripts"
+    "styled-components"
+    "web3" => Seulement si on veut faire le lien avec le contrat. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+=> Certaines sont dékà installé par défaut, il faut vérifier ça dans package.json 
 
-### `npm run eject`
+IMPORTANT: C'est dépendances sont nécessaires pour l'utilisation des différents Composants que l'on va utiliser 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+NB: On peut rajouter autant de dépendances que l'on souhaite, je peux également recommander 'semantic-ui-react' qui peut être utile pour le template. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Sites des composants 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+=> React-Bootstrap: https://react-bootstrap.github.io/
+                    https://getbootstrap.com/
+=> Semantic-ui-react: https://react.semantic-ui.com/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+CES SITES PERMETTENT DE VISUALISER DES EXEMPLES DE TEMPLATES POUR CERTAINS COMPOSANTS, IL SUFFIT DE COPIER/COLLER LES CODES. 
 
-## Learn More
+## Comment les utiliser? 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Il y a plusieurs manières d'utiliser un Composant, par exemple : 
+  - soit l'ajouter directement dans le corps de notre fonction 
+  - soit l'ajouter dans un 'assets', comme je l'ai fais pour 'NavBar' puis ensuite l'importer où l'on veut l'utiliser
+  
+  //Extrait de code de Home.js 
+  import NavBar from './../assets/NavBar';
+  <header>
+     <NavBar/>
+   </header>
+  
+  Il me suffit à présent de l'appeler dans n'importe qu'elle fonction, et elle sera identique pareil. 
