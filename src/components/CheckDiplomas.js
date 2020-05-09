@@ -44,16 +44,16 @@ export class CheckDiplomas extends Component {
     }
 
 
-  async componentDidMount () {
+async componentDidMount () {
     await this.getDiplomas(this.getDiplomaStorageAddress()
     )
   }
   
-  getDiplomaStorageAddress () {
+getDiplomaStorageAddress () {
     return this.props.match.params.address
   }
 
-  async getDiplomas(address) {
+async getDiplomas(address) {
     const contract = createContract(address)
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
@@ -125,7 +125,7 @@ constructor(props) {
 }
 
 
-    async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
+async checkDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
     const contract = createContract(this.getDiplomaStorageAddress())
     
     this.setState({ contract })
@@ -138,7 +138,7 @@ constructor(props) {
 }
 
 
-    onChange(event) {
+onChange(event) {
     
     const target = event.target;
     const value =  target.value;
@@ -151,7 +151,7 @@ constructor(props) {
 }
 
 
-    onSubmit(event) {
+onSubmit(event) {
     event.preventDefault();
 
     const diplomaResult =  this.checkDiploma(this.state.INE, this.state.firstName, this.state.lastName, this.state.birth, this.state.dYear, this.state.nameDegree, this.state.schoolName)
@@ -260,11 +260,11 @@ render () {
           show={this.state.ModalShow}
           onHide={ModalClose}
           onSubmit={this.onSubmit}
+          diplomaResult={this.state.diplomaResult}
+          student = {[this.state.students.name]}
           
         />
       </ButtonToolbar>
-
-      
 
         <div className="container">
           <div className="row mt-5">

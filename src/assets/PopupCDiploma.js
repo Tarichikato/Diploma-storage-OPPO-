@@ -22,12 +22,17 @@ render () {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className='container'>
-           Result :  
-        </p>
+        <div className='container'>
+          Result: {this.props.diplomaResult}
+        </div>
+        <div className='container'>
+          Student: {this.props.students}
+        </div>
+        
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={this.props.onHide}>Close</Button>
+        <Button variant="primary" onClick={this.props.onSubmit}>Check Diploma</Button>
       </Modal.Footer>
     </Modal>
 
