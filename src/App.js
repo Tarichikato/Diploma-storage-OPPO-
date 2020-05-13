@@ -34,14 +34,14 @@ function App() {
 
         <Route path ='/RenderStudents/:address' component={RenderStudents} />
         <Route path ='/CreateStudent/:address' component={CreateStudent} />
-        <Route path ='/CheckStudents/:address' component={CheckStudents} />
+        <Route path ='/CheckStudent/:address' component={CheckStudents} />
 
         <Route path ='/RenderDiplomas/:address' component={RenderDiplomas} />
         <Route path ='/CreateDiploma/:address' component={CreateDiploma} />
         <Route path ='/CheckDiplomas/:address' component={CheckDiplomas} />
 
         <Route path ='/RenderSchools/:address' component={RenderSchools} />
-        <Route path ='/CreateSchools/:address' component={CreateSchool} />
+        <Route path ='/CreateSchool/:address' component={CreateSchool} />
         <Route path ='/CheckSchools/:address' component={CheckSchools} />
 
         
