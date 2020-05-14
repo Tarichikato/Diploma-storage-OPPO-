@@ -52,6 +52,14 @@ getDiplomaStorageAddress () {
   return this.props.match.params.address
 }
 
+async getDegreeId(year, name, schoolName){
+  const contract = createContract(this.getDiplomaStorageAddress())
+  const id = await contract.methods.checkDegree(year, name, schoolName).call()
+  this.setState({id})
+  console.log('id',id)
+  return(id)
+}
+
 async getDiplomas(address) {
   const contract = createContract(address)
   const accounts = await web3.eth.getAccounts()
@@ -150,13 +158,20 @@ onChange(event) {
 }
 
 
-onSubmit(event) {
+async onSubmit(event) {
     event.preventDefault();
 
-    const degreeResult =  this.checkDegree(this.state.year, this.state.name, this.state.schoolName)
-    this.setState(degreeResult)
-const degreeName = this.state.name
-//this.setState(degreeName)
+    const infos =  this.state.year.concat(', ',this.state.name).concat(', ', this.state.schoolName)
+    this.setState({infos})
+
+    const id = await this.getDegreeId(this.state.year,this.state.name,this.state.schoolName)
+    console.log('idf',id)
+    if (id > 0) {
+      this.setState({answer : " Est inscrit dans la Blockchain Ethereum"});
+    } else{
+      this.setState({answer : " N'est pas inscrit"});
+    }
+
 }
 
 render () {
@@ -226,8 +241,8 @@ render () {
           show={this.state.ModalShow}
           onHide={ModalClose}
           onSubmit={this.onSubmit}
-          degreeResult={this.state.degreeResult}
-          degree = {[this.state.degreeName]}
+          answer={this.state.answer}
+          infos={this.state.infos}
 
 
         />

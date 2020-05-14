@@ -23,7 +23,7 @@ render () {
     </Modal.Header>
       <Modal.Body>
       <div className='container'>
-        School: {this.props.schoolName}
+        School: {this.props.firstName}
       </div>
       <div className='container'>
         Result: {this.props.answer}

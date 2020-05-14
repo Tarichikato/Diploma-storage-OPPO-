@@ -2,10 +2,9 @@ import React, { Component }  from 'react'
 import { createContract } from '../ethereum/DiplomaStorageContract'
 //import { Table } from 'semantic-ui-react'
 import { web3 } from './../ethereum/web3';
-//import { Header, Checkbox} from 'semantic-ui-react';
 import { Button, ButtonGroup, Form, Spinner, Modal, ButtonToolbar } from 'react-bootstrap';
 import NavBar from './../assets/NavBar';
-import { PopupCheckSchools } from './../assets/PopupCheckSchools';
+import { PopupCheckSchools } from '../assets/PopupCheckSchools';
 
 
 

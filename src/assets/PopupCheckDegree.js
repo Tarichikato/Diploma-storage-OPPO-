@@ -18,15 +18,15 @@ render () {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Check Diploma
+          Check Degree
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className='container'>
-          Result: {this.props.degreeResult}
+          Informations: {this.props.infos}
         </div>
         <div className='container'>
-          Degree: {this.props.degreeName}
+          Result: {this.props.answer}
         </div>
 
       </Modal.Body>
