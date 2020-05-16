@@ -1,3 +1,5 @@
 Menu déroulant FONCTIONS
 
 popup de Check Diploma (y mettre les informations comme dans les autres check)
+
+render diploma afficher les infos
