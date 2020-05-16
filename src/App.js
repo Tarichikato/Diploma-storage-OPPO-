@@ -25,6 +25,9 @@ import { RenderDegrees } from './components/RenderDegrees';
 import { CreateDegree } from './components/CreateDegree';
 import { CheckDegrees } from './components/CheckDegrees';
 
+import { AddAddress } from './components/AddAddress';
+import { DiplomaWithId } from './components/DiplomaWithId';
+
 function App() {
   return (
     <div >
@@ -48,6 +51,9 @@ function App() {
         <Route path ='/RenderDegrees/:address' component={RenderDegrees} />
         <Route path ='/CreateDegree/:address' component={CreateDegree} />
         <Route path ='/CheckDegrees/:address' component={CheckDegrees} />
+
+        <Route path ='/AddAddress/:address' component={AddAddress} />
+        <Route path ='/DiplomaWithId/:address' component={DiplomaWithId} />
       </Router>
     </div>
   );

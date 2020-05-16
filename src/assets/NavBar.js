@@ -10,7 +10,7 @@ function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <Nav.Link href="http://localhost:3000/" className ="text-white text-uppercase ml-5">Home</Nav.Link>
-              <Nav.Link href="http://localhost:3000/FunctionsChoice/0x3f60320F7479B7aB8ba5ec87C5b116A5068a8f4f
+              <Nav.Link href="http://localhost:3000/FunctionsChoice/0xfd4420CA2Da4060147AbA6A4bB49A9494a38E33b
 
 " className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
               <DropDown/>

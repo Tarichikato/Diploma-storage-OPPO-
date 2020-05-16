@@ -14,11 +14,14 @@ export class RenderDiplomas extends Component {
             id: 0,
             idDegree: 0,
             idStudent: 0,
-        }
+        },
+      contract:''
 
     }
 
   async componentDidMount () {
+    const contract = createContract(this.getDiplomaStorageAddress ())
+    this.setState({contract})
     await this.getDiplomas(this.getDiplomaStorageAddress()
     )
   }
@@ -47,6 +50,7 @@ export class RenderDiplomas extends Component {
         })
         console.log(diploma)
       }
+
     
 }
 
@@ -86,7 +90,7 @@ constructor(props) {
      <table className="table">
       <thead className="thead-dark">
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Editor</th>
       <th scope="col">idDegree</th>
       <th scope="col">idStudent</th>
     </tr>
@@ -99,7 +103,7 @@ constructor(props) {
               
               <div key={key}>
                 <td>
-                  {diploma.id}
+                  {diploma.editor}
                 </td>
               </div>
               
@@ -126,13 +130,15 @@ constructor(props) {
             return(
               <div key={key}>
                 <td>
-                  {diploma.iStudent}
+                  {diploma.idStudent}
               </td>
             </div> 
               
                  )
         })}
-    </td>  
+    </td>
+
+    
       
     </tr>
   </tbody>
