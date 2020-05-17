@@ -23,6 +23,7 @@ Voici la listes des dépendances que j'utilise :
     "react-router-dom"
     "react-scripts"
     "styled-components"
+    "react-bootstrap-icons"
     "web3" => Seulement si on veut faire le lien avec le contrat. 
 
 => Certaines sont dékà installé par défaut, il faut vérifier ça dans package.json 
