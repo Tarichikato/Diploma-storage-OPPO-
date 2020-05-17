@@ -32,6 +32,8 @@ constructor(props) {
     this.onSubmitRenderDegrees = this.onSubmitRenderDegrees.bind(this);
     this.onSubmitCreateDegree = this.onSubmitCreateDegree.bind(this);
     this.onSubmitCheckDegrees = this.onSubmitCheckDegrees.bind(this);
+
+    this.onSubmitAddAddress = this.onSubmitAddAddress.bind(this);
 }
 
     render() {
@@ -162,6 +164,25 @@ constructor(props) {
             </Card.Body>
         </Card>
         
+        </div>
+
+        <div className="col-lg-4 mb-4 grid-margin">
+          <Card className="bg-dark text-white">
+            <Card.Header as="h5">Gestion</Card.Header>
+            <Card.Body>
+                <Card.Title>These functions are concernig autorisations.</Card.Title>
+                <Card.Text>
+                  Choissiez une des fonctions ci-dessous :
+                </Card.Text>
+                <ButtonGroup vertical >
+                <Button variant="primary" 
+                    onClick={this.onSubmitAddAddress}
+                    >AddAddress
+                </Button>
+                </ButtonGroup>
+            </Card.Body>
+        </Card>
+        
         </div> 
       </div>
     </div>
@@ -238,6 +259,13 @@ onSubmitCreateDegree(event) {
 onSubmitCheckDegrees(event) {
   event.preventDefault();
   this.props.history.push(`/CheckDegrees/${this.state.address}`)
+}
+
+//Autorisations
+
+onSubmitAddAddress(event) {
+  event.preventDefault();
+  this.props.history.push(`/AddAddress/${this.state.address}`)
 }
 
 

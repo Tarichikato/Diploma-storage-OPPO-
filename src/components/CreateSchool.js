@@ -3,7 +3,7 @@ import { createContract } from './../ethereum/DiplomaStorageContract'
 import { Button, ButtonGroup, Form, Spinner, Modal, ButtonToolbar } from 'react-bootstrap';
 import { web3 } from './../ethereum/web3';
 import NavBar from './../assets/NavBar';
-import { PopupSchool } from './../assets/PopupSchool';
+import { PopupCreateSchool } from '../assets/PopupCreateSchool';
 
 
 
@@ -143,7 +143,7 @@ export class CreateSchool extends Component {
             >Create School
           </Button>
 
-          <PopupSchool
+          <PopupCreateSchool
             show={this.state.ModalShow}
             onHide={ModalClose}
             onSubmit={this.onSubmit}
