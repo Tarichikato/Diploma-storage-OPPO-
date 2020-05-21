@@ -27,6 +27,7 @@ import { CheckDegrees } from './components/CheckDegrees';
 
 import { AddAddress } from './components/AddAddress';
 import { DiplomaWithId } from './components/DiplomaWithId';
+import { RenderAddresses } from './components/RenderAddresses';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
 
         <Route path ='/AddAddress/:address' component={AddAddress} />
         <Route path ='/DiplomaWithId/:address' component={DiplomaWithId} />
+        <Route path ='/RenderAddresses/:address' component={RenderAddresses} />
       </Router>
     </div>
   );

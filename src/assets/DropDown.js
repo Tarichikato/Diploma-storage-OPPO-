@@ -14,10 +14,10 @@ export class DropDown extends Component {
             puis sur RenderStudents à renvoyer la bonne URL sans faire comme ça, 
             j'aimerai que ça récupère automatiquement
             l'addresse du contrat rentré sur Home */}
-        <NavDropdown.Item href="http://localhost:3000/RenderStudents/0xfd4420CA2Da4060147AbA6A4bB49A9494a38E33b">
+        <NavDropdown.Item href="http://localhost:3000/RenderStudents/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
           Render Students
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CreateStudent/0xfd4420CA2Da4060147AbA6A4bB49A9494a38E33b">
+        <NavDropdown.Item href="http://localhost:3000/CreateStudent/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
           Create Student
         </NavDropdown.Item>
         <NavDropdown.Item>Something</NavDropdown.Item>

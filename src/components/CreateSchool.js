@@ -65,9 +65,26 @@ export class CreateSchool extends Component {
   }
 
 
-  createSchool(schoolName,address) {
+  async createSchool(schoolName,address) {
+      var answer = ""
+      const lv = await  this.state.contract.methods.isAutorized(4,this.state.account).call()
+      console.log("lv",lv)
+      if(lv == 3){
+        answer = "You have the right"
+        const exists = await  this.state.contract.methods.checkSchool(schoolName).call()
+        console.log('exists',exists)
+          if(exists == 0){
       this.state.contract.methods.createSchool(schoolName,address).send({ from: this.state.account })
+          }
+          else{
+            answer = "The school ".concat(schoolName).concat(" already exists. It has the id: ").concat(exists)
+          }
+      }
+      else{
+      answer = "No servent can serve 2 masters boy"
+      }
       console.log("Account" , this.state.account)
+      console.log('answer',answer)
   }
 
 

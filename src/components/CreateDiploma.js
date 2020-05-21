@@ -163,7 +163,7 @@ createDiploma(INE, firstName, lastName, birth, dYear, nameDegree, schoolName) {
           <div className="row mt-5 text-center center">
             <div className="col-lg-10 mb-4 grid-margin">
               <div className="card h-100">
-                  <h4 className="card-header">Create Degree</h4>
+                  <h4 className="card-header">Create Diploma</h4>
                   <div className="card-body">
                     <p className="card-text">Rentrez les informations du diplôme et du student que vous voulez associer:  </p>
                   </div>
