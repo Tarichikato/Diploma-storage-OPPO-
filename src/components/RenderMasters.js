@@ -7,7 +7,7 @@ import NavBar from './../assets/NavBar';
 
 
 
-export class RenderAddresses extends Component {
+export class RenderMasters extends Component {
 
   state = {
     schools: {
@@ -151,4 +151,4 @@ window.location.reload()
 }
 }
 
-export default RenderAddresses;
+export default RenderMasters;

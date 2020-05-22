@@ -35,6 +35,7 @@ constructor(props) {
 
     this.onSubmitAddAddress = this.onSubmitAddAddress.bind(this);
     this.onSubmitRenderAddresses = this.onSubmitRenderAddresses.bind(this);
+    this.onSubmitRenderMasters = this.onSubmitRenderMasters.bind(this);
 }
 
     render() {
@@ -180,9 +181,13 @@ constructor(props) {
                     onClick={this.onSubmitAddAddress}
                     >AddAddress
                 </Button>
-                <Button variant="primary" 
+                <Button variant="light"
                     onClick={this.onSubmitRenderAddresses}
                     >RenderAddresses
+                </Button>
+                <Button variant="primary" 
+                    onClick={this.onSubmitRenderMasters}
+                    >RenderMasters
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -276,6 +281,11 @@ onSubmitAddAddress(event) {
 onSubmitRenderAddresses(event) {
   event.preventDefault();
   this.props.history.push(`/RenderAddresses/${this.state.address}`)
+}
+
+onSubmitRenderMasters(event) {
+  event.preventDefault();
+  this.props.history.push(`/RenderMasters/${this.state.address}`)
 }
 
 

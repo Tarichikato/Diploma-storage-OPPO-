@@ -27,8 +27,8 @@ render () {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={this.props.onSubmit}>Yes</Button>
-        <Button variant="primary" onClick={this.props.onHide}>NOO Good Noo</Button>
+        <Button variant="success" onClick={this.props.onSubmit}>Yes</Button>
+        <Button variant="danger" onClick={this.props.onHide}>NOO Good Noo</Button>
       </Modal.Footer>
     </Modal>
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react' ;
 import { Button, Modal } from 'react-bootstrap';
 
-export class Popup extends Component {
+export class PopupCreateStudent extends Component {
 
     constructor(props) {
         super(props);
@@ -27,8 +27,8 @@ render () {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={this.props.onSubmit}>Yes bro</Button>
-        <Button variant="primary" onClick={this.props.onHide}>No! Close</Button>
+        <Button variant="success" onClick={this.props.onSubmit}>Yes bro</Button>
+        <Button variant="danger" onClick={this.props.onHide}>No! Close</Button>
       </Modal.Footer>
     </Modal>
 
@@ -37,4 +37,4 @@ render () {
    
 }
   
- export default Popup;
+ export default PopupCreateStudent;

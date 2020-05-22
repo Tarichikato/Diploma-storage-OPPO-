@@ -3,7 +3,7 @@ import { createContract } from './../ethereum/DiplomaStorageContract'
 import { Button, ButtonGroup, Form, Spinner, Modal, ButtonToolbar } from 'react-bootstrap';
 import { web3 } from './../ethereum/web3';
 import NavBar from './../assets/NavBar';
-import { Popup } from './../assets/Popup';
+import { PopupCreateStudent } from './../assets/PopupCreateStudent';
 
 
 
@@ -161,7 +161,7 @@ createStudent(INE, firstName, lastName, birth) {
           >Create Student
         </Button>
 
-        <Popup
+        <PopupCreateStudent
           show={this.state.ModalShow}
           onHide={ModalClose}
           onSubmit={this.onSubmit}
