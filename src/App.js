@@ -30,6 +30,9 @@ import { DiplomaWithId } from './components/DiplomaWithId';
 import { RenderAddresses } from './components/RenderAddresses';
 import { RenderMasters } from './components/RenderMasters';
 
+import { getDiplomas } from './components/getDiplomas';
+
+
 function App() {
   return (
     <div >
@@ -58,6 +61,9 @@ function App() {
         <Route path ='/DiplomaWithId/:address' component={DiplomaWithId} />
         <Route path ='/RenderAddresses/:address' component={RenderAddresses} />
         <Route path ='/RenderMasters/:address' component={RenderMasters} />
+
+        <Route path ='/GetDiplomas/:address' component={getDiplomas} />
+
       </Router>
     </div>
   );

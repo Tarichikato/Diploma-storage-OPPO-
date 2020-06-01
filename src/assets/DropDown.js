@@ -14,52 +14,52 @@ export class DropDown extends Component {
             puis sur RenderStudents à renvoyer la bonne URL sans faire comme ça, 
             j'aimerai que ça récupère automatiquement
             l'addresse du contrat rentré sur Home */}
-        <NavDropdown.Item href="http://localhost:3000/FunctionsChoice/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/FunctionsChoice/0xf199868e3d5cced5aea036593e4742dae64baed7">
           FunctionsChoice
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/RenderStudents/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/RenderStudents/0xf199868e3d5cced5aea036593e4742dae64baed7">
           Render Students
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CreateStudent/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CreateStudent/0xf199868e3d5cced5aea036593e4742dae64baed7">
           Create Student
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CheckStudent/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CheckStudent/0xf199868e3d5cced5aea036593e4742dae64baed7">
           CheckStudent
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CreateDiploma/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CreateDiploma/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CreateDiploma
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/RenderDiplomas/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/RenderDiplomas/0xf199868e3d5cced5aea036593e4742dae64baed7">
         RenderDiplomas
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CheckDiplomas/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CheckDiplomas/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CheckDiplomas
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/RenderSchools/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/RenderSchools/0xf199868e3d5cced5aea036593e4742dae64baed7">
         RenderSchools
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CreateSchool/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CreateSchool/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CreateSchool
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CheckSchools/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CheckSchools/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CheckSchools
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/RenderDegrees/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/RenderDegrees/0xf199868e3d5cced5aea036593e4742dae64baed7">
         RenderDegrees
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CreateDegree/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CreateDegree/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CreateDegree
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/CheckDegrees/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/CheckDegrees/0xf199868e3d5cced5aea036593e4742dae64baed7">
         CheckDegrees
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/AddAddress/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/AddAddress/0xf199868e3d5cced5aea036593e4742dae64baed7">
         AddAddress
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/RenderAddresses/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/RenderAddresses/0xf199868e3d5cced5aea036593e4742dae64baed7">
         RenderAddresses
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/DiplomaWithId/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406">
+        <NavDropdown.Item href="http://localhost:3000/DiplomaWithId/0xf199868e3d5cced5aea036593e4742dae64baed7">
         DiplomaWithId
         </NavDropdown.Item>
       </NavDropdown>

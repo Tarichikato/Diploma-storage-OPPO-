@@ -36,6 +36,9 @@ constructor(props) {
     this.onSubmitAddAddress = this.onSubmitAddAddress.bind(this);
     this.onSubmitRenderAddresses = this.onSubmitRenderAddresses.bind(this);
     this.onSubmitRenderMasters = this.onSubmitRenderMasters.bind(this);
+
+    this.onSubmitgetDiplomas = this.onSubmitgetDiplomas.bind(this);
+
 }
 
     render() {
@@ -194,6 +197,25 @@ constructor(props) {
         </Card>
         
         </div> 
+
+        <div className="col-lg-4 mb-4 grid-margin">
+          <Card className="bg-dark text-white">
+            <Card.Header as="h5">See your diplomas</Card.Header>
+            <Card.Body>
+                <Card.Title>See your diplomas</Card.Title>
+                <Card.Text>
+                  Clic :
+                </Card.Text>
+                
+                <Button variant="primary" 
+                    onClick={this.onSubmitgetDiplomas}
+                    >See your diplomas
+                </Button>
+            </Card.Body>
+        </Card>
+        
+        </div>
+
       </div>
     </div>
     </div>
@@ -286,6 +308,11 @@ onSubmitRenderAddresses(event) {
 onSubmitRenderMasters(event) {
   event.preventDefault();
   this.props.history.push(`/RenderMasters/${this.state.address}`)
+}
+
+onSubmitgetDiplomas(event) {
+  event.preventDefault();
+  this.props.history.push(`/getDiplomas/${this.state.address}`)
 }
 
 

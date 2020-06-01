@@ -6,7 +6,7 @@ import * as Icon from 'react-bootstrap-icons';
 function NavBar() { 
     return (
       <Navbar expand="lg" variant="dark" bg="dark">
-      <Navbar.Brand href="http://localhost:3000/">Diploma Storage</Navbar.Brand>
+      <Navbar.Brand href="http://localhost:3000/">Smart CV</Navbar.Brand>
       <Icon.Award y color="white" size="25"/>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -14,7 +14,7 @@ function NavBar() {
             <Nav.Link href="https://kryptosphere.org/" className ="text-white text-uppercase ml-5">Kryptosphere</Nav.Link>
               <Nav.Link href="http://localhost:3000/" className ="text-white text-uppercase ml-5">
               <Icon.House y color="white" size="20"/></Nav.Link>
-              <Nav.Link href="http://localhost:3000/FunctionsChoice/0x90c25eeae1fdc27aac6ec3424a8f9329e5ed3406" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
+              <Nav.Link href="http://localhost:3000/FunctionsChoice/0xf199868e3d5cced5aea036593e4742dae64baed7" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
               <DropDown/>
           </Nav>
           <Form inline>
