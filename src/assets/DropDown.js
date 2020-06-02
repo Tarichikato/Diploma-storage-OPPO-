@@ -59,9 +59,7 @@ export class DropDown extends Component {
         <NavDropdown.Item href="http://localhost:3000/RenderAddresses/0xf199868e3d5cced5aea036593e4742dae64baed7">
         RenderAddresses
         </NavDropdown.Item>
-        <NavDropdown.Item href="http://localhost:3000/DiplomaWithId/0xf199868e3d5cced5aea036593e4742dae64baed7">
-        DiplomaWithId
-        </NavDropdown.Item>
+        
       </NavDropdown>
     );
   }
