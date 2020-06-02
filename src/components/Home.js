@@ -37,7 +37,7 @@ render() {
               <div className="card h-100">
                   <h4 className="card-header">About this application</h4>
                   <div className="card-body">
-                    <p className="card-text">Cette application permet de stocker et consulter des diplomes dans la blockchain Ethereum</p>
+                    <p className="card-text">Cette application permet de stocker et consulter des diplômes dans la blockchain Ethereum</p>
                   </div>
               </div>
             </div>
@@ -55,7 +55,7 @@ render() {
       <div>
                 <Button variant="primary" 
                     onClick={this.onSubmit}
-                    >Acceder à l'application</Button>
+                    >Accéder à l'application</Button>
         </div> 
     </div>
     

@@ -30,8 +30,6 @@ constructor(props) {
        <NavBar/>
       </header>
           
-      
-
     <div>
       <div className="container">
         <div className="row mt-5">
@@ -40,9 +38,6 @@ constructor(props) {
             <Card.Header as="h5">Rôle</Card.Header>
             <Card.Body>
                 <Card.Title>Qui êtes-vous ?</Card.Title>
-                <Card.Text>
-                  Choissiez un rôle ci-dessous :  
-                </Card.Text>
 
                 <ButtonGroup vertical >
                 <Button variant="light" 
