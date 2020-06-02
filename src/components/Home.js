@@ -45,7 +45,7 @@ render() {
               <div className="card h-100">
                   <h4 className="card-header">About Blockchain</h4>
                   <div className="card-body">
-                    <p className="card-text">Cette applciation a été déployée sur la blockchain Ethereum : immuable, infalsifiable et decentalisée.</p>
+                    <p className="card-text">Cette applciation a été déployée sur la blockchain Ethereum : immuable, infalsifiable et décentralisée.</p>
                   </div>
               </div>
             </div>
