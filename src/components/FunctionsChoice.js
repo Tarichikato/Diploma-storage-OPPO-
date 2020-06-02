@@ -202,10 +202,6 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">See your diplomas</Card.Header>
             <Card.Body>
-                <Card.Title>See your diplomas</Card.Title>
-                <Card.Text>
-                  Clic :
-                </Card.Text>
                 
                 <Button variant="primary" 
                     onClick={this.onSubmitgetDiplomas}
