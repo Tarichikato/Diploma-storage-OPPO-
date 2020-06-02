@@ -52,7 +52,7 @@ constructor(props) {
         <div className="row mt-5">
             <div className="col-lg-10 mb-4 grid-margin">
               <div className="card h-100">
-                  <h4 className="card-header">Choose what you want to do</h4>
+                  <h4 className="card-header">Choisissez une fonction</h4>
                   <div className="card-body">
                     <p className="card-text">Avec cette application, vous avez la possibilité de choisir ce que vous voulez faire. Choissiez une fonction ci-dessous. </p>
                   </div>
@@ -66,9 +66,9 @@ constructor(props) {
         <div className="row mt-5">
           <div className="col-lg-4 mb-4 grid-margin">
         <Card className="bg-dark text-white">
-            <Card.Header as="h5">Students</Card.Header>
+            <Card.Header as="h5">Etudiants</Card.Header>
             <Card.Body>
-                <Card.Title>These functions are concernig students.</Card.Title>
+                <Card.Title>Ces fonctions concernent les étudiants</Card.Title>
                 <Card.Text>
                   Choissiez une des fonctions ci-dessous :  
                 </Card.Text>
@@ -76,15 +76,15 @@ constructor(props) {
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitCheckStudents}
-                    >Check Students
+                    >Vérifier l'existance d'un étudiant
                 </Button>
                 <Button variant="light" 
                     onClick={this.onSubmitRenderStudents}
-                    >Renders Students
+                    >Voir tous les étudiants enregistrés
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitCreateStudent}
-                    >Create Students
+                    >Créer un étudiant
                 </Button>
                 </ButtonGroup>
 
@@ -96,22 +96,22 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Diplomas</Card.Header>
             <Card.Body>
-                <Card.Title>These functions are concernig diplomas.</Card.Title>
+                <Card.Title>Ces fonction concernent l'attribution d'un diplôme</Card.Title>
                 <Card.Text>
                   Choissiez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitCheckDiplomas}
-                    >Check Diplomas
+                    >Vérifier l'attribution d'un diplôome
                 </Button>
                 <Button variant="light" 
                     onClick={this.onSubmitRenderDiplomas}
-                    >Renders Diplomas
+                    >Voir tous les diplômes attribués
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitCreateDiploma}
-                    >Create Diplomas
+                    >Attribuer un diplôme
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -122,22 +122,22 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Degrees</Card.Header>
             <Card.Body>
-                <Card.Title>These functions are concernig degrees.</Card.Title>
+                <Card.Title>Ces fonctions concernent les diplomes</Card.Title>
                 <Card.Text>
                   Choissiez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitCheckDegrees}
-                    >Check Degrees
+                    >Vérifier l'existance d'un diplome
                 </Button>
                 <Button variant="light" 
                     onClick={this.onSubmitRenderDegrees}
-                    >Renders Degrees
+                    >Voir tous les diplômes enregistrés
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitCreateDegree}
-                    >Create Degrees
+                    >Créer un diplôme
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -148,22 +148,22 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Schools</Card.Header>
             <Card.Body>
-                <Card.Title>These functions are concernig schools.</Card.Title>
+                <Card.Title>Ces fonctions concernent les éécoles</Card.Title>
                 <Card.Text>
                   Choissiez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitCheckSchools}
-                    >Check Schools
+                    >Vérifier l'existance d'un diplôme
                 </Button>
                 <Button variant="light" 
                     onClick={this.onSubmitRenderSchools}
-                    >Renders Schools
+                    >Voir toutes les écoles enregistrées
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitCreateSchool}
-                    >Create Schools
+                    >Creer une école
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -175,22 +175,18 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Gestion</Card.Header>
             <Card.Body>
-                <Card.Title>These functions are concernig autorisations.</Card.Title>
+                <Card.Title>Ces fonctions concernent les autorisations.</Card.Title>
                 <Card.Text>
                   Choissiez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitAddAddress}
-                    >AddAddress
-                </Button>
-                <Button variant="light"
-                    onClick={this.onSubmitRenderAddresses}
-                    >RenderAddresses
+                    >Donner des droits à une addresse
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitRenderMasters}
-                    >RenderMasters
+                    >Voir les addresse master
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -200,12 +196,12 @@ constructor(props) {
 
         <div className="col-lg-4 mb-4 grid-margin">
           <Card className="bg-dark text-white">
-            <Card.Header as="h5">See your diplomas</Card.Header>
+            <Card.Header as="h5">Voir tous les diplomes d'un étudiant</Card.Header>
             <Card.Body>
                 
                 <Button variant="primary" 
                     onClick={this.onSubmitgetDiplomas}
-                    >See your diplomas
+                    >Voir les diplomes
                 </Button>
             </Card.Body>
         </Card>
