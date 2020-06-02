@@ -29,7 +29,7 @@ constructor(props) {
       <header>
        <NavBar/>
       </header>
-
+          
       <div className="container">
         <div className="row mt-5">
             <div className="col-lg-10 mb-4 grid-margin">
@@ -47,7 +47,7 @@ constructor(props) {
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-4 mb-4 grid-margin">
-        <Card className="bg-dark text-white">
+        <Card className="bg-dark text-white" style={{ width: '60rem' }}>
             <Card.Header as="h5">Role</Card.Header>
             <Card.Body>
                 <Card.Title>Qui etes vous ?</Card.Title>
