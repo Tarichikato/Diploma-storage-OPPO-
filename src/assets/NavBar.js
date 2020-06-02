@@ -14,8 +14,8 @@ function NavBar() {
             <Nav.Link href="https://kryptosphere.org/" className ="text-white text-uppercase ml-5">Kryptosphere</Nav.Link>
               <Nav.Link href="http://localhost:3000/" className ="text-white text-uppercase ml-5">
               <Icon.House y color="white" size="20"/></Nav.Link>
-              <Nav.Link href="http://localhost:3000/FunctionsChoice/0xf199868e3d5cced5aea036593e4742dae64baed7" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
-              <Nav.Link href="http://localhost:3000/RoleChoice/0xf199868e3d5cced5aea036593e4742dae64baed7" className ="text-white text-uppercase ml-5">Role Choice</Nav.Link>
+              <Nav.Link href="http://localhost:3000/FunctionsChoice/0x925C5Ff691A44574f73f55A19bF1201A38BDC531" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
+              <Nav.Link href="http://localhost:3000/RoleChoice/0x925C5Ff691A44574f73f55A19bF1201A38BDC531" className ="text-white text-uppercase ml-5">Role Choice</Nav.Link>
               <DropDown/>
           </Nav>
           <Form inline>

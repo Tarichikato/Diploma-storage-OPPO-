@@ -23,12 +23,12 @@ render () {
       </Modal.Header>
       <Modal.Body>
         <p className='container'>
-            Tes sur de vouloir créer un étudiant? C'est irréversible poto
+            Etes vous sur de vouloir créer un étudiant sur la blockchain Ethereum? Cette action est irréversible. 
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={this.props.onSubmit}>Yes bro</Button>
-        <Button variant="danger" onClick={this.props.onHide}>No! Close</Button>
+        <Button variant="success" onClick={this.props.onSubmit}>Oui</Button>
+        <Button variant="danger" onClick={this.props.onHide}>Non, fermé.</Button>
       </Modal.Footer>
     </Modal>
 

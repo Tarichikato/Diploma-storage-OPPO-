@@ -49,12 +49,12 @@ constructor(props) {
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-4 mb-4 grid-margin">
-        <Card className="bg-dark text-white">
-            <Card.Header as="h5">Role</Card.Header>
+        <Card className="bg-dark text-white" style={{ width: '60rem' }}>
+            <Card.Header as="h5">Diploma</Card.Header>
             <Card.Body>
-                <Card.Title>Qui etes vous ?</Card.Title>
+                <Card.Title>Que souhaitez vous faire?</Card.Title>
                 <Card.Text>
-                  Choissiez un role ci-dessous :  
+                  Choissiez une action ci dessous:  
                 </Card.Text>
 
                 <ButtonGroup vertical >
