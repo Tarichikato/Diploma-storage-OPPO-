@@ -7,7 +7,7 @@ import NavBar from './../assets/NavBar';
 export class Home extends Component {
 
     state = {
-        address: ''
+        address: '0x925C5Ff691A44574f73f55A19bF1201A38BDC531'
     }
 
     constructor(props) {
@@ -62,28 +62,9 @@ render() {
       </div>
 
       <div>
-        <Card className="bg-dark text-white">
-            <Card.Header as="h5">Contract Address</Card.Header>
-            <Card.Body>
-                <Card.Title>Acces to the functions</Card.Title>
-                <Card.Text>
-                Pour rentrer dans les fonctions de cette applciation, rentrer l'adresse de votre contrat s'il vous plait ci dessous: 
-                </Card.Text>
-                <InputGroup size="lg">
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="inputGroup-sizing-lg">Contract Address</InputGroup.Text>
-                        </InputGroup.Prepend>
-                            <FormControl
-                        aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Address contract..."
-                        value={this.state.address}
-                        onChange={this.onChange}
-                    />
-                    </InputGroup>
                 <Button variant="primary" 
                     onClick={this.onSubmit}
-                    >Submit</Button>
-            </Card.Body>
-        </Card>
+                    >Acceder à l'application</Button>
         </div> 
     </div>
     
