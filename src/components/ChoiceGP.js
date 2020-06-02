@@ -32,39 +32,27 @@ constructor(props) {
        <NavBar/>
       </header>
 
-      <div className="container">
-        <div className="row mt-5">
-            <div className="col-lg-10 mb-4 grid-margin">
-              <div className="card h-100">
-                  <h4 className="card-header">Choose what you want to do</h4>
-                  <div className="card-body">
-                    <p className="card-text">Avec cette application, vous avez la possibilité de choisir ce que vous voulez faire. Choissiez une fonction ci-dessous. </p>
-                  </div>
-              </div>
-            </div>
-        </div>    
-      </div>
 
     <div>
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-4 mb-4 grid-margin">
         <Card className="bg-dark text-white" style={{ width: '60rem' }}>
-            <Card.Header as="h5">Diploma</Card.Header>
+            <Card.Header as="h5">Consultation</Card.Header>
             <Card.Body>
-                <Card.Title>Que souhaitez vous faire?</Card.Title>
+                
                 <Card.Text>
-                  Choissiez une action ci dessous:  
+                  Choisissez une action ci dessous:  
                 </Card.Text>
 
                 <ButtonGroup vertical >
                 <Button variant="light" 
                     onClick={this.onSubmitCheckDiplomas}
-                    >Verifier un diploma
+                    >Vérifier l'attribution d'un diplôme
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitgetDiplomas}
-                    >Voir tous les diplomes d'une personne
+                    >Voir tous les diplômes d'une personne
                 </Button>
                 </ButtonGroup>
 

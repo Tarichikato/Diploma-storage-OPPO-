@@ -30,29 +30,18 @@ constructor(props) {
        <NavBar/>
       </header>
           
-      <div className="container">
-        <div className="row mt-5">
-            <div className="col-lg-10 mb-4 grid-margin">
-              <div className="card h-100">
-                  <h4 className="card-header">Choose what you want to do</h4>
-                  <div className="card-body">
-                    <p className="card-text">Avec cette application, vous avez la possibilité de choisir ce que vous voulez faire. Choissiez une fonction ci-dessous. </p>
-                  </div>
-              </div>
-            </div>
-        </div>    
-      </div>
+      
 
     <div>
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-4 mb-4 grid-margin">
         <Card className="bg-dark text-white" style={{ width: '60rem' }}>
-            <Card.Header as="h5">Role</Card.Header>
+            <Card.Header as="h5">Rôle</Card.Header>
             <Card.Body>
-                <Card.Title>Qui etes vous ?</Card.Title>
+                <Card.Title>Qui êtes-vous ?</Card.Title>
                 <Card.Text>
-                  Choissiez un role ci-dessous :  
+                  Choissiez un rôle ci-dessous :  
                 </Card.Text>
 
                 <ButtonGroup vertical >

@@ -54,7 +54,7 @@ constructor(props) {
               <div className="card h-100">
                   <h4 className="card-header">Choisissez une fonction</h4>
                   <div className="card-body">
-                    <p className="card-text">Avec cette application, vous avez la possibilité de choisir ce que vous voulez faire. Choissiez une fonction ci-dessous. </p>
+                    <p className="card-text">Avec cette application, vous avez la possibilité de choisir ce que vous voulez faire. Choisissez une fonction ci-dessous. </p>
                   </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ constructor(props) {
             <Card.Body>
                 <Card.Title>Ces fonctions concernent les étudiants</Card.Title>
                 <Card.Text>
-                  Choissiez une des fonctions ci-dessous :  
+                  Choisissez une des fonctions ci-dessous :  
                 </Card.Text>
 
                 <ButtonGroup vertical >
@@ -98,7 +98,7 @@ constructor(props) {
             <Card.Body>
                 <Card.Title>Ces fonction concernent l'attribution d'un diplôme</Card.Title>
                 <Card.Text>
-                  Choissiez une des fonctions ci-dessous :
+                  Choisissez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
@@ -122,14 +122,14 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Diplomes</Card.Header>
             <Card.Body>
-                <Card.Title>Ces fonctions concernent les diplomes</Card.Title>
+                <Card.Title>Ces fonctions concernent les diplômes</Card.Title>
                 <Card.Text>
-                  Choissiez une des fonctions ci-dessous :
+                  Choisissez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitCheckDegrees}
-                    >Vérifier l'existance d'un diplome
+                    >Vérifier l'existance d'un diplôme
                 </Button>
                 <Button variant="light" 
                     onClick={this.onSubmitRenderDegrees}
@@ -148,9 +148,9 @@ constructor(props) {
           <Card className="bg-dark text-white">
             <Card.Header as="h5">Ecoles</Card.Header>
             <Card.Body>
-                <Card.Title>Ces fonctions concernent les éécoles</Card.Title>
+                <Card.Title>Ces fonctions concernent les écoles</Card.Title>
                 <Card.Text>
-                  Choissiez une des fonctions ci-dessous :
+                  Choisissez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
@@ -163,7 +163,7 @@ constructor(props) {
                 </Button>
                 <Button variant="primary" 
                     onClick={this.onSubmitCreateSchool}
-                    >Creer une école
+                    >Créer une école
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -177,16 +177,16 @@ constructor(props) {
             <Card.Body>
                 <Card.Title>Ces fonctions concernent les autorisations.</Card.Title>
                 <Card.Text>
-                  Choissiez une des fonctions ci-dessous :
+                  Choisissez une des fonctions ci-dessous :
                 </Card.Text>
                 <ButtonGroup vertical >
                 <Button variant="primary" 
                     onClick={this.onSubmitAddAddress}
-                    >Donner des droits à une addresse
+                    >Donner des droits à une adresse
                 </Button>
-                <Button variant="primary" 
+                <Button variant="light" 
                     onClick={this.onSubmitRenderMasters}
-                    >Voir les addresse master
+                    >Voir les adresses master
                 </Button>
                 </ButtonGroup>
             </Card.Body>
@@ -201,7 +201,7 @@ constructor(props) {
                 
                 <Button variant="primary" 
                     onClick={this.onSubmitgetDiplomas}
-                    >Voir les diplomes
+                    >Voir les diplômes
                 </Button>
             </Card.Body>
         </Card>
