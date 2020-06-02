@@ -94,7 +94,7 @@ constructor(props) {
         
         <div className="col-lg-4 mb-4 grid-margin">
           <Card className="bg-dark text-white">
-            <Card.Header as="h5">Diplomas</Card.Header>
+            <Card.Header as="h5">Attribution</Card.Header>
             <Card.Body>
                 <Card.Title>Ces fonction concernent l'attribution d'un diplôme</Card.Title>
                 <Card.Text>
@@ -120,7 +120,7 @@ constructor(props) {
         </div> 
         <div className="col-lg-4 mb-4 grid-margin">
           <Card className="bg-dark text-white">
-            <Card.Header as="h5">Degrees</Card.Header>
+            <Card.Header as="h5">Diplomes</Card.Header>
             <Card.Body>
                 <Card.Title>Ces fonctions concernent les diplomes</Card.Title>
                 <Card.Text>
@@ -146,7 +146,7 @@ constructor(props) {
         </div> 
         <div className="col-lg-4 mb-4 grid-margin">
           <Card className="bg-dark text-white">
-            <Card.Header as="h5">Schools</Card.Header>
+            <Card.Header as="h5">Ecoles</Card.Header>
             <Card.Body>
                 <Card.Title>Ces fonctions concernent les éécoles</Card.Title>
                 <Card.Text>
