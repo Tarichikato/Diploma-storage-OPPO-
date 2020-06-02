@@ -92,6 +92,7 @@ constructor(props) {
       <th scope="col">First Name </th>
       <th scope="col">Last Name</th>
       <th scope="col">Birthday</th>
+      <th scope="col">Editor</th>
     </tr>
   </thead>
   <tbody>
@@ -156,6 +157,18 @@ constructor(props) {
               <div key={key}>
                 <td>
                   {student.birth}
+              </td>
+            </div> 
+              
+                 )
+        })}
+    </td> 
+    <td> 
+      { this.state.students.map((student, key) => {
+            return(
+              <div key={key}>
+                <td>
+                  {student.editor}
               </td>
             </div> 
               
