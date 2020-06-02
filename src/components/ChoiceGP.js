@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown, Form,  FormControl, Button, InputGroup, Card,
 import NavBar from './../assets/NavBar';
 
 
-export class RoleChoice extends Component {
+export class ChoiceGP extends Component {
 
   state = {
     address: this.getDiplomaStorageAddress()
@@ -17,8 +17,10 @@ constructor(props) {
     super(props);
 
     
-    this.onSubmitFonctionChoice = this.onSubmitFunctionChoice.bind(this);
-    this.onSubmitGrandPublic = this.onSubmitGrandPublic.bind(this);
+    this.onSubmitCheckDiplomas = this.onSubmitCheckDiplomas.bind(this);
+
+
+    this.onSubmitgetDiplomas = this.onSubmitgetDiplomas.bind(this);
     
 
 }
@@ -57,12 +59,12 @@ constructor(props) {
 
                 <ButtonGroup vertical >
                 <Button variant="light" 
-                    onClick={this.onSubmitFonctionChoice}
-                    >Une école
+                    onClick={this.onSubmitCheckDiplomas}
+                    >Verifier un diploma
                 </Button>
                 <Button variant="primary" 
-                    onClick={this.onSubmitGrandPublic}
-                    >Un recruteur
+                    onClick={this.onSubmitgetDiplomas}
+                    >Voir tous les diplomes d'une personne
                 </Button>
                 </ButtonGroup>
 
@@ -83,23 +85,23 @@ constructor(props) {
     }
 
 
-    //STUDENTS INFORMATIONS
-onSubmitGrandPublic(event) {
-    event.preventDefault();
-    this.props.history.push(`/ChoiceGP/${this.state.address}`)
+    onSubmitCheckDiplomas(event) {
+        event.preventDefault();
+        this.props.history.push(`/CheckDiplomas/${this.state.address}`)
+      }
+      
+      
+     
+      
+      onSubmitgetDiplomas(event) {
+        event.preventDefault();
+        this.props.history.push(`/getDiplomas/${this.state.address}`)
+      }
+
+
+
+
+
 }
 
-  onSubmitFunctionChoice(event) {
-    event.preventDefault();
-    this.props.history.push(`/FunctionsChoice/${this.state.address}`)
-}
-
-
-
-
-
-
-
-}
-
-export default RoleChoice;
+export default ChoiceGP;

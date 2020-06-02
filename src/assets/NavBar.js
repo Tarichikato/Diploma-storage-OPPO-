@@ -15,6 +15,7 @@ function NavBar() {
               <Nav.Link href="http://localhost:3000/" className ="text-white text-uppercase ml-5">
               <Icon.House y color="white" size="20"/></Nav.Link>
               <Nav.Link href="http://localhost:3000/FunctionsChoice/0xf199868e3d5cced5aea036593e4742dae64baed7" className ="text-white text-uppercase ml-5">Function Choice</Nav.Link>
+              <Nav.Link href="http://localhost:3000/RoleChoice/0xf199868e3d5cced5aea036593e4742dae64baed7" className ="text-white text-uppercase ml-5">Role Choice</Nav.Link>
               <DropDown/>
           </Nav>
           <Form inline>

@@ -9,6 +9,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import  history  from './assets/history';
 import { FunctionsChoice } from './components/FunctionsChoice';
 import { RoleChoice } from './components/RoleChoice';
+import { ChoiceGP } from './components/ChoiceGP';
 
 import { RenderStudents } from './components/RenderStudents';
 import { CreateStudent } from './components/CreateStudent';
@@ -41,6 +42,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route path ='/FunctionsChoice/:address' component={FunctionsChoice} />
         <Route path ='/RoleChoice/:address' component={RoleChoice} />
+        <Route path ='/ChoiceGP/:address' component={ChoiceGP} />
 
         <Route path ='/RenderStudents/:address' component={RenderStudents} />
         <Route path ='/CreateStudent/:address' component={CreateStudent} />
