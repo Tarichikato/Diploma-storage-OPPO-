@@ -1,4 +1,4 @@
-export const contractAddress = '0x3f60320F7479B7aB8ba5ec87C5b116A5068a8f4f'
+export const contractAddress = '0x925C5Ff691A44574f73f55A19bF1201A38BDC531'
 
 export const diplomaStorageABI = [
 	{
@@ -409,63 +409,6 @@ export const diplomaStorageABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "cv",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "schoolName",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "year",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "idSchool",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "editor",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "cvCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "degreeCount",
 		"outputs": [
@@ -567,34 +510,6 @@ export const diplomaStorageABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_INE",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_firstName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_lastName",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_birth",
-				"type": "uint256"
-			}
-		],
-		"name": "editCv",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -841,6 +756,19 @@ export const diplomaStorageABI = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "validate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
