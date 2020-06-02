@@ -112,10 +112,7 @@ constructor(props) {
            <div className="row mt-5 text-center">
             <div className="col-lg-10 mb-4 grid-margin">
               <div className="card h-100">
-                  <h4 className="card-header">All the Diplomas are here below</h4>
-                  <div className="card-body">
-                    <p className="card-text">Voici la liste des diplomes enregistrés sur la blockchain. </p>
-                  </div>
+                  <h4 className="card-header">Choisissez l'étudiant dont vous voulez consulter les diplomes </h4>
               </div>
             </div>
         </div>    
@@ -163,7 +160,7 @@ constructor(props) {
       <ButtonToolbar>
       <Button variant="primary" 
         onClick={this.onSubmitGetId}
-        >Check Student
+        >Voir les diplomes
       </Button>
           
         
@@ -171,7 +168,16 @@ constructor(props) {
     </ButtonToolbar> 
       
       </div>
-          
+
+      <div className="container">
+           <div className="row mt-5 text-center">
+            <div className="col-lg-10 mb-4 grid-margin">
+              <div className="card h-100">
+                  <h4 className="card-header">Voici ses diplomes </h4>
+              </div>
+            </div>
+        </div>    
+      </div>
             
       <div>
      <table className="table">

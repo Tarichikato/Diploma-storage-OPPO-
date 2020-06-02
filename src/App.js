@@ -8,6 +8,7 @@ import { Home } from './components/Home';
 import { Router, Switch, Route } from 'react-router-dom';
 import  history  from './assets/history';
 import { FunctionsChoice } from './components/FunctionsChoice';
+import { RoleChoice } from './components/RoleChoice';
 
 import { RenderStudents } from './components/RenderStudents';
 import { CreateStudent } from './components/CreateStudent';
@@ -39,6 +40,7 @@ function App() {
       <Router history={history}>
         <Route exact path='/' component={Home} />
         <Route path ='/FunctionsChoice/:address' component={FunctionsChoice} />
+        <Route path ='/RoleChoice/:address' component={RoleChoice} />
 
         <Route path ='/RenderStudents/:address' component={RenderStudents} />
         <Route path ='/CreateStudent/:address' component={CreateStudent} />

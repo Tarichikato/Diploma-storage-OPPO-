@@ -97,7 +97,7 @@ render() {
 
     onSubmit(event) {
         event.preventDefault();
-        this.props.history.push(`/FunctionsChoice/${this.state.address}`)
+        this.props.history.push(`/RoleChoice/${this.state.address}`)
         const contractAddress = this.state.address
         console.log(contractAddress)
     }
