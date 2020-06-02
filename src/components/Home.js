@@ -29,10 +29,7 @@ render() {
               <div className="card h-100">
                   <h4 className="card-header">About us</h4>
                   <div className="card-body">
-                    <p className="card-text">Nous sommes étudiants à Télécom Sud Paris et nous avons conçu cette application full stack.</p>
-                  </div>
-                  <div className="card-footer">
-                    <Button variant="btn btn-primary">Learn More</Button>
+                    <p className="card-text">Nous sommes étudiants à Télécom Sud Paris et nous avons conçu cette application full stack dans le cadre du module PRO3600.</p>
                   </div>
               </div>
             </div>
@@ -40,10 +37,7 @@ render() {
               <div className="card h-100">
                   <h4 className="card-header">About this application</h4>
                   <div className="card-body">
-                    <p className="card-text">Cette application offre plusieurs possibilité comme vérifier le diplôme d'un candidat, ou bien ajouter un étudiant à une école...</p>
-                  </div>
-                  <div className="card-footer">
-                    <Button variant="btn btn-primary">Learn More</Button>
+                    <p className="card-text">Cette application permet de stocker et consulter des diplomes dans la blockchain Ethereum</p>
                   </div>
               </div>
             </div>
@@ -51,10 +45,7 @@ render() {
               <div className="card h-100">
                   <h4 className="card-header">About Blockchain</h4>
                   <div className="card-body">
-                    <p className="card-text">Cette applciation a été codé et insérer sur la blockchain Ethereum : immuable, inviolable et immodifiable.</p>
-                  </div>
-                  <div className="card-footer">
-                    <Button variant="btn btn-primary">Learn More</Button>
+                    <p className="card-text">Cette applciation a été déployée sur la blockchain Ethereum : immuable, infalsifiable et decentalisée.</p>
                   </div>
               </div>
             </div>
