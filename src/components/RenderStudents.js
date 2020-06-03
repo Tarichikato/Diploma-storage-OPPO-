@@ -75,7 +75,7 @@ constructor(props) {
               <div className="card h-100">
                   <h4 className="card-header">All the students are here below</h4>
                   <div className="card-body">
-                    <p className="card-text">Voici la liste des étudinats enregistrés sur la blockchain. </p>
+                    <p className="card-text">Voici la liste des étudiants enregistrés sur la blockchain. </p>
                   </div>
               </div>
             </div>
